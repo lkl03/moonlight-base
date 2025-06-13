@@ -4,12 +4,12 @@ const styled = { createGlobalStyle };
 
 export const GlobalStyles = styled.createGlobalStyle`
   :root {
-    --Background: #070606;
+    --Background: #121717;
     --white: #fff;
     --light-gray: #dcdcdc;
-    --link-color: #bdbdbd;
-    --green: #2b892e;
-    --emerald: #48d64c;
+    --link-color: #17F2A6;
+    --green: #17F2A6;
+    --emerald: #17F2A6;
   }
 
   * {
@@ -23,7 +23,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   body {
     max-width: 100vw;
     overflow-x: hidden;
-    font-family: 'SF Pro Display', sans-serif;
+    font-family: 'Raleway', sans-serif;
     background-color: var(--Background);
     color: var(--white);
     scroll-snap-type: y mandatory;
@@ -40,6 +40,16 @@ export const GlobalStyles = styled.createGlobalStyle`
         background: var(--Background);
       }
     }
+  }
+
+  h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900 !important; /* Inter Black */
+  }
+
+  p {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400; /* Regular */
   }
 
   a {

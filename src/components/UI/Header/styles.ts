@@ -14,7 +14,7 @@ export const Wrapper = styled.section`
 export const Inner = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 90%;
   max-width: 1440px;
   margin: 0 auto;
@@ -24,7 +24,7 @@ export const LogoContainer = styled.div`
   @media (max-width: 768px) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
   }
 `;
