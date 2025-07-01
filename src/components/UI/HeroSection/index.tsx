@@ -8,8 +8,10 @@ import { useIsMobile } from '../../../../libs/useIsMobile';
 import {
   mobileParagraphPhrases,
   mobilePhrases,
+  mobilePrePhrases,
   paragraphPhrases,
   phrases,
+  prePhrases
 } from './constants';
 
 const HeroSection = () => {
@@ -18,17 +20,19 @@ const HeroSection = () => {
     <Wrapper>
       <Inner>
         <Pill>
-          <span>Introducing Raft cards</span>
+          
           <Image src={ic_chevron_right} alt="chevron-right" />
         </Pill>
         <HeroTextContainer>
           {isMobile ? (
             <>
+              <span>{mobilePrePhrases}</span>
               <MaskText phrases={mobilePhrases} tag="h1" />
               <MaskText phrases={mobileParagraphPhrases} tag="p" />
             </>
           ) : (
             <>
+              <span>{prePhrases}</span>
               <MaskText phrases={phrases} tag="h1" />
               <MaskText phrases={paragraphPhrases} tag="p" />
             </>

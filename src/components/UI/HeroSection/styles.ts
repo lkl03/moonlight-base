@@ -46,6 +46,8 @@ export const HeroTextContainer = styled.div`
   h1 {
     font-size: 6rem;
     font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 120%;
   }
 
   p {

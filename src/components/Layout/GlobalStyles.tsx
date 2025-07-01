@@ -1,6 +1,15 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
 
 const styled = { createGlobalStyle };
+
+const moveBackground = keyframes`
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
+  }
+`;
 
 export const GlobalStyles = styled.createGlobalStyle`
   :root {
@@ -25,8 +34,12 @@ export const GlobalStyles = styled.createGlobalStyle`
     overflow-x: hidden;
     font-family: 'Raleway', sans-serif;
     background-color: var(--Background);
+    background-image: url("../svgs/noise.svg");
+    background-repeat: repeat;
+    background-size: 400px 400px;
     color: var(--white);
     scroll-snap-type: y mandatory;
+    animation: ${moveBackground} 60s ease-in-out infinite alternate;
 
     &::-webkit-scrollbar {
       width: 0.5rem;
@@ -35,7 +48,6 @@ export const GlobalStyles = styled.createGlobalStyle`
         background: var(--link-color);
         border-radius: 0.5rem;
       }
-
       &-track {
         background: var(--Background);
       }
@@ -44,12 +56,12 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   h1, h2, h3 {
     font-family: 'Inter', sans-serif;
-    font-weight: 900 !important; /* Inter Black */
+    font-weight: 900 !important;
   }
 
   p {
     font-family: 'Raleway', sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: 400;
   }
 
   a {
@@ -68,7 +80,6 @@ export const GlobalStyles = styled.createGlobalStyle`
   .parallax .scroller {
     display: flex;
     white-space: nowrap;
-    display: flex;
     flex-wrap: nowrap;
   }
 

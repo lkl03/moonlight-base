@@ -1,13 +1,15 @@
 // For desktop
-export const phrases = ['Building the future of', 'banking.'];
+export const prePhrases = ['The Best Option to ELEVATE Your Online Presence'];
+export const phrases = ['A website Creation Service', 'as you needed'];
 export const paragraphPhrases = [
-  "Experience the future of banking with RAFT. We're here to",
-  'empower your financial journey.',
+  "We offer 100% handcrafted websites tailored exclusively for your ",
+  'business. Achieve better results at a better price.',
 ];
 
 // For mobile
-export const mobilePhrases = ['Building the future', 'of banking'];
+export const mobilePrePhrases = ['The Best Option to ELEVATE Your Online Presence'];
+export const mobilePhrases = ['A website Creation Service', 'as you needed'];
 export const mobileParagraphPhrases = [
-  "Experience the future of banking with RAFT. We're",
-  'here to empower your financial journey.',
+  "We offer 100% handcrafted websites tailored exclusively for your ",
+  'business. Achieve better results at a better price.',
 ];
