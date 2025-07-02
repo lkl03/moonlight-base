@@ -3,8 +3,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Raft',
-  description: 'Building the future of banking',
+  title: 'Moonlight Web Designs',
+  description: '100% handcrafted websites tailored exclusively for your business.',
 };
 
 export default function RootLayout({

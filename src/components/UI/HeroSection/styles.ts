@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import hero_background from '../../../../public/images/grid_background.png';
 
 export const Wrapper = styled.section`
-  margin-top: 6.25rem;
+  margin-top: 10rem;
 `;
 
 export const Inner = styled.div`
@@ -11,7 +11,7 @@ export const Inner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 56rem;
+  max-width: 70rem;
   margin: 0 auto;
   text-align: center;
   background-position: top center;
@@ -44,31 +44,48 @@ export const HeroTextContainer = styled.div`
   padding-bottom: 2rem;
 
   h1 {
-    font-size: 6rem;
-    font-weight: 400;
+    font-size: 5rem;
+    font-weight: bolder;
     letter-spacing: -2px;
     line-height: 120%;
+    text-transform: capitalize;
   }
 
   p {
     max-width: 41.75rem;
     color: #bdbdbd;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 400;
+    letter-spacing: 0;
+    line-height: 150%;
     margin: 0 auto;
   }
+
+  span {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1.6px;
+    line-height: 120%;
+    color: var(--emerald);
+  }
+
 
   @media (max-width: 768px) {
     gap: 1rem;
     padding-bottom: 1.5rem;
+    text-wrap: balance;
+    
     h1 {
       font-size: 2.5rem;
-      font-weight: 400;
     }
 
     p {
-      font-size: 1rem;
-      line-height: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    span {
+      font-size: 0.8rem;
     }
   }
 `;

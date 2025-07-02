@@ -47,6 +47,15 @@ const MaskText = ({ phrases, tag }: { phrases: string[]; tag: string }) => {
               >
                 {phrase}
               </motion.h3>
+              ) : tag === 'span' ? (
+              <motion.span
+                variants={animate}
+                initial="initial"
+                animate={isInView ? 'open' : ''}
+                custom={index}
+              >
+                {phrase}
+              </motion.span>
             ) : (
               <motion.p
                 variants={animate}

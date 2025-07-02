@@ -1,39 +1,50 @@
 'use client';
-import Image from 'next/image';
-import { Wrapper, Inner, Pill, HeroTextContainer } from './styles';
-import ic_chevron_right from '../../../../public/svgs/ic_chevron_right.svg';
+
+import dynamic from 'next/dynamic';
+import { Wrapper, Inner, HeroTextContainer } from './styles';
 import { GetStartedButton } from '@/components';
 import MaskText from '@/components/Common/MaskText';
 import { useIsMobile } from '../../../../libs/useIsMobile';
 import {
   mobileParagraphPhrases,
-  mobilePhrases,
   mobilePrePhrases,
   paragraphPhrases,
-  phrases,
-  prePhrases
+  prePhrases,
+  staticPhrase,
+  dynamicPhrases,
+  mobileStaticPhrase,
+  mobileDynamicPhrases,
 } from './constants';
+
+// ✨ Dynamically import the animated heading, disabling SSR
+const HeroAnimatedHeading = dynamic(
+  () => import('./HeroAnimatedHeading'),
+  { ssr: false }
+);
 
 const HeroSection = () => {
   const isMobile = useIsMobile();
+
   return (
     <Wrapper>
       <Inner>
-        <Pill>
-          
-          <Image src={ic_chevron_right} alt="chevron-right" />
-        </Pill>
         <HeroTextContainer>
           {isMobile ? (
             <>
-              <span>{mobilePrePhrases}</span>
-              <MaskText phrases={mobilePhrases} tag="h1" />
+              <MaskText phrases={mobilePrePhrases} tag="span" />
+              <HeroAnimatedHeading
+                staticText={mobileStaticPhrase}
+                dynamicPhrases={mobileDynamicPhrases}
+              />
               <MaskText phrases={mobileParagraphPhrases} tag="p" />
             </>
           ) : (
             <>
-              <span>{prePhrases}</span>
-              <MaskText phrases={phrases} tag="h1" />
+              <MaskText phrases={prePhrases} tag="span" />
+              <HeroAnimatedHeading
+                staticText={staticPhrase}
+                dynamicPhrases={dynamicPhrases}
+              />
               <MaskText phrases={paragraphPhrases} tag="p" />
             </>
           )}
@@ -45,3 +56,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
