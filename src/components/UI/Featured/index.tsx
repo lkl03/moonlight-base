@@ -1,12 +1,27 @@
 'use client';
 import Image from 'next/image';
-import big_banner from '../../../../public/images/big_banner.png';
-import featured_mobile_banner from '../../../../public/images/featured_mobile_banner.png';
-import ParallaxText from '@/components/Common/ParallaxImages';
-import companies_image from '../../../../public/images/companies.png';
-import { Wrapper, Inner, ImageContainer, ParallaxImages, Div } from './styles';
+import { motion } from 'framer-motion';
+import site_banner from '../../../../public/images/featured_site_banner.png';
+import green_divider from '../../../../public/svgs/green_divider.svg';
+
+import { 
+  Wrapper, 
+  Inner, 
+  ImageContainer, 
+  Div, 
+  Content, 
+  TextColumn, 
+  ImageColumn, 
+  Label, 
+  Headline, 
+  Paragraph,
+  ButtonContainer
+} from './styles';
+
 import RevealCover from '@/components/Common/RevealCover';
+import { GetStartedButton } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
+
 export const imageVariants = {
   hidden: {
     scale: 1.6,
@@ -23,35 +38,50 @@ export const imageVariants = {
 
 const Featured = () => {
   const isMobile = useIsMobile();
+
   return (
     <Wrapper>
-      <Inner>
-        <ImageContainer>
-          <RevealCover />
-          <Div
-            variants={imageVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ amount: 0.25, once: true }}
-          >
-            {isMobile ? (
-              <Image
-                src={featured_mobile_banner}
-                alt="featured_mobile_banner"
-                fill
-              />
-            ) : (
-              <Image src={big_banner} alt="big_banner" fill />
-            )}
-          </Div>
-        </ImageContainer>
-        <h2>Featured and Seen in</h2>
-        <ParallaxImages>
-          <ParallaxText baseVelocity={-4}>
-            <Image src={companies_image} alt="comapanies" />
-          </ParallaxText>
-        </ParallaxImages>
-      </Inner>
+      <ImageContainer>
+        <RevealCover />
+        <Div
+          variants={imageVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.25, once: true }}
+        >
+          <Image
+            src={green_divider}
+            alt="green divider"
+            fill
+          />
+        </Div>
+
+        <Content>
+          <TextColumn>
+            <Label>WHAT WE DO</Label>
+            <Headline>
+              We Just Build <br />
+              Websites, <br />
+              From 0 To 100
+            </Headline>
+            <Paragraph>
+              From concept to launch, we craft websites that captivate and convert. Experience the power of a stunning, custom-built website that showcases your business and engages your audience.
+            </Paragraph>
+            <ButtonContainer>
+              <GetStartedButton text="Learn More" variant='black filled' />
+            </ButtonContainer>
+          </TextColumn>
+
+  <ImageColumn>
+    <Image
+      src={site_banner}
+      alt="Devices showing website"
+      fill
+      priority
+    />
+  </ImageColumn>
+        </Content>
+      </ImageContainer>
     </Wrapper>
   );
 };

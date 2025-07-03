@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    const hasSeenPreloader = localStorage.getItem('hasSeenPreloader');
+    const hasSeenPreloader = sessionStorage.getItem('hasSeenPreloader');
     if (!hasSeenPreloader) {
       setShowPreloader(true);
     } else {
@@ -21,7 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (complete) {
-      localStorage.setItem('hasSeenPreloader', 'true');
+      sessionStorage.setItem('hasSeenPreloader', 'true');
       setShowPreloader(false);
     }
   }, [complete]);

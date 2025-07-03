@@ -15,7 +15,7 @@ export default function Home() {
       <HeroSection />
       <Featured />
       <OffersSection />
-      <FinancilaFreedom />
+      {/*<FinancilaFreedom />*/}
       <FinancialFuture />
       <IntroSection />
       <JoinSection />

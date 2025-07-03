@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { LinkTo } from './styles';
 
-const GetStartedButton = ({ padding }: { padding: string }) => {
+interface GetStartedButtonProps {
+  text: string;
+  variant?: 'green filled' | 'black filled';
+}
+
+const GetStartedButton = ({ text, variant = 'green filled' }: GetStartedButtonProps) => {
   return (
-    <LinkTo
-      style={{
-        padding: padding,
-      }}
-      href="/"
-    >
-      <span>Get Started</span>
+    <LinkTo href="/" $variant={variant}>
+      <span>{text}</span>
     </LinkTo>
   );
 };

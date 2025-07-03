@@ -1,58 +1,64 @@
 'use client';
 import Link from 'next/link';
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 
-export const LinkTo = styled(Link)`
+export const LinkTo = styled(Link)<{ $variant: 'green filled' | 'black filled' }>`
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border-radius: 9999px;
-  background: transparent;
+  border-radius: 10px;
+
+  /* keep your 2px border + 10px left border */
   border: 2px solid var(--white);
+  border-left-width: 8px;
+
+  /* text on top */
   color: var(--white);
   font-size: clamp(0.9rem, 2.5vw, 1rem);
-  font-weight: 600;
-  padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1.5rem, 5vw, 2.5rem);
-  cursor: pointer;
+  font-weight: bold;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.8rem, 5vw, 2.8rem);
   text-decoration: none;
-  transition: all 0.4s ease-in-out;
+  cursor: pointer;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -90%;
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    transition: left 0.4s ease;
-    z-index: 0;
+  /* 1) set up a one-color gradient background
+     2) hide it by sizing it to 0% width
+     3) animate background-size on hover */
+  background-image: linear-gradient(
+    ${({ $variant }) =>
+      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'}
+  , ${({ $variant }) =>
+      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'} );
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  transition:
+    background-size 0.3s ease-in-out,
+    border-color   0.3s ease-in-out;
+
+  &:hover {
+    /* expand the gradient from the left to full width */
+    background-size: 100% 100%;
+
+    /* recolor your borders to match */
+    border-color: ${({ $variant }) =>
+      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'};
   }
 
-  &:hover::before {
-    left: 0;
-    background-color: var(--green);
-  }
+&:focus {
+  outline: none;
+  /* subtle outer shadow for both variants */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
   span {
     position: relative;
     z-index: 1;
-    display: inline-block;
     width: 100%;
     text-align: center;
   }
-
-  &:hover {
-    border-color: var(--green);
-    color: var(--white);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(23, 242, 166, 0.4);
-  }
 `;
+
 
 
