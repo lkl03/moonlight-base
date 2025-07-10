@@ -14,6 +14,7 @@ import {
   LeftImage,
   MiddleImage,
   RightImage,
+  ButtonContainer
 } from './styles';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -24,6 +25,7 @@ import {
   mobileHeaderPhrase,
   mobileParagraphPhrase,
 } from './constants';
+import { GetStartedButton } from '@/components';
 
 const IntroSection = () => {
   const isMobile = useIsMobile();
@@ -33,7 +35,7 @@ const IntroSection = () => {
     <Wrapper>
       <Inner>
         <Header>
-          <h3>Introducing</h3>
+          <span>Our Process</span>
           <HeaderMainText>
             {isMobile ? (
               <>
@@ -77,6 +79,9 @@ const IntroSection = () => {
             </Edge>
           ))}
         </Edges>
+        <ButtonContainer>
+          <GetStartedButton text="Get Started" />
+        </ButtonContainer>
       </Inner>
     </Wrapper>
   );

@@ -75,13 +75,15 @@ export const HeroTextContainer = styled.div`
     gap: 1rem;
     padding-bottom: 1.5rem;
     text-wrap: balance;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
     
     h1 {
       font-size: 2.5rem;
     }
 
     p {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
 
     span {

@@ -92,13 +92,19 @@ export const Edge = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.62rem;
+  text-wrap: balance;
 
   p {
     max-width: 26rem;
-    color: var(--link-color);
+    color: var(--white);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -106,10 +112,12 @@ export const Title = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: center;
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 500;
+    text-align: center;
   }
 `;
 

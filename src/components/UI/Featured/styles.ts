@@ -140,6 +140,10 @@ export const Paragraph = styled.p`
   line-height: 1.6;
   max-width: 40rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const ButtonContainer = styled.div`

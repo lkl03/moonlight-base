@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+	<title>image</title>
+	<defs>
+		<image  width="20" height="20" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAAXNSR0IB2cksfwAAAUdQTFRFF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmF/KmVmhpEgAAAG10Uk5TAA58KAMeHQaE/MgiEofU0ooR86vstKz5pvCLmQlj9wz/vgeM4xenffj6sdH7aWzqWJPtZQ2zkd0CZGYBuyQYqjjhX/J5C+Up2OZv9jXxzP53bWBDV/W4xF63et9QCv2Y1Rs7zbUUwKTQK+SULtiDOt4AAAFcSURBVHicNdDPSwJREAfw912XtvapUWmH3G0jsyyoKBCJfgkGQXWqY+cO0Z9WEER5CcofLRQhiYUaFhFalCFdVlcDtVmtOQ2f9+bNvAFjDECDdUKkvM5AJlFWaZsdVnyDTKakaqmdMqorgayH0CTVTBnvHuuuIKnVDy/wWld42QVkp5CBTfLhwSs3xNyIQI8XVauacbmlZD2DeLQr0DW1yPsT1J3LQ+A23Pub1yyEkjtqjcR4yzfQEGGQmQZZG5lNWribxzlZ70+U/aHGDYVq12+d/mr8DzUuOC1LBoCMGm8j/UPp1lkoHazEt+iTCcI+YQlfZObn3DHbzpozFwbYTpJNS0fUQ3CYpxOzBZd8BrbxNgnDgZS7WaiFX0b12toJxF1aQEp9ovlWfJHw4WI5EMMeCsNXzdWcNd/yeMTUgpd57D+PFVW9ku8seVPqiuVppQfpmzr7D7vopuNfRd91pvkZOyIAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="pencil-ruler-solid" href="#img1" x="2" y="2"/>
+</svg>

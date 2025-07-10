@@ -2,40 +2,41 @@ import ic_document_duplicate from '../../../../public/svgs/ic_document_duplicate
 import ic_identification from '../../../../public/svgs/ic_identification.svg';
 import ic_lock_closed from '../../../../public/svgs/ic_lock_closed.svg';
 
+import ic_step_1 from '../../../../public/svgs/ic_step_1.svg';
+import ic_step_2 from '../../../../public/svgs/ic_step_2.svg';
+import ic_step_3 from '../../../../public/svgs/ic_step_3.svg';
+
 // For desktop
-export const desktopHeaderPhrase = ["Introducing RAFT's Next-", 'Gen Cards'];
+export const desktopHeaderPhrase = ["How It Works"];
 export const desktopParagraphPhrase = [
-  " Discover RAFT's latest innovation – our new cards. Elevate your banking",
-  'experience with cutting-edge features, security, and unprecedented',
-  'convenience.',
+  "We make website creation simple. Share your vision, and we’ll bring it to life.",
+  'Your satisfaction is our priority.',
 ];
 
 // For mobile
-export const mobileHeaderPhrase = ["Introducing RAFT's", 'Next-Gen Cards'];
+export const mobileHeaderPhrase = ["How It Works"];
 export const mobileParagraphPhrase = [
-  " Discover RAFT's latest innovation – our new cards.",
-  ' Elevate your banking experience with cutting-edge',
-  'features, security, and unprecedented',
-  'convenience.',
+  "We make website creation simple. Share your vision, and we’ll bring it to life.",
+  'Your satisfaction is our priority.'
 ];
 
 export const edges = [
   {
-    point: 'Contactless Technology',
+    point: 'Step 1',
     details:
-      'Our new cards come equipped with contactless technology, allowing you to make swift, secure payments with a simple tap.',
-    icon: ic_document_duplicate,
+      'Choose a plan that fits your needs.',
+    icon: ic_step_1,
   },
   {
-    point: 'Personalization',
+    point: 'Step 2',
     details:
-      'Customize your card to reflect your unique style. Choose from a range of designs that suit your personality.',
-    icon: ic_identification,
+      'We’ll build your website based on your ideas and feedback.',
+    icon: ic_step_2,
   },
   {
-    point: 'Enhanced Security',
+    point: 'Step 3',
     details:
-      'Your peace of mind is our priority. Our cards feature advanced security measures to protect your transactions and data.',
-    icon: ic_lock_closed,
+      'Launch your new site and showcase your business with pride.',
+    icon: ic_step_3,
   },
 ];
