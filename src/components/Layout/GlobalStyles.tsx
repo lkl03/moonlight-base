@@ -19,6 +19,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     --link-color: #17F2A6;
     --green: #17F2A6;
     --emerald: #17F2A6;
+    --darkGreen: #45a383
   }
 
   * {

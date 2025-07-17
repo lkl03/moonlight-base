@@ -8,12 +8,14 @@ import {
   OfferCard,
   ImageCtn,
   TextCtn,
+  HeaderMainText
 } from './styles';
 import MaskText from '@/components/Common/MaskText';
 import { useIsMobile } from '../../../../libs/useIsMobile';
 import {
-  desktopHeaderPhrases,
+  desktopHeaderPhrase,
   desktopParagraphPhrase,
+  mobileHeaderPhrase,
   mobileParagraphPhrase,
   offers,
 } from './constants';
@@ -24,13 +26,20 @@ const OffersSection = () => {
     <Wrapper>
       <Inner>
         <Header>
-          <MaskText phrases={desktopHeaderPhrases} tag="h1" />
-
-          {isMobile ? (
-            <MaskText phrases={mobileParagraphPhrase} tag="p" />
-          ) : (
-            <MaskText phrases={desktopParagraphPhrase} tag="p" />
-          )}
+          <span>Our Offering</span>
+          <HeaderMainText>
+            {isMobile ? (
+              <>
+                <MaskText phrases={mobileHeaderPhrase} tag="h2" />
+                <MaskText phrases={mobileParagraphPhrase} tag="p" />
+              </>
+            ) : (
+              <>
+                <MaskText phrases={desktopHeaderPhrase} tag="h2" />
+                <MaskText phrases={desktopParagraphPhrase} tag="p" />
+              </>
+            )}
+          </HeaderMainText>
         </Header>
         <Offers>
           {offers.slice(0, 2).map((offer, i) => (
@@ -39,7 +48,7 @@ const OffersSection = () => {
                 <Image src={offer.illustration} alt="illustration" />
               </ImageCtn>
               <TextCtn>
-                <MaskText phrases={new Array(offer.title)} tag="h2" />
+                <MaskText phrases={new Array(offer.title)} tag="h3" />
                 <p>{offer.details}</p>
               </TextCtn>
             </OfferCard>
@@ -52,7 +61,7 @@ const OffersSection = () => {
                 <Image src={offer.illustration} alt="illustration" />
               </ImageCtn>
               <TextCtn>
-                <MaskText phrases={new Array(offer.title)} tag="h2" />
+                <MaskText phrases={new Array(offer.title)} tag="h3" />
                 <p>{offer.details}</p>
               </TextCtn>
             </OfferCard>

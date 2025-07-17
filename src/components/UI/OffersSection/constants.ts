@@ -3,20 +3,23 @@ import smart_investing from '../../../../public/images/smart_investing.png';
 import wealth_management from '../../../../public/images/wealth_management.png';
 import financial_planning from '../../../../public/images/financial_planning.png';
 // For desktop
-export const desktopHeaderPhrases = [
-  'Elevate Your Financial',
-  'Journey with RAFT',
+export const desktopHeaderPhrase = [
+  "$0 Upfront Payment,",
+  'A Monthly Subscription That Fits Your Needs',
 ];
 export const desktopParagraphPhrase = [
-  'RAFT offers a world of financial possibilities. From investments to payments,',
-  "we've got you covered. Join us and unlock your potential today.",
+  "Experience seamless website creation with our affordable monthly subscription plans.",
+  'Whatever your needs, we have a suitable package for you. No upfront costs, no hidden fees, and no surprises. Discover below what’s included.',
 ];
 
 // For mobile
+export const mobileHeaderPhrase = [
+  "$0 Upfront Payment,",
+  'A Monthly Subscription That Fits Your Needs',
+];
 export const mobileParagraphPhrase = [
-  'RAFT offers a world of financial possibilities. From',
-  "investments to payments, we've got you covered.",
-  'Join us and unlock your potential today.',
+  "Experience seamless website creation with our affordable monthly subscription plans.",
+  'Whatever your needs, we have a suitable package for you. No upfront costs, no hidden fees, and no surprises. Discover below what’s included.',
 ];
 
 export const offers = [

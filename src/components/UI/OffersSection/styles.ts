@@ -18,33 +18,59 @@ export const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
   text-align: center;
   max-width: 56rem;
-  margin: 0 auto 6.75rem;
+  margin: 0 auto 4rem;
 
-  h1 {
-    font-size: 4.75rem;
-    font-weight: 400;
+  span {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    letter-spacing: 1.6px;
+    line-height: 120%;
+    color: var(--emerald);
+  }
+
+  h2 {
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: bolder;
+    line-height: 1.15;
+    letter-spacing: 0px;
+    text-transform: capitalize;
   }
 
   p {
     max-width: 41.75rem;
-    color: #989898;
-    font-size: 1.25rem;
+    color: #bdbdbd;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 1.75rem;
+    letter-spacing: 0;
+    line-height: 150%;
+    margin: 0 auto;
   }
 
   @media (max-width: 768px) {
-    h1 {
-      font-size: 2.25rem;
-    }
+
+    margin: 0 auto 3rem;
 
     p {
-      font-size: 1rem;
-      line-height: 1.5rem;
+      font-size: 0.9rem;
     }
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
+`;
+
+export const HeaderMainText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
   }
 `;
 

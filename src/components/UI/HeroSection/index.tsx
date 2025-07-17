@@ -5,6 +5,7 @@ import { Wrapper, Inner, HeroTextContainer } from './styles';
 import { GetStartedButton } from '@/components';
 import MaskText from '@/components/Common/MaskText';
 import { useIsMobile } from '../../../../libs/useIsMobile';
+import { useHasMounted } from '../../../../libs/useHasMounted';
 import {
   mobileParagraphPhrases,
   mobilePrePhrases,
@@ -24,8 +25,11 @@ const HeroAnimatedHeading = dynamic(
 
 const HeroSection = () => {
   const isMobile = useIsMobile();
+  const hasMounted = useHasMounted();
 
-  return (
+  if (!hasMounted) return null;
+
+return (
     <Wrapper>
       <Inner>
         <HeroTextContainer>

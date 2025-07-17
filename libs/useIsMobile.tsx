@@ -1,27 +1,22 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-
-const isClient = typeof window === 'object';
 
 export const useIsMobile = () => {
-  const pathname = usePathname();
-  const [isMobile, setIsMobile] = useState(isClient && window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false); // Always start with `false` (safe on server)
 
   useEffect(() => {
-    const handleResize = () => {
-      const newIsMobile = window.innerWidth <= 768;
-      setIsMobile(newIsMobile);
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
 
-    if (isClient) {
-      window.addEventListener('resize', handleResize);
+    // Set on mount
+    checkIsMobile();
 
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [pathname]);
+    // Listen to resize
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   return isMobile;
 };
+

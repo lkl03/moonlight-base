@@ -4,6 +4,7 @@ import {
   Portfolio,
   FinancialFuture,
   FinancilaFreedom,
+  FirstCTA,
   HeroSection,
   IntroSection,
   JoinSection,
@@ -18,8 +19,9 @@ export default function Home() {
       <IntroSection />
       <Portfolio />
       <OffersSection />
+      <FirstCTA />
       {/*<FinancilaFreedom />*/}
-      <FinancialFuture />
+      {/*<FinancialFuture />*/}
       <JoinSection />
       <FAQ />
     </main>

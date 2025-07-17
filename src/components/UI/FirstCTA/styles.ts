@@ -46,8 +46,6 @@ export const Div = styled(motion.div)`
   @media (max-width: 599px) {
     img {
       object-fit: cover;
-      height: 123% !important;
-      width: 105% !important;
     }
   }
 `;
@@ -58,7 +56,7 @@ export const Content = styled.div`
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
   margin: 0 15%;
@@ -77,6 +75,7 @@ export const TextColumn = styled.div`
   min-width: 280px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   @media (max-width: 900px) {
     flex: 1 1 100%;
@@ -134,6 +133,7 @@ export const Headline = styled.h2`
   letter-spacing: 0px;
   margin-bottom: 1.5rem;
   white-space: pre-line; /* allow line breaks from code */
+  text-align: center;
 `;
 
 export const Paragraph = styled.p`
@@ -142,6 +142,8 @@ export const Paragraph = styled.p`
   line-height: 1.6;
   max-width: 40rem;
   margin-bottom: 2rem;
+  text-align: center;
+  text-wrap: balance;
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -149,12 +151,10 @@ export const Paragraph = styled.p`
 `;
 
 export const ButtonContainer = styled.div`
-  @media (max-width: 767px) {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    background-color: #45a383;
-    padding: 0rem 0 5px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #45a383;
+  padding: 1rem;
 `;

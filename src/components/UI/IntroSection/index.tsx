@@ -39,12 +39,12 @@ const IntroSection = () => {
           <HeaderMainText>
             {isMobile ? (
               <>
-                <MaskText phrases={mobileHeaderPhrase} tag="h1" />
+                <MaskText phrases={mobileHeaderPhrase} tag="h2" />
                 <MaskText phrases={mobileParagraphPhrase} tag="p" />
               </>
             ) : (
               <>
-                <MaskText phrases={desktopHeaderPhrase} tag="h1" />
+                <MaskText phrases={desktopHeaderPhrase} tag="h2" />
                 <MaskText phrases={desktopParagraphPhrase} tag="p" />
               </>
             )}

@@ -20,6 +20,7 @@ import {
 
 import RevealCover from '@/components/Common/RevealCover';
 import { GetStartedButton } from '@/components';
+import { useIsMobile } from '../../../../libs/useIsMobile';
 
 export const imageVariants = {
   hidden: {
@@ -35,7 +36,8 @@ export const imageVariants = {
   },
 };
 
-const Featured = () => {
+const FirstCTA = () => {
+  const isMobile = useIsMobile();
 
   return (
     <Wrapper>
@@ -56,32 +58,21 @@ const Featured = () => {
 
         <Content>
           <TextColumn>
-            <Label>WHAT WE DO</Label>
             <Headline>
-              We Just Build <br />
-              Websites, <br />
-              From 0 To 100
+              Doubts? <br />
+              Let's Talk!
             </Headline>
             <Paragraph>
-              From concept to launch, we craft websites that captivate and convert. Experience the power of a stunning, custom-built website that showcases your business and engages your audience.
+              Reach out to us to learn more about how we work and how we can help you.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Learn More" variant='black filled' />
+              <GetStartedButton text="Get in Touch" variant='black filled' />
             </ButtonContainer>
           </TextColumn>
-
-  <ImageColumn>
-    <Image
-      src={site_banner}
-      alt="Devices showing website"
-      fill
-      priority
-    />
-  </ImageColumn>
         </Content>
       </ImageContainer>
     </Wrapper>
   );
 };
 
-export default Featured;
+export default FirstCTA;

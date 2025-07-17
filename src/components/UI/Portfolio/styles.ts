@@ -12,22 +12,8 @@ export const Inner = styled.div`
   max-width: 1440px;
   width: 90%;
 
-  h2 {
-    color: var(--link-color);
-    font-size: 1.25rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-top: 6.5rem;
-  }
-
   @media (max-width: 768px) {
-    margin-top: 5rem;
-
-    h2 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-top: 3.75rem;
-    }
+    margin-top: 6.44rem;
   }
 `;
 
@@ -37,7 +23,7 @@ export const Header = styled.header`
   align-items: center;
   text-align: center;
   max-width: 56rem;
-  margin: 0 auto 7.38rem;
+  margin: 0 auto 4rem;
 
   span {
     font-size: 1rem;
@@ -48,10 +34,11 @@ export const Header = styled.header`
     color: var(--emerald);
   }
 
-  h1 {
-    font-size: 4rem;
+  h2 {
+    font-size: clamp(2.25rem, 5vw, 3rem);
     font-weight: bolder;
-    line-height: 120%;
+    line-height: 1.15;
+    letter-spacing: 0px;
     text-transform: capitalize;
   }
 
@@ -68,10 +55,6 @@ export const Header = styled.header`
   @media (max-width: 768px) {
 
     margin: 0 auto 3rem;
-
-    h1 {
-      font-size: 2.5rem;
-    }
 
     p {
       font-size: 0.9rem;
