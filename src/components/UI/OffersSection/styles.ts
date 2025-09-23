@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { styled } from 'styled-components';
 import grid_background from '../../../../public/images/offer_card_grid_1.png';
 
@@ -75,64 +76,57 @@ export const HeaderMainText = styled.div`
 `;
 
 export const ImageCtn = styled.div`
-  margin: 3rem auto 0;
-  position: relative;
   display: flex;
-
-  &::after {
-    position: absolute;
-    content: '';
-    height: 13.4375rem;
-    width: 100%;
-    background: linear-gradient(180deg, rgba(19, 19, 19, 0) 0%, #131313 100%);
-    left: 0;
-    top: 50px;
-  }
+  max-width: 25%;
+  padding: 1.25rem;
+  background-color: var(--white);
+  border-radius: 100%;
 
   img {
     width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 
   @media (max-width: 768px) {
-    margin: 0.32rem auto 0;
-
-    &::after {
-      top: 30px;
-    }
-
+    max-width: inherit;
     img {
-      width: 90%;
-      margin: 0 auto;
-      object-fit: contain;
+      max-width: 80px;
+      height: auto;
     }
   }
 `;
 
 export const TextCtn = styled.div`
-  padding: 2.5rem;
-  padding-top: 3.25rem;
-  max-width: 32.25rem;
+  padding: 1rem;
+  max-width: 75%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: auto;
 
-  h2 {
-    font-size: 2rem;
+  h3 {
+    font-size: 1.3rem;
     font-weight: 500;
-    line-height: 1.75rem;
+    text-align: center;
   }
 
   p {
-    color: var(--link-color);
+    max-width: 26rem;
+    color: var(--white);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
 
   @media (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 1rem 0;
+    max-width: inherit;
     h2 {
       font-size: 1.5rem;
     }
@@ -141,95 +135,106 @@ export const TextCtn = styled.div`
 
 export const Offers = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2rem;
-
-  &:last-child {
-    margin-top: 2rem;
-
-    div:first-child {
-      flex: 1;
-
-      ${ImageCtn} {
-        margin-top: 5.7rem;
-        flex: 2;
-      }
-
-      ${TextCtn} {
-        height: 1em;
-        flex: 1;
-      }
-    }
-
-    div:last-child {
-      flex: 2;
-
-      ${ImageCtn} {
-        margin-top: 5.7rem;
-        flex: 2;
-        margin-left: auto;
-      }
-
-      ${TextCtn} {
-        height: 1em;
-        flex: 1;
-      }
-    }
-  }
+  gap: 1rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
-
-    &:last-child {
-      div:first-child {
-        flex: 1;
-
-        ${ImageCtn} {
-          margin-top: 4.78rem;
-          flex: 1;
-        }
-
-        ${TextCtn} {
-          margin-top: 4rem;
-        }
-      }
-
-      div:last-child {
-        flex: 1;
-
-        ${ImageCtn} {
-          margin-top: 5.7rem;
-          flex: 1;
-          margin-left: auto;
-        }
-
-        ${TextCtn} {
-          margin-top: 2rem;
-        }
-      }
-    }
+    order: 2;
   }
 `;
 
 export const OfferCard = styled.div`
-  overflow: hidden;
-  height: 31.25rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--stroke, rgba(255, 255, 255, 0.04));
-  display: flex;
-  flex-direction: column;
-  background: url(${grid_background.src}) #131313 no-repeat;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: center;
+      align-items: start;
+      padding: 2rem 1.5rem;
+			border-radius: 2rem;
+			background: transparent;
+			box-shadow: 0 0 30px var(--Background);
+			overflow: hidden;
 
-  &:first-child {
-    flex: 2;
-  }
+      transition: all 0.3s ease-in-out;
 
-  &:nth-child(2) {
-    flex: 1;
+      &:nth-child(odd) {
+        flex-direction: row;
+      }
 
-    ${ImageCtn} {
-      margin-left: 2.5rem;
-      width: 100%;
+      @media (min-width: 769px) {
+      ${TextCtn} p {
+        visibility: hidden;
+      }
+
+      &:hover {
+        box-shadow: 0 0 3px var(--light-gray);
+        transform: translateY(-3px);   
+        			-webkit-backdrop-filter: blur(1px);
+			backdrop-filter: blur(1px); 
+
+              ${TextCtn} p {
+                visibility: visible;
+      }
+      }
     }
+    
+
+  @media (max-width: 768px) {
+    box-shadow: 0 0 3px var(--light-gray);
+    align-items: center;
+    padding: 1rem 0.75rem;
+    gap: 1rem;
   }
+`;
+
+
+export const CardsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 7.77rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+    order: 1;
+  }
+`;
+
+export const LeftImage = styled(Image)`
+
+`;
+
+export const MiddleImage = styled(Image)`
+  position: relative;
+  z-index: 3;
+  //cursor: pointer;
+  @media (max-width: 768px) {
+    width: 75%;
+    height: auto;
+    object-fit: contain;
+  }
+`;
+
+export const RightImage = styled(Image)`
+
+`;
+
+export const PerksContainer = styled.div`
+  display: flex;  
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;

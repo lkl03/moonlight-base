@@ -9,14 +9,14 @@ import ic_step_3 from '../../../../public/svgs/ic_step_3.svg';
 // For desktop
 export const desktopHeaderPhrase = ["How It Works"];
 export const desktopParagraphPhrase = [
-  "We make website creation simple. Share your vision, and we’ll bring it to life.",
+  "We make website creation simple. Share your vision, and we'll bring it to life.",
   'Your satisfaction is our priority.',
 ];
 
 // For mobile
 export const mobileHeaderPhrase = ["How It Works"];
 export const mobileParagraphPhrase = [
-  "We make website creation simple. Share your vision, and we’ll bring it to life.",
+  "We make website creation simple. Share your vision, and we'll bring it to life.",
   'Your satisfaction is our priority.'
 ];
 

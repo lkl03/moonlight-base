@@ -2,6 +2,14 @@ import seamless_payments from '../../../../public/images/seamless_payments.png';
 import smart_investing from '../../../../public/images/smart_investing.png';
 import wealth_management from '../../../../public/images/wealth_management.png';
 import financial_planning from '../../../../public/images/financial_planning.png';
+
+import ic_perk_1 from '../../../../public/svgs/ic_perk_1.svg';
+import ic_perk_2 from '../../../../public/svgs/ic_perk_2.svg';
+import ic_perk_3 from '../../../../public/svgs/ic_perk_3.svg';
+import ic_perk_4 from '../../../../public/svgs/ic_perk_4.svg';
+import ic_perk_5 from '../../../../public/svgs/ic_perk_5.svg';
+import ic_perk_6 from '../../../../public/svgs/ic_perk_6.svg';
+
 // For desktop
 export const desktopHeaderPhrase = [
   "$0 Upfront Payment,",
@@ -24,27 +32,39 @@ export const mobileParagraphPhrase = [
 
 export const offers = [
   {
-    illustration: seamless_payments,
-    title: 'Seamless Payments',
+    illustration: ic_perk_1,
+    title: '24/7 Customer Service',
     details:
-      'Enjoy secure, seamless transactions that make managing your money a breeze.',
+      `Contact us directly anytime you need assistance. We're here to support you around the clock.`,
   },
   {
-    illustration: smart_investing,
-    title: 'Smart Investing',
+    illustration: ic_perk_2,
+    title: 'Unlimited Revisions',
     details:
-      'Grow your wealth confidently with our personalized investment solutions, tailored to your financial goals.',
+      `Want to modify anything? We'll implement your changes on the same day you request them.`,
   },
   {
-    illustration: wealth_management,
-    title: 'Wealth Management',
+    illustration: ic_perk_3,
+    title: 'No Additional Fees',
     details:
-      'Make informed decisions for your financial future with our wealth management expertise.',
+      'Pay once and maintain the same monthly price. We cover all the charges to keep your site live.',
   },
   {
-    illustration: financial_planning,
-    title: 'Financial Planning',
+    illustration: ic_perk_4,
+    title: 'Content Creation',
     details:
-      'Achieve your financial dreams with our comprehensive financial planning services, guiding you toward a secure future.',
+      `Don't worry about hiring multiple professionals. We cover all your site's needs - design, content, and development - all in one package.`,
+  },
+    {
+    illustration: ic_perk_5,
+    title: 'Unique and Yours',
+    details:
+      'Each website is crafted exclusively for you, and you retain full ownership.',
+  },
+    {
+    illustration: ic_perk_6,
+    title: 'Content Creation',
+    details:
+      `Receive your website within days, showcasing fast results. Cancel anytime with no fees or hassle.`,
   },
 ];
