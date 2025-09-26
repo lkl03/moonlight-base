@@ -63,7 +63,7 @@ export const offers = [
   },
     {
     illustration: ic_perk_6,
-    title: 'Content Creation',
+    title: 'Quality Service',
     details:
       `Receive your website within days, showcasing fast results. Cancel anytime with no fees or hassle.`,
   },

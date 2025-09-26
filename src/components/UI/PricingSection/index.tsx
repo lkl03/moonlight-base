@@ -10,10 +10,15 @@ import {
   Inner,
   Header,
   HeaderMainText,
-  CardsContainer,
-  LeftImage,
-  MiddleImage,
-  RightImage,
+  CardContainer,
+  Card,
+  TextCtn,
+  CardBody,
+  FeatureList,
+  Footer,
+  StartBtn,
+  
+  SVGCtn,
   ButtonContainer
 } from './styles';
 import { MaskText } from '@/components';
@@ -21,13 +26,14 @@ import { useIsMobile } from '../../../../libs/useIsMobile';
 import {
   desktopHeaderPhrase,
   desktopParagraphPhrase,
-  edges,
   mobileHeaderPhrase,
   mobileParagraphPhrase,
+  cardsInfo,
+  planStyles,
 } from './constants';
 import { GetStartedButton } from '@/components';
 
-const PricingSection = () => {
+const IntroSection = () => {
   const isMobile = useIsMobile();
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -35,7 +41,7 @@ const PricingSection = () => {
     <Wrapper>
       <Inner>
         <Header>
-          <span>Our Process</span>
+          <span>Pricing</span>
           <HeaderMainText>
             {isMobile ? (
               <>
@@ -50,35 +56,29 @@ const PricingSection = () => {
             )}
           </HeaderMainText>
         </Header>
-        <CardsContainer>
-          <LeftImage
-            className={isHovered ? 'active' : ''}
-            src={orange_card}
-            alt="orange_atm_card"
-          />
-          <MiddleImage
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            src={lola_card}
-            alt="blue card"
-          />
-          <RightImage
-            className={isHovered ? 'active' : ''}
-            src={terry_card}
-            alt="terry card"
-          />
-        </CardsContainer>
-        <Edges>
-          {edges.map((edge, i) => (
-            <Edge key={i}>
-              <Title>
-                <Image src={edge.icon} alt="icon" />
-                <MaskText phrases={new Array(edge.point)} tag="h3" />
-              </Title>
-              <MaskText phrases={new Array(edge.details)} tag="p" />
-            </Edge>
-          ))}
-        </Edges>
+<CardContainer>
+  {cardsInfo.map((info) => (
+    <Card key={info.title} style={planStyles[info.appearance]}>
+      <CardBody>
+        <TextCtn>
+          <MaskText phrases={[info.title]} tag="span"/>
+          <MaskText phrases={[info.price]} tag="h3"/>
+          <MaskText phrases={[info.contractNote]} tag="span"/>
+          <MaskText phrases={[info.description]} tag="p"/>
+          <hr />
+        </TextCtn>
+
+        <FeatureList>
+          {info.features.map((f) => <li key={f}>{f}</li>)}
+        </FeatureList>
+      </CardBody>
+
+      <Footer>
+        <StartBtn>Start Now</StartBtn>
+      </Footer>
+    </Card>
+  ))}
+</CardContainer>
         <ButtonContainer>
           <GetStartedButton text="Get Started" />
         </ButtonContainer>
@@ -87,4 +87,4 @@ const PricingSection = () => {
   );
 };
 
-export default PricingSection;
+export default IntroSection;

@@ -210,7 +210,21 @@ export const LeftImage = styled(Image)`
 export const MiddleImage = styled(Image)`
   position: relative;
   z-index: 3;
-  //cursor: pointer;
+  animation: bounce-rotate 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; 
+
+  @media (max-width: 768px) {
+    animation: none;
+  }
+
+@keyframes bounce-rotate {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
   @media (max-width: 768px) {
     width: 75%;
     height: auto;
@@ -232,7 +246,6 @@ export const PerksContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  margin-top: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
