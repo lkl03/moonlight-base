@@ -1,8 +1,24 @@
+// styles.ts
 'use client';
 import Link from 'next/link';
-import { styled, css } from 'styled-components';
+import { styled } from 'styled-components';
 
-export const LinkTo = styled(Link)<{ $variant: 'green filled' | 'black filled' }>`
+type Variant = 'green filled' | 'black filled' | 'green-to-black';
+
+const baseBorder = ($variant: Variant) =>
+  $variant === 'green-to-black' ? 'var(--darkGreen)' : 'var(--white)';
+
+const hoverBorder = ($variant: Variant) =>
+  $variant === 'black filled' || $variant === 'green-to-black'
+    ? 'var(--Background)'
+    : 'var(--green)';
+
+const overlayFill = ($variant: Variant) =>
+  $variant === 'black filled' || $variant === 'green-to-black'
+    ? 'var(--Background), var(--Background)'
+    : 'var(--green), var(--green)';
+
+export const LinkTo = styled(Link)<{ $variant: Variant }>`
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -10,47 +26,39 @@ export const LinkTo = styled(Link)<{ $variant: 'green filled' | 'black filled' }
   overflow: hidden;
   border-radius: 10px;
 
-  /* keep your 2px border + 10px left border */
-  border: 2px solid var(--white);
+  border: 2px solid ${({ $variant }) => baseBorder($variant)};
   border-left-width: 8px;
+  border-left-color: ${({ $variant }) => baseBorder($variant)};
 
-  /* text on top */
-  color: var(--white);
+  color: ${({ $variant }) => ($variant === 'green-to-black' ? 'var(--darkGreen)' : 'var(--white)')};
   font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: bold;
   padding: clamp(0.8rem, 2vw, 1rem) clamp(1.8rem, 5vw, 2.8rem);
   text-decoration: none;
   cursor: pointer;
 
-  /* 1) set up a one-color gradient background
-     2) hide it by sizing it to 0% width
-     3) animate background-size on hover */
-  background-image: linear-gradient(
-    ${({ $variant }) =>
-      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'}
-  , ${({ $variant }) =>
-      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'} );
+  background-image: linear-gradient(${({ $variant }) => overlayFill($variant)});
   background-repeat: no-repeat;
   background-position: left center;
   background-size: 0% 100%;
+
   transition:
     background-size 0.3s ease-in-out,
-    border-color   0.3s ease-in-out;
+    border-color 0.3s ease-in-out,
+    border-left-color 0.3s ease-in-out,
+    color 0.2s ease-in-out;
 
   &:hover {
-    /* expand the gradient from the left to full width */
     background-size: 100% 100%;
-
-    /* recolor your borders to match */
-    border-color: ${({ $variant }) =>
-      $variant === 'green filled' ? 'var(--green)' : 'var(--Background)'};
+    border-color: ${({ $variant }) => hoverBorder($variant)};
+    border-left-color: ${({ $variant }) => hoverBorder($variant)};
+    color: var(--white);
   }
 
-&:focus {
-  outline: none;
-  /* subtle outer shadow for both variants */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  &:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
   span {
     position: relative;
@@ -59,6 +67,3 @@ export const LinkTo = styled(Link)<{ $variant: 'green filled' | 'black filled' }
     text-align: center;
   }
 `;
-
-
-

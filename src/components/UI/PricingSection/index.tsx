@@ -16,10 +16,6 @@ import {
   CardBody,
   FeatureList,
   Footer,
-  StartBtn,
-  
-  SVGCtn,
-  ButtonContainer
 } from './styles';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -61,10 +57,10 @@ const IntroSection = () => {
     <Card key={info.title} style={planStyles[info.appearance]}>
       <CardBody>
         <TextCtn>
-          <MaskText phrases={[info.title]} tag="span"/>
-          <MaskText phrases={[info.price]} tag="h3"/>
-          <MaskText phrases={[info.contractNote]} tag="span"/>
-          <MaskText phrases={[info.description]} tag="p"/>
+          <MaskText className="title" phrases={[info.title]} tag="span" />
+          <MaskText className="price" phrases={[info.price]} tag="h2" />
+          <MaskText className="note" phrases={[info.contractNote]} tag="span" />
+          <MaskText className="desc" phrases={[info.description]} tag="p" />
           <hr />
         </TextCtn>
 
@@ -74,14 +70,14 @@ const IntroSection = () => {
       </CardBody>
 
       <Footer>
-        <StartBtn>Start Now</StartBtn>
+        <GetStartedButton
+          text="Start Now"
+          variant={info.appearance === 'outline' ? 'green-to-black' : 'black filled'}
+        />
       </Footer>
     </Card>
   ))}
 </CardContainer>
-        <ButtonContainer>
-          <GetStartedButton text="Get Started" />
-        </ButtonContainer>
       </Inner>
     </Wrapper>
   );

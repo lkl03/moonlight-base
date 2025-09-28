@@ -1,5 +1,5 @@
 'use client';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import card_grid from '../../../../public/images/card_grid.png';
 
 export const Wrapper = styled.section`
@@ -90,6 +90,16 @@ export const CardContainer = styled.div`
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
+  & > div {
+    transition: transform 0.25s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    & > div:hover {
+      transform: translateY(-4px);
+    }
+  }
 `;
 
 export const Card = styled.div`
@@ -109,21 +119,10 @@ export const TextCtn = styled.div`
   padding: 2rem 2.25rem 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.75rem;
   color: var(--card-fg, var(--Background));
 
-  /* Title: primer span directo (MaskText tag="span") */
-  > span:first-of-type {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 700;
-    line-height: 1.2;
-    opacity: 0.95;
-  }
-
-  /* Fallback del layout anterior */
-  h3.title,
   .title {
     font-size: 0.8rem;
     letter-spacing: 0.12em;
@@ -131,67 +130,47 @@ export const TextCtn = styled.div`
     font-weight: 700;
     line-height: 1.2;
     opacity: 0.95;
+    color: var(--Background);
   }
 
-  /* Price: h3 directo (MaskText tag="h3") */
-  > h3,
   .price {
     font-size: 3rem;
     line-height: 1;
     font-weight: 800;
     margin-top: 0.25rem;
+    color: var(--price-color, currentColor);
   }
 
-  /* Note: segundo span directo (MaskText tag="span" después del h3) */
-  > span:nth-of-type(2),
   .note {
     font-size: 0.75rem;
     line-height: 1.2;
     opacity: 0.9;
+    color: var(--Background);
   }
 
-  /* Description: p directo (MaskText tag="p") */
-  > p,
   .desc {
     font-size: 0.9rem;
     line-height: 1.5;
     margin-top: 0.25rem;
     opacity: 0.95;
+    text-align: center;
   }
 
   hr {
     border: 0;
     height: 1px;
     background: currentColor;
-    opacity: var(--divider-opacity, 0.12);
+    opacity: var(--divider-opacity, 0.2);
     margin: 1.25rem 0 1rem;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
     padding: 1.5rem 1.5rem 0;
-
-    > span:first-of-type,
-    h3.title,
-    .title {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-    }
-
-    > h3,
-    .price {
-      font-size: 2.25rem;
-    }
-
-    > span:nth-of-type(2),
-    .note {
-      font-size: 0.75rem;
-    }
-
-    > p,
-    .desc {
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
+    > .title { font-size: 0.75rem; letter-spacing: 0.1em; }
+    > .price { font-size: 2.25rem; }
+    > .note { font-size: 0.75rem; }
+    > .desc { font-size: 0.95rem; line-height: 1.4; }
   }
 `;
 
@@ -204,9 +183,10 @@ export const FeatureList = styled.ul`
 
   li {
     font-size: 0.9rem;
-    display: grid;
-    grid-template-columns: 1.1rem auto;
+    display: flex;
+    flex-direction: row-reverse;
     align-items: start;
+    justify-content: space-between;
     column-gap: 0.5rem;
   }
 
@@ -219,48 +199,12 @@ export const FeatureList = styled.ul`
 
 export const Footer = styled.div`
   padding: 0 2.25rem 2rem;
-`;
-
-export const StartBtn = styled.button`
-  width: fit-content;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: transform 0.1s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-
-  background: var(--btn-bg, transparent);
-  color: var(--btn-fg, var(--green));
-  border: var(--btn-border, 2px solid var(--green));
-
-  &:hover { transform: translateY(-1px); }
+  display: flex;
+  justify-content: center; /* ← centra el botón */
 `;
 
 export const CardBody = styled.div`
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-`;
-
-export const SVGCtn = styled.div`
-  background: url(${card_grid.src});
-  height: 24.55rem;
-  display: grid;
-  place-items: center;
-
-  @media (max-width: 768px) {
-    height: 15.28219rem;
-    background-position: center center;
-    background-size: contain;
-
-    img {
-      width: 7.5rem;
-      height: 7.5rem;
-    }
-  }
-`;
-
-export const ButtonContainer = styled.div`
-  margin-top: 3rem;
 `;

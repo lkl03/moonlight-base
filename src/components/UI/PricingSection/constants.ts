@@ -29,8 +29,6 @@ export const cardsInfo = [
     price: '$199',
     description: 'Up to 3 pages.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
-    details:
-      'Unlimited Edits · Custom Design · 24/7 Customer Service · Lifetime Updates · Hosting Included · SEO Integrations',
     features: [
       'Unlimited Edits',
       'Custom Design',
@@ -46,8 +44,6 @@ export const cardsInfo = [
     price: '$349',
     description: 'Up to 10 pages. Same benefits as Standard Plan.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
-    details:
-      'Unlimited Edits · Custom Design · 24/7 Customer Service · Lifetime Updates · Hosting Included · SEO Integrations',
     features: [
       'Unlimited Edits',
       'Custom Design',
@@ -58,7 +54,7 @@ export const cardsInfo = [
     ],
     appearance: 'outline',
   },
-]  as const;
+] as const;
 
 export const planStyles: Record<'solid' | 'outline', React.CSSProperties> = {
   solid: {
@@ -70,15 +66,17 @@ export const planStyles: Record<'solid' | 'outline', React.CSSProperties> = {
     ['--btn-bg' as any]: 'var(--white)',
     ['--btn-fg' as any]: 'var(--darkGreen)',
     ['--btn-border' as any]: 'var(--white)',
+    ['--price-color' as any]: 'var(--white)',
   },
   outline: {
     ['--card-bg' as any]: 'var(--white)',
     ['--card-fg' as any]: 'var(--Background)',
     ['--card-border' as any]: '1px solid var(--light-gray)',
     ['--tick' as any]: 'var(--green)',
-    ['--divider-opacity' as any]: 0.12,
+    ['--divider-opacity' as any]: 0.2,
     ['--btn-bg' as any]: 'transparent',
     ['--btn-fg' as any]: 'var(--green)',
     ['--btn-border' as any]: '2px solid var(--green)',
+    ['--price-color' as any]: 'var(--darkGreen)',
   },
 };

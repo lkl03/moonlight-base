@@ -5,7 +5,7 @@ import featured_mobile_banner from '../../../../public/images/featured_mobile_ba
 import ParallaxText from '@/components/Common/ParallaxImages';
 import companies_image from '../../../../public/images/companies.png';
 import portfolio_image from '../../../../public/images/portfolio.png';
-import { Wrapper, Inner, Header, HeaderMainText, ParallaxImages, Div } from './styles';
+import { Wrapper, Inner, Header, HeaderMainText, ParallaxImages, Div, ButtonContainer } from './styles';
 import RevealCover from '@/components/Common/RevealCover';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -15,6 +15,7 @@ import {
   mobileHeaderPhrase,
   mobileParagraphPhrase,
 } from './constants';
+import { GetStartedButton } from '@/components';
 
 export const imageVariants = {
   hidden: {
@@ -61,6 +62,9 @@ const Portfolio = () => {
             <Image src={portfolio_image} alt="portfolio 2" />
           </ParallaxText>
         </ParallaxImages>
+                <ButtonContainer>
+                  <GetStartedButton text="View Our Recent Work" />
+                </ButtonContainer>
       </Inner>
     </Wrapper>
   );
