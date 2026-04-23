@@ -1,0 +1,28 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#0D1617"/>
+  <circle cx="514" cy="96" r="78" fill="#17F2A6" fill-opacity="0.12"/>
+  <circle cx="120" cy="310" r="90" fill="#43A583" fill-opacity="0.12"/>
+  <rect x="88" y="84" width="464" height="252" rx="24" fill="#121E20" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="88" y="84" width="464" height="36" rx="24" fill="#F3F4F0"/>
+  <circle cx="118" cy="102" r="5" fill="#C7CDD0"/>
+  <circle cx="136" cy="102" r="5" fill="#C7CDD0"/>
+  <circle cx="154" cy="102" r="5" fill="#C7CDD0"/>
+  <rect x="176" y="94" width="184" height="16" rx="8" fill="#DDE2E4"/>
+  <rect x="124" y="148" width="182" height="148" rx="18" fill="#0F1819" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <rect x="148" y="176" width="92" height="12" rx="6" fill="#FFFFFF"/>
+  <rect x="148" y="198" width="122" height="9" rx="4.5" fill="#FFFFFF" fill-opacity="0.42"/>
+  <path d="M148 264L176 238L206 252L236 216L264 232L292 196" stroke="#17F2A6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="206" cy="252" r="5" fill="#17F2A6"/>
+  <circle cx="292" cy="196" r="5" fill="#17F2A6"/>
+  <rect x="336" y="148" width="180" height="148" rx="18" fill="#131F21"/>
+  <rect x="360" y="176" width="84" height="12" rx="6" fill="#FFFFFF"/>
+  <rect x="360" y="198" width="128" height="9" rx="4.5" fill="#FFFFFF" fill-opacity="0.42"/>
+  <path d="M418 234C432 209 458 201 475 207C488 212 497 223 499 239C501 255 494 271 482 279C470 287 452 287 436 276L428 298L416 276C404 263 404 245 418 234Z" fill="#17F2A6"/>
+  <path d="M453 228L470 245L456 260" stroke="#0B1112" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M431 298L420 320" stroke="#17F2A6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M447 302L456 324" stroke="#17F2A6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M389 130L394 143L407 148L394 153L389 166L384 153L371 148L384 143L389 130Z" fill="#F5F8F8"/>
+  <path d="M520 132L525 145L538 150L525 155L520 168L515 155L502 150L515 145L520 132Z" fill="#17F2A6"/>
+  <rect x="204" y="314" width="132" height="16" rx="8" fill="#FFFFFF" fill-opacity="0.08"/>
+  <rect x="352" y="314" width="120" height="16" rx="8" fill="#17F2A6" fill-opacity="0.14"/>
+</svg>

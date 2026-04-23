@@ -1,12 +1,26 @@
 'use client';
+
 import Image from 'next/image';
-import big_banner from '../../../../public/images/big_banner.png';
-import featured_mobile_banner from '../../../../public/images/featured_mobile_banner.png';
+import { useRef } from 'react';
+import { useScroll, useTransform } from 'framer-motion';
+import abstractFigure from '../../../../public/svgs/abstract-figure.svg';
 import ParallaxText from '@/components/Common/ParallaxImages';
-import companies_image from '../../../../public/images/companies.png';
-import portfolio_image from '../../../../public/images/portfolio.png';
-import { Wrapper, Inner, Header, HeaderMainText, ParallaxImages, Div, ButtonContainer } from './styles';
-import RevealCover from '@/components/Common/RevealCover';
+import {
+  Wrapper,
+  Inner,
+  Header,
+  HeaderFigure,
+  HeaderMainText,
+  ParallaxImages,
+  ButtonContainer,
+  PortfolioTrack,
+  PortfolioCard,
+  PortfolioCardImage,
+  PortfolioPill,
+  PortfolioMeta,
+  PortfolioTitle,
+  PortfolioHint,
+} from './styles';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
 import {
@@ -14,29 +28,54 @@ import {
   desktopParagraphPhrase,
   mobileHeaderPhrase,
   mobileParagraphPhrase,
+  portfolioItems,
 } from './constants';
 import { GetStartedButton } from '@/components';
 
-export const imageVariants = {
-  hidden: {
-    scale: 1.6,
-  },
-  visible: {
-    scale: 1,
-    transition: {
-      duration: 1.4,
-      ease: [0.6, 0.05, -0.01, 0.9],
-      delay: 0.2,
-    },
-  },
-};
+type PortfolioItem = (typeof portfolioItems)[number];
 
 const Portfolio = () => {
   const isMobile = useIsMobile();
+  const headerRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: headerRef, offset: ['start end', 'end start'] });
+  const figureY = useTransform(scrollYProgress, [0, 1], [28, -28]);
+  const figureScale = useTransform(scrollYProgress, [0, 1], [0.97, 1.04]);
+
+  const renderTrack = (items: ReadonlyArray<PortfolioItem>) => (
+    <PortfolioTrack>
+      {items.map((item) => (
+        <PortfolioCard
+          key={`${item.title}-${item.tag}`}
+          href={item.href}
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label={`${item.title} demo site (opens in a new tab)`}
+        >
+          <PortfolioCardImage>
+            <Image
+              src={item.cover}
+              alt={`${item.title} website cover`}
+              fill
+              sizes="(max-width: 768px) 75vw, 24vw"
+            />
+            <PortfolioPill>{item.tag}</PortfolioPill>
+            <PortfolioMeta>
+              <PortfolioTitle>{item.title}</PortfolioTitle>
+              <PortfolioHint>Open site</PortfolioHint>
+            </PortfolioMeta>
+          </PortfolioCardImage>
+        </PortfolioCard>
+      ))}
+    </PortfolioTrack>
+  );
+
   return (
-    <Wrapper>
+    <Wrapper id="portfolio">
       <Inner>
-        <Header>
+        <Header ref={headerRef}>
+          <HeaderFigure style={{ y: figureY, scale: figureScale }} aria-hidden="true">
+            <Image src={abstractFigure} alt="" fill priority={false} />
+          </HeaderFigure>
           <span>Our Portfolio</span>
           <HeaderMainText>
             {isMobile ? (
@@ -52,19 +91,19 @@ const Portfolio = () => {
             )}
           </HeaderMainText>
         </Header>
+
         <ParallaxImages>
-          <ParallaxText baseVelocity={-3}>
-            <Image src={portfolio_image} alt="portfolio 1" />
+          <ParallaxText baseVelocity={isMobile ? -1.55 : -2.8}>{renderTrack(portfolioItems)}</ParallaxText>
+        </ParallaxImages>
+        <ParallaxImages>
+          <ParallaxText baseVelocity={isMobile ? 1.25 : 2.2}>
+            {renderTrack([...portfolioItems].reverse())}
           </ParallaxText>
         </ParallaxImages>
-                <ParallaxImages>
-          <ParallaxText baseVelocity={-3}>
-            <Image src={portfolio_image} alt="portfolio 2" />
-          </ParallaxText>
-        </ParallaxImages>
-                <ButtonContainer>
-                  <GetStartedButton text="View Our Recent Work" />
-                </ButtonContainer>
+
+        <ButtonContainer>
+          <GetStartedButton text="View Our Recent Work" href="#contact" />
+        </ButtonContainer>
       </Inner>
     </Wrapper>
   );

@@ -1,10 +1,4 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import { Edge, Edges, Title } from '../FinancialFreedom/styles';
-import lola_card from '../../../../public/images/lola_card.png';
-import orange_card from '../../../../public/images/orange_card.png';
-import terry_card from '../../../../public/images/terry_card.png';
 import {
   Wrapper,
   Inner,
@@ -29,12 +23,11 @@ import {
 } from './constants';
 import { GetStartedButton } from '@/components';
 
-const IntroSection = () => {
+const PricingSection = () => {
   const isMobile = useIsMobile();
-  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
-    <Wrapper>
+    <Wrapper id="pricing">
       <Inner>
         <Header>
           <span>Pricing</span>
@@ -52,35 +45,38 @@ const IntroSection = () => {
             )}
           </HeaderMainText>
         </Header>
-<CardContainer>
-  {cardsInfo.map((info) => (
-    <Card key={info.title} style={planStyles[info.appearance]}>
-      <CardBody>
-        <TextCtn>
-          <MaskText className="title" phrases={[info.title]} tag="span" />
-          <MaskText className="price" phrases={[info.price]} tag="h2" />
-          <MaskText className="note" phrases={[info.contractNote]} tag="span" />
-          <MaskText className="desc" phrases={[info.description]} tag="p" />
-          <hr />
-        </TextCtn>
+        <CardContainer>
+          {cardsInfo.map((info) => (
+            <Card key={info.title} style={planStyles[info.appearance]}>
+              <CardBody>
+                <TextCtn>
+                  <MaskText className="title" phrases={[info.title]} tag="span" />
+                  <MaskText className="price" phrases={[info.price]} tag="h2" />
+                  <MaskText className="note" phrases={[info.contractNote]} tag="span" />
+                  <MaskText className="desc" phrases={[info.description]} tag="p" />
+                  <hr />
+                </TextCtn>
 
-        <FeatureList>
-          {info.features.map((f) => <li key={f}>{f}</li>)}
-        </FeatureList>
-      </CardBody>
+                <FeatureList>
+                  {info.features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </FeatureList>
+              </CardBody>
 
-      <Footer>
-        <GetStartedButton
-          text="Start Now"
-          variant={info.appearance === 'outline' ? 'green-to-black' : 'black filled'}
-        />
-      </Footer>
-    </Card>
-  ))}
-</CardContainer>
+              <Footer>
+                <GetStartedButton
+                  text="Start Now"
+                  href="#contact"
+                  variant={info.appearance === 'outline' ? 'green-to-black' : 'black filled'}
+                />
+              </Footer>
+            </Card>
+          ))}
+        </CardContainer>
       </Inner>
     </Wrapper>
   );
 };
 
-export default IntroSection;
+export default PricingSection;

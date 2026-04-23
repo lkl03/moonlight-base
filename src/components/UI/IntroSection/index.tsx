@@ -1,20 +1,18 @@
 'use client';
-import { useState } from 'react';
+
 import Image from 'next/image';
-import { Edge, Edges, Title } from '../FinancialFreedom/styles';
-import lola_card from '../../../../public/images/lola_card.png';
-import orange_card from '../../../../public/images/orange_card.png';
-import terry_card from '../../../../public/images/terry_card.png';
 import {
   Wrapper,
   Inner,
   Header,
   HeaderMainText,
-  CardsContainer,
-  LeftImage,
-  MiddleImage,
-  RightImage,
-  ButtonContainer
+  ProcessGrid,
+  StepCard,
+  StepIllustration,
+  StepContent,
+  StepTitle,
+  StepDescription,
+  ButtonContainer,
 } from './styles';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -27,12 +25,11 @@ import {
 } from './constants';
 import { GetStartedButton } from '@/components';
 
-const PricingSection = () => {
+const IntroSection = () => {
   const isMobile = useIsMobile();
-  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
-    <Wrapper>
+    <Wrapper id="how-it-works">
       <Inner>
         <Header>
           <span>Our Process</span>
@@ -50,41 +47,32 @@ const PricingSection = () => {
             )}
           </HeaderMainText>
         </Header>
-        <CardsContainer>
-          <LeftImage
-            className={isHovered ? 'active' : ''}
-            src={orange_card}
-            alt="orange_atm_card"
-          />
-          <MiddleImage
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            src={lola_card}
-            alt="blue card"
-          />
-          <RightImage
-            className={isHovered ? 'active' : ''}
-            src={terry_card}
-            alt="terry card"
-          />
-        </CardsContainer>
-        <Edges>
-          {edges.map((edge, i) => (
-            <Edge key={i}>
-              <Title>
-                <Image src={edge.icon} alt="icon" />
-                <MaskText phrases={new Array(edge.point)} tag="h3" />
-              </Title>
-              <MaskText phrases={new Array(edge.details)} tag="p" />
-            </Edge>
+
+        <ProcessGrid>
+          {edges.map((edge) => (
+            <StepCard key={edge.point}>
+              <StepIllustration>
+                <Image src={edge.art} alt={edge.artAlt} fill sizes="(max-width: 900px) 100vw, 33vw" />
+              </StepIllustration>
+              <StepContent>
+                <StepTitle>
+                  <Image src={edge.icon} alt="" aria-hidden="true" />
+                  <MaskText phrases={[edge.point]} tag="h3" />
+                </StepTitle>
+                <StepDescription>
+                  <MaskText phrases={[edge.details]} tag="p" />
+                </StepDescription>
+              </StepContent>
+            </StepCard>
           ))}
-        </Edges>
+        </ProcessGrid>
+
         <ButtonContainer>
-          <GetStartedButton text="Get Started" />
+          <GetStartedButton text="Get Started" href="#pricing" />
         </ButtonContainer>
       </Inner>
     </Wrapper>
   );
 };
 
-export default PricingSection;
+export default IntroSection;

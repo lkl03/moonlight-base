@@ -11,9 +11,7 @@ import {
   TextCtn,
   HeaderMainText,
   CardsContainer,
-  LeftImage,
   MiddleImage,
-  RightImage,
   PerksContainer,
   ButtonContainer,
 } from './styles';
@@ -30,8 +28,9 @@ import { GetStartedButton } from '@/components';
 
 const OffersSection = () => {
   const isMobile = useIsMobile();
+
   return (
-    <Wrapper>
+    <Wrapper id="services">
       <Inner>
         <Header>
           <span>Our Offering</span>
@@ -64,10 +63,7 @@ const OffersSection = () => {
             ))}
           </Offers>
           <CardsContainer>
-            <MiddleImage
-              src={user_offers}
-              alt="blue card"
-            />
+            <MiddleImage src={user_offers} alt="user offers illustration" />
           </CardsContainer>
           <Offers>
             {offers.slice(3, 6).map((offer, i) => (
@@ -84,7 +80,7 @@ const OffersSection = () => {
           </Offers>
         </PerksContainer>
         <ButtonContainer>
-          <GetStartedButton text="View Plans" />
+          <GetStartedButton text="View Plans" href="#pricing" />
         </ButtonContainer>
       </Inner>
     </Wrapper>

@@ -17,11 +17,7 @@ import {
   mobileDynamicPhrases,
 } from './constants';
 
-// ✨ Dynamically import the animated heading, disabling SSR
-const HeroAnimatedHeading = dynamic(
-  () => import('./HeroAnimatedHeading'),
-  { ssr: false }
-);
+const HeroAnimatedHeading = dynamic(() => import('./HeroAnimatedHeading'), { ssr: false });
 
 const HeroSection = () => {
   const isMobile = useIsMobile();
@@ -29,7 +25,7 @@ const HeroSection = () => {
 
   if (!hasMounted) return null;
 
-return (
+  return (
     <Wrapper>
       <Inner>
         <HeroTextContainer>
@@ -45,19 +41,15 @@ return (
           ) : (
             <>
               <MaskText phrases={prePhrases} tag="span" />
-              <HeroAnimatedHeading
-                staticText={staticPhrase}
-                dynamicPhrases={dynamicPhrases}
-              />
+              <HeroAnimatedHeading staticText={staticPhrase} dynamicPhrases={dynamicPhrases} />
               <MaskText phrases={paragraphPhrases} tag="p" />
             </>
           )}
         </HeroTextContainer>
-        <GetStartedButton text="Get Started" />
+        <GetStartedButton text="Get Started" href="#pricing" />
       </Inner>
     </Wrapper>
   );
 };
 
 export default HeroSection;
-

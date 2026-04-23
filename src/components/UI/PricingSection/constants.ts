@@ -1,56 +1,47 @@
-import ic_document_duplicate from '../../../../public/svgs/ic_document_duplicate.svg';
-import ic_identification from '../../../../public/svgs/ic_identification.svg';
-import ic_lock_closed from '../../../../public/svgs/ic_lock_closed.svg';
-
-import ic_step_1 from '../../../../public/svgs/ic_step_1.svg';
-import ic_step_2 from '../../../../public/svgs/ic_step_2.svg';
-import ic_step_3 from '../../../../public/svgs/ic_step_3.svg';
-
-import ic_money_send from '../../../../public/svgs/ic_money_send.svg';
-import ic_wallet_minus from '../../../../public/svgs/ic_wallet_minus.svg';
-
 // For desktop
-export const desktopHeaderPhrase = ["Simple & Transparent Pricing"];
+export const desktopHeaderPhrase = ['Simple & Transparent Pricing'];
 export const desktopParagraphPhrase = [
-  "Choose a plan that fits your needs without any hidden fees or surprises.",
-  'Pay the same amount every month and watch your business thrive.',
+  'Choose a plan that fits your needs without any hidden fees or surprises.',
+  'Pay the same amount every month and scale your website with confidence.',
 ];
 
 // For mobile
-export const mobileHeaderPhrase = ["Simple & Transparent Pricing"];
+export const mobileHeaderPhrase = ['Simple & Transparent Pricing'];
 export const mobileParagraphPhrase = [
-  "Choose a plan that fits your needs without any hidden fees or surprises.",
-  'Pay the same amount every month and watch your business thrive.'
+  'Choose a plan that fits your needs without any hidden fees or surprises.',
+  'Pay the same amount every month and scale your website with confidence.',
 ];
 
 export const cardsInfo = [
   {
     title: 'Standard',
     price: '$199',
-    description: 'Up to 3 pages.',
+    description:
+      'Built for landing pages and smaller brochure websites that need a polished online presence.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
     features: [
-      'Unlimited Edits',
-      'Custom Design',
-      '24/7 Customer Service',
-      'Lifetime Updates',
-      'Hosting Included',
-      'SEO Integrations',
+      'Up to 3 pages',
+      'Best for landings & brochure sites',
+      'Custom design + mobile responsive',
+      'Contact form + basic SEO setup',
+      'Hosting & maintenance included',
+      'Unlimited edits & support',
     ],
     appearance: 'solid',
   },
   {
     title: 'Advance',
     price: '$349',
-    description: 'Up to 10 pages. Same benefits as Standard Plan.',
+    description:
+      'Designed for more complex websites that need extra pages, structure, and custom functionality.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
     features: [
-      'Unlimited Edits',
-      'Custom Design',
-      '24/7 Customer Service',
-      'Lifetime Updates',
-      'Hosting Included',
-      'SEO Integrations',
+      'Up to 10 pages',
+      'Ideal for larger business websites',
+      'Everything in Standard included',
+      'Blog, portfolio, or CMS-ready sections',
+      'Advanced forms & third-party integrations',
+      'Priority support with scalable structure',
     ],
     appearance: 'outline',
   },

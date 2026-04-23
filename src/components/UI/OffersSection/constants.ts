@@ -1,8 +1,3 @@
-import seamless_payments from '../../../../public/images/seamless_payments.png';
-import smart_investing from '../../../../public/images/smart_investing.png';
-import wealth_management from '../../../../public/images/wealth_management.png';
-import financial_planning from '../../../../public/images/financial_planning.png';
-
 import ic_perk_1 from '../../../../public/svgs/ic_perk_1.svg';
 import ic_perk_2 from '../../../../public/svgs/ic_perk_2.svg';
 import ic_perk_3 from '../../../../public/svgs/ic_perk_3.svg';
@@ -10,23 +5,21 @@ import ic_perk_4 from '../../../../public/svgs/ic_perk_4.svg';
 import ic_perk_5 from '../../../../public/svgs/ic_perk_5.svg';
 import ic_perk_6 from '../../../../public/svgs/ic_perk_6.svg';
 
-// For desktop
 export const desktopHeaderPhrase = [
-  "$0 Upfront Payment,",
+  '$0 Upfront Payment,',
   'A Monthly Subscription That Fits Your Needs',
 ];
 export const desktopParagraphPhrase = [
-  "Experience seamless website creation with our affordable monthly subscription plans.",
+  'Experience seamless website creation with our affordable monthly subscription plans.',
   'Whatever your needs, we have a suitable package for you. No upfront costs, no hidden fees, and no surprises. Discover below what’s included.',
 ];
 
-// For mobile
 export const mobileHeaderPhrase = [
-  "$0 Upfront Payment,",
+  '$0 Upfront Payment,',
   'A Monthly Subscription That Fits Your Needs',
 ];
 export const mobileParagraphPhrase = [
-  "Experience seamless website creation with our affordable monthly subscription plans.",
+  'Experience seamless website creation with our affordable monthly subscription plans.',
   'Whatever your needs, we have a suitable package for you. No upfront costs, no hidden fees, and no surprises. Discover below what’s included.',
 ];
 
@@ -35,36 +28,36 @@ export const offers = [
     illustration: ic_perk_1,
     title: '24/7 Customer Service',
     details:
-      `Contact us directly anytime you need assistance. We're here to support you around the clock.`,
+      'Reach out whenever you need support. We stay available throughout the project and after launch.',
   },
   {
     illustration: ic_perk_2,
     title: 'Unlimited Revisions',
     details:
-      `Want to modify anything? We'll implement your changes on the same day you request them.`,
+      'Need changes? We handle ongoing revisions so your website can evolve with your business.',
   },
   {
     illustration: ic_perk_3,
     title: 'No Additional Fees',
     details:
-      'Pay once and maintain the same monthly price. We cover all the charges to keep your site live.',
+      'Your monthly rate stays consistent, with no surprise setup, maintenance, or hosting charges.',
   },
   {
     illustration: ic_perk_4,
     title: 'Content Creation',
     details:
-      `Don't worry about hiring multiple professionals. We cover all your site's needs - design, content, and development - all in one package.`,
+      'We cover layout, copy guidance, design, and development in one streamlined subscription.',
   },
-    {
+  {
     illustration: ic_perk_5,
     title: 'Unique and Yours',
     details:
-      'Each website is crafted exclusively for you, and you retain full ownership.',
+      'Every site is designed specifically for your brand, and you keep full ownership of the final website.',
   },
-    {
+  {
     illustration: ic_perk_6,
     title: 'Quality Service',
     details:
-      `Receive your website within days, showcasing fast results. Cancel anytime with no fees or hassle.`,
+      'Fast turnaround, clear communication, and polished delivery without unnecessary hassle.',
   },
 ];

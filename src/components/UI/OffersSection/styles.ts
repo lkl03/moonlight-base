@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { styled } from 'styled-components';
-import grid_background from '../../../../public/images/offer_card_grid_1.png';
 
 export const Wrapper = styled.section``;
 
@@ -51,7 +50,6 @@ export const Header = styled.header`
   }
 
   @media (max-width: 768px) {
-
     margin: 0 auto 3rem;
 
     p {
@@ -76,172 +74,185 @@ export const HeaderMainText = styled.div`
 `;
 
 export const ImageCtn = styled.div`
-  display: flex;
-  max-width: 25%;
-  padding: 1.25rem;
+  flex: 0 0 clamp(3.9rem, 6vw, 4.85rem);
+  width: clamp(3.9rem, 6vw, 4.85rem);
+  height: clamp(3.9rem, 6vw, 4.85rem);
+  display: grid;
+  place-items: center;
+  padding: 0.8rem;
   background-color: var(--white);
-  border-radius: 100%;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 72%;
+    height: 72%;
     object-fit: contain;
   }
 
   @media (max-width: 768px) {
-    max-width: inherit;
+    flex-basis: 3.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0.68rem;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+
     img {
-      max-width: 80px;
-      height: auto;
+      width: 70%;
+      height: 70%;
     }
   }
 `;
 
 export const TextCtn = styled.div`
-  padding: 1rem;
-  max-width: 75%;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: auto;
+  gap: 0.7rem;
 
   h3 {
-    font-size: 1.3rem;
-    font-weight: 500;
-    text-align: center;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.15;
   }
 
   p {
-    max-width: 26rem;
-    color: var(--white);
-    font-size: 1rem;
+    max-width: 18rem;
+    color: #d7d7d7;
+    font-size: 0.95rem;
     font-weight: 400;
-    line-height: 1.5rem;
-    text-align: center;
-
-    @media (max-width: 768px) {
-      font-size: 0.9rem;
-    }
+    line-height: 1.55;
   }
 
   @media (max-width: 768px) {
-    padding: 1rem 0;
-    max-width: inherit;
-    h2 {
-      font-size: 1.5rem;
+    gap: 0.55rem;
+
+    h3 {
+      font-size: 1.08rem;
+      line-height: 1.18;
+    }
+
+    p {
+      max-width: none;
+      font-size: 0.9rem;
+      line-height: 1.45;
     }
   }
 `;
 
 export const Offers = styled.div`
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 1rem;
 
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
-    flex-direction: column;
+    gap: 0.9rem;
     order: 2;
   }
 `;
 
 export const OfferCard = styled.div`
-			display: flex;
-			flex-direction: row-reverse;
-			justify-content: center;
-      align-items: start;
-      padding: 2rem 1.5rem;
-			border-radius: 2rem;
-			background: transparent;
-			box-shadow: 0 0 30px var(--Background);
-			overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.35rem 1.35rem 1.4rem;
+  border-radius: 1.75rem;
+  min-height: 9.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 
-      transition: all 0.3s ease-in-out;
-
-      &:nth-child(odd) {
-        flex-direction: row;
-      }
-
-      @media (min-width: 769px) {
-      ${TextCtn} p {
-        visibility: hidden;
-      }
-
-      &:hover {
-        box-shadow: 0 0 3px var(--light-gray);
-        transform: translateY(-3px);   
-        			-webkit-backdrop-filter: blur(1px);
-			backdrop-filter: blur(1px); 
-
-              ${TextCtn} p {
-                visibility: visible;
-      }
-      }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.045);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
     }
-    
+  }
+
+  @media (max-width: 1024px) {
+    min-height: auto;
+  }
 
   @media (max-width: 768px) {
-    box-shadow: 0 0 3px var(--light-gray);
     align-items: center;
-    padding: 1rem 0.75rem;
-    gap: 1rem;
+    gap: 0.85rem;
+    padding: 1rem 0.95rem;
+    border-radius: 1.45rem;
   }
 `;
-
 
 export const CardsContainer = styled.div`
   display: flex;
+  flex: 0 1 clamp(14rem, 24vw, 22rem);
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 7.77rem;
   width: 100%;
+  min-width: 0;
+
+  @media (max-width: 1024px) {
+    flex-basis: 100%;
+    margin: 0 auto 1.5rem;
+  }
 
   @media (max-width: 768px) {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     order: 1;
   }
-`;
-
-export const LeftImage = styled(Image)`
-
 `;
 
 export const MiddleImage = styled(Image)`
   position: relative;
   z-index: 3;
-  animation: bounce-rotate 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; 
+  width: min(100%, 20rem);
+  height: auto;
+  animation: bounce-rotate 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+
+  @keyframes bounce-rotate {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(1deg);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: min(70vw, 18rem);
+  }
 
   @media (max-width: 768px) {
+    width: min(72vw, 16rem);
     animation: none;
   }
-
-@keyframes bounce-rotate {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(1deg);
-  }
-}
-
-  @media (max-width: 768px) {
-    width: 75%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-export const RightImage = styled(Image)`
-
 `;
 
 export const PerksContainer = styled.div`
-  display: flex;  
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 `;
 
@@ -250,4 +261,9 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 2.75rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
 `;

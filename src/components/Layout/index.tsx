@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ReactLenis } from '@studio-freight/react-lenis';
 import StyledComponentsRegistry from '../../../libs/registry';
 import { GlobalStyles } from './GlobalStyles';
-import { Footer, Header, Preloader } from '..';
+import { FloatingNav, Footer, Header, Preloader } from '../';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [showPreloader, setShowPreloader] = useState(false);
@@ -28,18 +27,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <StyledComponentsRegistry>
-      <ReactLenis
-        root
-        easing={(t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))}
-      >
-        <GlobalStyles />
-        {showPreloader && <Preloader setComplete={setComplete} />}
-        <div className={complete ? 'complete' : 'not_complete'}>
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </ReactLenis>
+      <GlobalStyles />
+      {showPreloader && <Preloader setComplete={setComplete} />}
+      <div className={complete ? 'complete' : 'not_complete'}>
+        <Header />
+        {children}
+        <Footer />
+        <FloatingNav />
+      </div>
     </StyledComponentsRegistry>
   );
 };

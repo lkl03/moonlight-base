@@ -1,26 +1,20 @@
 'use client';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import site_banner from '../../../../public/images/featured_site_banner.png';
 import green_divider from '../../../../public/svgs/green_divider.svg';
 
-import { 
-  Wrapper, 
-  Inner, 
-  ImageContainer, 
-  Div, 
-  Content, 
-  TextColumn, 
-  ImageColumn, 
-  Label, 
-  Headline, 
+import {
+  Wrapper,
+  ImageContainer,
+  Div,
+  Content,
+  TextColumn,
+  Headline,
   Paragraph,
-  ButtonContainer
+  ButtonContainer,
 } from './styles';
 
 import RevealCover from '@/components/Common/RevealCover';
 import { GetStartedButton } from '@/components';
-import { useIsMobile } from '../../../../libs/useIsMobile';
 
 export const imageVariants = {
   hidden: {
@@ -37,8 +31,6 @@ export const imageVariants = {
 };
 
 const FirstCTA = () => {
-  const isMobile = useIsMobile();
-
   return (
     <Wrapper>
       <ImageContainer>
@@ -49,24 +41,20 @@ const FirstCTA = () => {
           whileInView="visible"
           viewport={{ amount: 0.25, once: true }}
         >
-          <Image
-            src={green_divider}
-            alt="green divider"
-            fill
-          />
+          <Image src={green_divider} alt="green divider" fill />
         </Div>
 
         <Content>
           <TextColumn>
             <Headline>
               Doubts? <br />
-              Let's Talk!
+              Let’s Talk!
             </Headline>
             <Paragraph>
               Reach out to us to learn more about how we work and how we can help you.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Get in Touch" variant='black filled' />
+              <GetStartedButton text="Get in Touch" href="#contact" variant="black filled" />
             </ButtonContainer>
           </TextColumn>
         </Content>

@@ -1,6 +1,6 @@
 'use client';
+
 import styled from 'styled-components';
-import card_grid from '../../../../public/images/card_grid.png';
 
 export const Wrapper = styled.section`
   padding-top: 7.5rem;
@@ -30,9 +30,9 @@ export const Header = styled.header`
   span {
     font-size: 1rem;
     text-transform: uppercase;
-    font-weight: bold !important;
+    font-weight: 700 !important;
     letter-spacing: 1.6px;
-    line-height: 120%;
+    line-height: 1.2;
     color: var(--emerald);
   }
 
@@ -40,7 +40,7 @@ export const Header = styled.header`
     font-size: clamp(2.25rem, 5vw, 3rem);
     font-weight: bolder;
     line-height: 1.15;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     text-transform: capitalize;
   }
 
@@ -50,12 +50,12 @@ export const Header = styled.header`
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 150%;
+    line-height: 1.5;
     margin: 0 auto;
+    text-wrap: balance;
   }
 
   @media (max-width: 768px) {
-
     margin: 0 auto 3rem;
 
     p {
@@ -78,7 +78,6 @@ export const HeaderMainText = styled.div`
     gap: 1rem;
   }
 `;
-
 
 export const CardContainer = styled.div`
   display: grid;
@@ -108,11 +107,10 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   background: var(--card-bg, var(--white));
   color: var(--card-fg, var(--Background));
   border: var(--card-border, 1px solid var(--light-gray));
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 `;
 
 export const TextCtn = styled.div`
@@ -146,14 +144,18 @@ export const TextCtn = styled.div`
     line-height: 1.2;
     opacity: 0.9;
     color: var(--Background);
+    text-align: center;
   }
 
   .desc {
+    width: min(100%, 24rem);
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.55;
     margin-top: 0.25rem;
+    margin-inline: auto;
     opacity: 0.95;
     text-align: center;
+    text-wrap: balance;
   }
 
   hr {
@@ -167,10 +169,25 @@ export const TextCtn = styled.div`
 
   @media (max-width: 768px) {
     padding: 1.5rem 1.5rem 0;
-    > .title { font-size: 0.75rem; letter-spacing: 0.1em; }
-    > .price { font-size: 2.25rem; }
-    > .note { font-size: 0.75rem; }
-    > .desc { font-size: 0.95rem; line-height: 1.4; }
+
+    > .title {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    > .price {
+      font-size: 2.25rem;
+    }
+
+    > .note {
+      font-size: 0.75rem;
+    }
+
+    > .desc {
+      width: min(100%, 20rem);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
   }
 `;
 
@@ -200,7 +217,7 @@ export const FeatureList = styled.ul`
 export const Footer = styled.div`
   padding: 0 2.25rem 2rem;
   display: flex;
-  justify-content: center; /* ← centra el botón */
+  justify-content: center;
 `;
 
 export const CardBody = styled.div`

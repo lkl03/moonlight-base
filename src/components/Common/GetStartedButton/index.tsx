@@ -1,18 +1,21 @@
-import Link from 'next/link';
 import { LinkTo } from './styles';
 
 interface GetStartedButtonProps {
   text: string;
+  href?: string;
   variant?: 'green filled' | 'black filled' | 'green-to-black';
 }
 
-const GetStartedButton = ({ text, variant = 'green filled' }: GetStartedButtonProps) => {
+const GetStartedButton = ({
+  text,
+  href = '#contact',
+  variant = 'green filled',
+}: GetStartedButtonProps) => {
   return (
-    <LinkTo href="/" $variant={variant}>
+    <LinkTo href={href} $variant={variant}>
       <span>{text}</span>
     </LinkTo>
   );
 };
 
 export default GetStartedButton;
-

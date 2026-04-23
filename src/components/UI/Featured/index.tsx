@@ -1,21 +1,20 @@
 'use client';
+
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import site_banner from '../../../../public/images/featured_site_banner.png';
+import featured_showcase from '../../../../public/svgs/featured-devices-showcase.svg';
 import green_divider from '../../../../public/svgs/green_divider.svg';
 
-import { 
-  Wrapper, 
-  Inner, 
-  ImageContainer, 
-  Div, 
-  Content, 
-  TextColumn, 
-  ImageColumn, 
-  Label, 
-  Headline, 
+import {
+  Wrapper,
+  ImageContainer,
+  Div,
+  Content,
+  TextColumn,
+  ImageColumn,
+  Label,
+  Headline,
   Paragraph,
-  ButtonContainer
+  ButtonContainer,
 } from './styles';
 
 import RevealCover from '@/components/Common/RevealCover';
@@ -36,9 +35,8 @@ export const imageVariants = {
 };
 
 const Featured = () => {
-
   return (
-    <Wrapper>
+    <Wrapper id="what-we-do">
       <ImageContainer>
         <RevealCover />
         <Div
@@ -47,11 +45,7 @@ const Featured = () => {
           whileInView="visible"
           viewport={{ amount: 0.25, once: true }}
         >
-          <Image
-            src={green_divider}
-            alt="green divider"
-            fill
-          />
+          <Image src={green_divider} alt="green divider" fill />
         </Div>
 
         <Content>
@@ -63,21 +57,23 @@ const Featured = () => {
               From 0 To 100
             </Headline>
             <Paragraph>
-              From concept to launch, we craft websites that captivate and convert. Experience the power of a stunning, custom-built website that showcases your business and engages your audience.
+              From concept to launch, we craft websites that captivate and convert. Experience
+              the power of a stunning, custom-built website that showcases your business and
+              engages your audience.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Learn More" variant='black filled' />
+              <GetStartedButton text="Learn More" href="#how-it-works" variant="black filled" />
             </ButtonContainer>
           </TextColumn>
 
-  <ImageColumn>
-    <Image
-      src={site_banner}
-      alt="Devices showing website"
-      fill
-      priority
-    />
-  </ImageColumn>
+          <ImageColumn>
+            <Image
+              src={featured_showcase}
+              alt="Desktop monitor and tablet showing a custom website interface"
+              fill
+              priority
+            />
+          </ImageColumn>
         </Content>
       </ImageContainer>
     </Wrapper>

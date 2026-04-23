@@ -1,5 +1,6 @@
 import {
   FAQ,
+  ContactSection,
   Featured,
   Portfolio,
   FinancialFuture,
@@ -28,6 +29,7 @@ export default function Home() {
       <PricingSection />
       <SecondCTA />
       <FAQ />
+      <ContactSection />
     </main>
   );
 }

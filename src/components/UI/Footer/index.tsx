@@ -1,89 +1,104 @@
 import Image from 'next/image';
-import raft_footer_logo from '../../../../public/svgs/raft_footer_logo.svg';
-import qr_code from '../../../../public/svgs/qr_code.svg';
-import ic_google_playstore from '../../../../public/svgs/ic_google_playstore.svg';
-import ic_baseline_apple from '../../../../public/svgs/ic_baseline_apple.svg';
-import ic_chevron_down from '../../../../public/svgs/ic_chevron_down.svg';
-import ic_copyright from '../../../../public/svgs/ic_copyright.svg';
-
-const linksArr = [
-  {
-    title: 'About us',
-    links: ['Our Company', 'Careers', 'Press kits'],
-  },
-  {
-    title: 'Legal',
-    links: ['Terms of use', 'Privacy policy', 'About us'],
-  },
-  {
-    title: 'About us',
-    links: ['Contact us', 'FAQ'],
-  },
-];
-
+import moonlight_logo_white from '../../../../public/pngs/logo-moonlight_white.png';
 import {
   Wrapper,
   Inner,
-  FooterLogo,
-  FooterMainContent,
-  FooterMiddle,
-  QRContainer,
-  QRImageCtn,
-  TextCtn,
-  IconCtn,
-  FooterNavigation,
-  GridColumn,
-  LinksContainer,
-  FooterBottom,
-  Translator,
-  CopyRight,
+  Content,
+  BrandBlock,
+  LogoLink,
+  BrandCopy,
+  BrandCopyLine,
+  BrandSecondaryRow,
+  BrandAccentLink,
+  LegalMeta,
+  LegalMetaItem,
+  UtilityGrid,
+  Column,
+  ColumnTitle,
+  NavList,
+  FooterLink,
+  ContactList,
+  ContactLink,
 } from './styles';
 
+const sitemapLinks = [
+  { label: 'What We Do', href: '#what-we-do' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Services', href: '#services' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+];
+
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <Wrapper>
       <Inner>
-        <FooterLogo>
-          <Image src={raft_footer_logo} alt="raft_footer_logo" />
-        </FooterLogo>
-        <FooterMainContent>
-          <FooterMiddle>
-            <QRContainer>
-              <QRImageCtn>
-                <Image src={qr_code} alt="qr_code" />
-              </QRImageCtn>
-              <TextCtn>
-                <p>Scan to download App on the Playstore and Appstore.</p>
-                <IconCtn>
-                  <Image src={ic_google_playstore} alt="playstore icon" />
-                  <Image src={ic_baseline_apple} alt="apple icon" />
-                </IconCtn>
-              </TextCtn>
-            </QRContainer>
-            <FooterNavigation>
-              {linksArr.map((l, i) => (
-                <GridColumn key={i}>
-                  <h3>{l.title}</h3>
-                  <LinksContainer>
-                    {l.links.map((link, i) => (
-                      <li key={i}>{link}</li>
-                    ))}
-                  </LinksContainer>
-                </GridColumn>
-              ))}
-            </FooterNavigation>
-          </FooterMiddle>
-          <FooterBottom>
-            <Translator>
-              <h3>English (United Kingdom)</h3>
-              <Image src={ic_chevron_down} alt="chevron down" />
-            </Translator>
-            <CopyRight>
-              <Image src={ic_copyright} alt="copyright svg" />
-              Raft Corp, LLC.
-            </CopyRight>
-          </FooterBottom>
-        </FooterMainContent>
+        <Content>
+          <BrandBlock>
+            <LogoLink href="/" aria-label="Moonlight Web Designs home">
+              <Image
+                src={moonlight_logo_white}
+                alt="Moonlight Web Designs logo"
+                width={220}
+                priority
+              />
+            </LogoLink>
+
+            <BrandCopy>
+              <BrandCopyLine>
+                Copyright © {currentYear} | Moonlight Web Designs
+              </BrandCopyLine>
+              <BrandSecondaryRow>
+                <span>All Rights Reserved</span>
+                <span>•</span>
+                <span>
+                  Part of{' '}
+                  <BrandAccentLink
+                    href="https://www.eterlab.co"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    eterlab.
+                  </BrandAccentLink>
+                </span>
+              </BrandSecondaryRow>
+              <LegalMeta>
+                <LegalMetaItem>Terms of Service</LegalMetaItem>
+                <LegalMetaItem>Privacy Policy</LegalMetaItem>
+              </LegalMeta>
+            </BrandCopy>
+          </BrandBlock>
+
+          <UtilityGrid>
+            <Column>
+              <ColumnTitle>Sitemap</ColumnTitle>
+              <NavList>
+                {sitemapLinks.map((link) => (
+                  <li key={link.href}>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  </li>
+                ))}
+              </NavList>
+            </Column>
+
+            <Column id="footer-contact">
+              <ColumnTitle>Contact Info</ColumnTitle>
+              <ContactList>
+                <li>
+                  <ContactLink href="tel:+11234567890">+1(123) 456 7890</ContactLink>
+                </li>
+                <li>
+                  <ContactLink href="mailto:info@codestitch.com">
+                    info@codestitch.com
+                  </ContactLink>
+                </li>
+              </ContactList>
+            </Column>
+          </UtilityGrid>
+        </Content>
       </Inner>
     </Wrapper>
   );

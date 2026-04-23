@@ -1,6 +1,8 @@
 'use client';
+
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+
 const variant = {
   hidden: {
     width: '100%',
@@ -20,7 +22,7 @@ const RevealCover = () => {
       variants={variant}
       initial="hidden"
       whileInView="visible"
-      viewport={{ amount: 0.6, once: true }}
+      viewport={{ amount: 0.18, once: true, margin: '-8% 0px -8% 0px' }}
     ></Reveal>
   );
 };
