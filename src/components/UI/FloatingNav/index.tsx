@@ -85,33 +85,32 @@ const FloatingNav = () => {
   const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.target))
-      .filter((section): section is HTMLElement => Boolean(section));
+    const getActiveSection = (): NavTarget => {
+      const viewportMid = window.innerHeight / 2;
+      let best: NavTarget = navItems[0].target;
+      let bestDist = Infinity;
 
-    if (!sections.length) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visibleEntries.length > 0) {
-          setActiveSection(visibleEntries[0].target.id as NavTarget);
+      for (const item of navItems) {
+        const el = document.getElementById(item.target);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        const sectionMid = (rect.top + rect.bottom) / 2;
+        const dist = Math.abs(sectionMid - viewportMid);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = item.target;
         }
-      },
-      {
-        rootMargin: '-35% 0px -40% 0px',
-        threshold: [0.15, 0.35, 0.55, 0.75],
       }
-    );
+      return best;
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    const handleScroll = () => {
+      setActiveSection(getActiveSection());
+    };
 
-    return () => observer.disconnect();
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -145,7 +144,7 @@ const FloatingNav = () => {
   }, []);
 
   const scrollToSection = (sectionId: NavTarget) => {
-    setActiveSection(sectionId);
+    setActiveSection(sectionId); // optimistic update; scroll handler will confirm
     setIsMobileMenuOpen(false);
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: 'smooth',

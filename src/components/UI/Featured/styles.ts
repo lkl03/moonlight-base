@@ -63,6 +63,35 @@ export const Div = styled(motion.div)`
   }
 `;
 
+export const StaticDiv = styled.div`
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+
+  img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.75rem;
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    inset: 0 0 auto 0;
+    height: clamp(6.5rem, 19vw, 9rem);
+
+    img {
+      border-radius: 0;
+      object-fit: cover !important;
+      object-position: center top !important;
+      width: 100% !important;
+      height: 100% !important;
+      transform: none !important;
+    }
+  }
+`;
+
 export const Content = styled.div`
   position: relative;
   z-index: 1;

@@ -87,7 +87,7 @@ const FAQ = () => {
         </Accordion>
 
         <Actions>
-          <GetStartedButton text="Get In Touch" href="#contact" variant="black filled" />
+          <GetStartedButton text="Get In Touch" href="#contact" variant="green filled" />
         </Actions>
       </Inner>
     </Wrapper>

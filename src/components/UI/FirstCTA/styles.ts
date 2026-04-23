@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.section`
@@ -28,7 +27,7 @@ export const ImageContainer = styled.div`
   justify-content: center;
 `;
 
-export const Div = styled(motion.div)`
+export const Div = styled.div`
   position: absolute;
   top: 0;
   left: 0;

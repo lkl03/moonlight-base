@@ -16,8 +16,6 @@ import {
   Heading,
   Inner,
   Lead,
-  NoticeCard,
-  NoticeLink,
   ScheduleColumn,
   SchedulerCard,
   StickerCard,
@@ -87,9 +85,9 @@ const ContactSection = () => {
                 <AccentLine>(it probably is)</AccentLine>
               </Heading>
               <Lead>
-                Schedule a quick, 15-minute intro call to talk through your goals, page count,
-                timing, and whether a landing page, a multi-page site, or a custom scope makes
-                the most sense.
+                Book a free 30-minute intro call. We'll talk through your goals, page count,
+                and timeline — and figure out together whether a landing page, multi-page site,
+                or custom scope is the right move for your business.
               </Lead>
             </div>
 
@@ -109,7 +107,7 @@ const ContactSection = () => {
             </StickerCluster>
 
             <SupportRow>
-              <SupportItem>15-minute discovery call</SupportItem>
+              <SupportItem>30-minute intro call</SupportItem>
               <SupportLink href={calendlyCtaHref} target="_blank" rel="noreferrer noopener">
                 Book on Calendly
               </SupportLink>
@@ -119,18 +117,12 @@ const ContactSection = () => {
           </ContentColumn>
 
           <ScheduleColumn>
-            <NoticeCard>
-              Moonlight is currently booking a limited number of projects each month. For faster
-              service, email <NoticeLink href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</NoticeLink>{' '}
-              with your business name, goals, and ideal launch window.
-            </NoticeCard>
-
             <SchedulerCard>
               <WidgetEyebrow>Schedule</WidgetEyebrow>
               <WidgetHeader>Pick a time that works for you.</WidgetHeader>
               <WidgetSubcopy>
-                The inline scheduler below is styled to drop into this section without breaking the
-                rest of the layout.
+                30-minute intro call — no commitment needed. Just pick a slot and we'll take it
+                from there.
               </WidgetSubcopy>
               <CalendlyEmbed />
             </SchedulerCard>

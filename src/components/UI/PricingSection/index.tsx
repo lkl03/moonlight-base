@@ -67,7 +67,7 @@ const PricingSection = () => {
               <Footer>
                 <GetStartedButton
                   text="Start Now"
-                  href="#contact"
+                  href="/checkout"
                   variant={info.appearance === 'outline' ? 'green-to-black' : 'black filled'}
                 />
               </Footer>
