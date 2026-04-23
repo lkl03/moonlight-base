@@ -3,11 +3,10 @@
 import { keyframes, styled } from 'styled-components';
 
 const bounce = keyframes`
-  0% { transform: translate3d(var(--tx, 0), var(--ty, 0), 0) rotate(var(--rotate, 0deg)) scale(1); }
-  30% { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) - 10px), 0) rotate(calc(var(--rotate, 0deg) - 2deg)) scale(1.04); }
-  55% { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) + 4px), 0) rotate(calc(var(--rotate, 0deg) + 1deg)) scale(0.99); }
-  75% { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) - 3px), 0) rotate(var(--rotate, 0deg)) scale(1.02); }
-  100% { transform: translate3d(var(--tx, 0), var(--ty, 0), 0) rotate(var(--rotate, 0deg)) scale(1); }
+  0%   { transform: translate3d(var(--tx, 0), var(--ty, 0), 0) rotate(var(--rotate, 0deg)); }
+  40%  { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) - 6px), 0) rotate(var(--rotate, 0deg)); }
+  70%  { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) - 2px), 0) rotate(var(--rotate, 0deg)); }
+  100% { transform: translate3d(var(--tx, 0), calc(var(--ty, 0) - 5px), 0) rotate(var(--rotate, 0deg)); }
 `;
 
 export const Wrapper = styled.section`
@@ -55,22 +54,12 @@ export const Eyebrow = styled.span`
 `;
 
 export const Heading = styled.h2`
-  max-width: 10.8ch;
-  font-size: clamp(2.75rem, 6vw, 5.3rem);
+  max-width: 14ch;
+  font-size: clamp(2.25rem, 5vw, 3rem);
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   text-wrap: balance;
-
-  @media (max-width: 1120px) {
-    max-width: 11.8ch;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 12ch;
-    font-size: clamp(2.35rem, 10vw, 3.9rem);
-    line-height: 0.96;
-  }
 `;
 
 export const AccentLine = styled.span`
@@ -139,8 +128,8 @@ export const StickerCard = styled.div<{
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       z-index: 4;
-      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.2));
-      animation: ${bounce} 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+      animation: ${bounce} 0.35s ease forwards;
     }
   }
 

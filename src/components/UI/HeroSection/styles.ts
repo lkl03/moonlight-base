@@ -4,6 +4,7 @@ import hero_background from '../../../../public/images/grid_background.png';
 
 export const Wrapper = styled.section`
   margin-top: 10rem;
+  border-top: 2px solid var(--green);
 `;
 
 export const Inner = styled.div`

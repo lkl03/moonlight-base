@@ -7,7 +7,7 @@ import green_divider from '../../../../public/svgs/green_divider.svg';
 import {
   Wrapper,
   ImageContainer,
-  Div,
+  StaticDiv,
   Content,
   TextColumn,
   ImageColumn,
@@ -20,33 +20,15 @@ import {
 import RevealCover from '@/components/Common/RevealCover';
 import { GetStartedButton } from '@/components';
 
-export const imageVariants = {
-  hidden: {
-    scale: 1.6,
-  },
-  visible: {
-    scale: 1,
-    transition: {
-      duration: 1.4,
-      ease: [0.6, 0.05, -0.01, 0.9],
-      delay: 0.2,
-    },
-  },
-};
 
 const Featured = () => {
   return (
     <Wrapper id="what-we-do">
       <ImageContainer>
         <RevealCover />
-        <Div
-          variants={imageVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ amount: 0.25, once: true }}
-        >
+        <StaticDiv>
           <Image src={green_divider} alt="green divider" fill />
-        </Div>
+        </StaticDiv>
 
         <Content>
           <TextColumn>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import StyledComponentsRegistry from '../../../libs/registry';
 import { GlobalStyles } from './GlobalStyles';
 import { FloatingNav, Footer, Header, Preloader } from '../';
+import CustomCursor from '../Common/CustomCursor';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [showPreloader, setShowPreloader] = useState(false);
@@ -28,6 +29,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <StyledComponentsRegistry>
       <GlobalStyles />
+      <CustomCursor />
       {showPreloader && <Preloader setComplete={setComplete} />}
       <div className={complete ? 'complete' : 'not_complete'}>
         <Header />

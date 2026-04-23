@@ -29,6 +29,12 @@ export const GlobalStyles = styled.createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  @media (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   html {
     max-width: 100vw;
     overflow-x: hidden;
@@ -103,6 +109,13 @@ export const GlobalStyles = styled.createGlobalStyle`
   }
 
   .not_complete {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .complete {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.6s ease 0.1s;
   }
 `;

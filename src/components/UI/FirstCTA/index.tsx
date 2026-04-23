@@ -16,31 +16,13 @@ import {
 import RevealCover from '@/components/Common/RevealCover';
 import { GetStartedButton } from '@/components';
 
-export const imageVariants = {
-  hidden: {
-    scale: 1.6,
-  },
-  visible: {
-    scale: 1,
-    transition: {
-      duration: 1.4,
-      ease: [0.6, 0.05, -0.01, 0.9],
-      delay: 0.2,
-    },
-  },
-};
 
 const FirstCTA = () => {
   return (
     <Wrapper>
       <ImageContainer>
         <RevealCover />
-        <Div
-          variants={imageVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ amount: 0.25, once: true }}
-        >
+        <Div>
           <Image src={green_divider} alt="green divider" fill />
         </Div>
 
