@@ -33,7 +33,7 @@ export const Grid = styled.div`
 export const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.1rem;
   min-width: 0;
   padding-top: 0.35rem;
 `;
@@ -64,17 +64,14 @@ export const Heading = styled.h2`
 
 export const AccentLine = styled.span`
   display: block;
-  margin-top: 0.35rem;
+  margin-top: 0.5rem;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(2rem, 4.4vw, 3.9rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
   font-style: italic;
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-
-  @media (max-width: 768px) {
-    font-size: clamp(1.85rem, 8vw, 2.9rem);
-  }
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.6);
 `;
 
 export const Lead = styled.p`
