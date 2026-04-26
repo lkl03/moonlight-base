@@ -40,8 +40,8 @@ const Reveal = styled(motion.div)`
   background-color: var(--Background);
   z-index: 10;
 
-  @media (max-width: 599px) {
-    border-radius: 0;
+  @media (max-width: 900px) {
+    display: none;
   }
 
   @media (min-width: 600px) and (max-width: 1024px) {

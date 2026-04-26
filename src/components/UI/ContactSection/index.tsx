@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import browserSticker from '../../../../public/svgs/contact-sticker-browser.svg';
-import chatSticker from '../../../../public/svgs/contact-sticker-chat.svg';
-import cursorSticker from '../../../../public/svgs/contact-sticker-cursor.svg';
-import rocketSticker from '../../../../public/svgs/contact-sticker-rocket.svg';
-import sparkSticker from '../../../../public/svgs/contact-sticker-spark.svg';
+import stickerDiscovery from '../../../../public/svgs/process-discovery.svg';
+import stickerBuild from '../../../../public/svgs/process-build.svg';
+import stickerLaunch from '../../../../public/svgs/process-launch.svg';
+import stickerPerk1 from '../../../../public/svgs/ic_perk_1.svg';
+import stickerPerk2 from '../../../../public/svgs/ic_perk_2.svg';
 import CalendlyEmbed from './CalendlyEmbed';
 import { CALENDLY_EMBED_URL, CONTACT_EMAIL } from './config';
 import {
@@ -36,39 +36,39 @@ const calendlyCtaHref = CALENDLY_EMBED_URL.includes('your-handle')
 
 const stickers = [
   {
-    src: browserSticker,
-    alt: 'Browser window sticker',
+    src: stickerDiscovery,
+    alt: 'Discovery phase illustration',
     $size: 'large' as const,
-    $rotate: '-6deg',
-    $translate: '0, 18px',
+    $rotate: '-5deg',
+    $translate: '0, 14px',
   },
   {
-    src: rocketSticker,
-    alt: 'Rocket sticker',
+    src: stickerBuild,
+    alt: 'Build phase illustration',
     $size: 'medium' as const,
     $rotate: '4deg',
-    $translate: '-18px, 0',
+    $translate: '-16px, 0',
   },
   {
-    src: chatSticker,
-    alt: 'Chat bubble sticker',
+    src: stickerLaunch,
+    alt: 'Launch phase illustration',
     $size: 'small' as const,
-    $rotate: '-2deg',
-    $translate: '-30px, 28px',
+    $rotate: '-3deg',
+    $translate: '-28px, 24px',
   },
   {
-    src: cursorSticker,
-    alt: 'Cursor sticker',
+    src: stickerPerk1,
+    alt: 'Support icon',
     $size: 'medium' as const,
-    $rotate: '5deg',
-    $translate: '-42px, 10px',
+    $rotate: '6deg',
+    $translate: '-40px, 8px',
   },
   {
-    src: sparkSticker,
-    alt: 'Spark sticker',
+    src: stickerPerk2,
+    alt: 'Revisions icon',
     $size: 'small' as const,
-    $rotate: '8deg',
-    $translate: '-54px, 34px',
+    $rotate: '9deg',
+    $translate: '-52px, 30px',
   },
 ];
 

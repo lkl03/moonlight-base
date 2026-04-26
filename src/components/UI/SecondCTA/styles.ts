@@ -154,6 +154,4 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #45a383;
-  padding: 1rem;
 `;

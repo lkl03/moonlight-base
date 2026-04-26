@@ -35,6 +35,11 @@ export const GlobalStyles = styled.createGlobalStyle`
     }
   }
 
+  ::selection {
+    background: var(--green);
+    color: var(--Background);
+  }
+
   html {
     max-width: 100vw;
     overflow-x: hidden;

@@ -1,7 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { styled } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
+
+const float = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+`;
 
 export const Wrapper = styled.section`
   margin: 6.25rem auto 0;
@@ -28,9 +33,9 @@ export const ImageContainer = styled.div`
   padding: 6rem 1rem;
 
   @media (max-width: 900px) {
-    background: #4daf91;
+    background: #17a276;
     border-radius: 0;
-    padding: 4.75rem 1rem 4rem;
+    padding: 5.5rem 1.5rem 5rem;
   }
 `;
 
@@ -78,13 +83,12 @@ export const StaticDiv = styled.div`
   }
 
   @media (max-width: 900px) {
-    inset: 0 0 auto 0;
-    height: clamp(6.5rem, 19vw, 9rem);
+    inset: 0;
 
     img {
       border-radius: 0;
       object-fit: cover !important;
-      object-position: center top !important;
+      object-position: center !important;
       width: 100% !important;
       height: 100% !important;
       transform: none !important;
@@ -138,6 +142,11 @@ export const ImageColumn = styled.div`
   img {
     object-fit: contain;
     object-position: center;
+    animation: ${float} 5s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   @media (max-width: 900px) {

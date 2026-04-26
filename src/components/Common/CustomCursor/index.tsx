@@ -1,105 +1,108 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
 
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to   { opacity: 1; }
-`;
-
-const Dot = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--green);
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s ease, opacity 0.2s ease;
-  animation: ${fadeIn} 0.4s ease forwards;
-
-  @media (pointer: coarse) {
-    display: none;
-  }
-`;
-
-const Ring = styled.div<{ $hovered: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1.5px solid var(--green);
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%) scale(${({ $hovered }) => ($hovered ? 1.6 : 1)});
-  transition: transform 0.22s ease, opacity 0.2s ease, border-color 0.2s ease;
-  animation: ${fadeIn} 0.4s ease forwards;
-  opacity: ${({ $hovered }) => ($hovered ? 0.6 : 0.85)};
-
-  @media (pointer: coarse) {
-    display: none;
-  }
-`;
-
-const INTERACTIVE = 'a, button, [role="button"], input, textarea, select, label, [tabindex]';
-
-const CustomCursor = () => {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const [hovered, setHovered] = useState(false);
-
-  // Ring follows with lerp via rAF
-  const ringPos = useRef({ x: -100, y: -100 });
-  const mousePos = useRef({ x: -100, y: -100 });
-  const rafId = useRef<number | null>(null);
+export default function CustomCursor() {
+  const dotRef = useRef<HTMLDivElement | null>(null);
+  const ringRef = useRef<HTMLDivElement | null>(null);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+    const fine = window.matchMedia('(pointer: fine)');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      if (dotRef.current) {
-        dotRef.current.style.left = `${e.clientX}px`;
-        dotRef.current.style.top = `${e.clientY}px`;
-      }
+    const update = () => setEnabled(fine.matches && !reduce.matches);
+    update();
 
-      const target = e.target as Element | null;
-      setHovered(Boolean(target?.closest(INTERACTIVE)));
-    };
-
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    const tick = () => {
-      ringPos.current.x = lerp(ringPos.current.x, mousePos.current.x, 0.14);
-      ringPos.current.y = lerp(ringPos.current.y, mousePos.current.y, 0.14);
-
-      if (ringRef.current) {
-        ringRef.current.style.left = `${ringPos.current.x}px`;
-        ringRef.current.style.top = `${ringPos.current.y}px`;
-      }
-      rafId.current = requestAnimationFrame(tick);
-    };
-
-    rafId.current = requestAnimationFrame(tick);
-    window.addEventListener('mousemove', onMove);
+    fine.addEventListener('change', update);
+    reduce.addEventListener('change', update);
 
     return () => {
-      window.removeEventListener('mousemove', onMove);
-      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+      fine.removeEventListener('change', update);
+      reduce.removeEventListener('change', update);
     };
   }, []);
 
+  useEffect(() => {
+    if (!enabled) return;
+
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let tx = x;
+    let ty = y;
+
+    const onMove = (e: PointerEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    };
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+
+    let raf = 0;
+    const loop = () => {
+      x += (tx - x) * 0.18;
+      y += (ty - y) * 0.18;
+
+      dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      ring.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+      raf = requestAnimationFrame(loop);
+    };
+
+    raf = requestAnimationFrame(loop);
+
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, [enabled]);
+
+  if (!enabled) return null;
+
   return (
     <>
-      <Dot ref={dotRef} />
-      <Ring ref={ringRef} $hovered={hovered} />
+      {/* Ring — slightly lagged, hollow with emerald border */}
+      <div
+        ref={ringRef}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          zIndex: 99998,
+          width: '18px',
+          height: '18px',
+          marginLeft: '-9px',
+          marginTop: '-9px',
+          borderRadius: '50%',
+          border: '1.5px solid #17F2A6',
+          background: 'transparent',
+          backdropFilter: 'blur(1px)',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }}
+      />
+      {/* Dot — same position, very subtle tinted fill */}
+      <div
+        ref={dotRef}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          zIndex: 99999,
+          width: '18px',
+          height: '18px',
+          marginLeft: '-9px',
+          marginTop: '-9px',
+          borderRadius: '50%',
+          background: 'rgba(23, 242, 166, 0.08)',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }}
+      />
     </>
   );
-};
-
-export default CustomCursor;
+}
