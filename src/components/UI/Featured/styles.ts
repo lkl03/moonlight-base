@@ -36,6 +36,7 @@ export const ImageContainer = styled.div`
     background: #17a276;
     border-radius: 0;
     padding: 5.5rem 1.5rem 5rem;
+    margin-top: 3rem;
   }
 `;
 
@@ -83,16 +84,7 @@ export const StaticDiv = styled.div`
   }
 
   @media (max-width: 900px) {
-    inset: 0;
-
-    img {
-      border-radius: 0;
-      object-fit: cover !important;
-      object-position: center !important;
-      width: 100% !important;
-      height: 100% !important;
-      transform: none !important;
-    }
+    display: none;
   }
 `;
 

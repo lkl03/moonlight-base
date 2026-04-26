@@ -1,0 +1,22 @@
+<svg viewBox="0 0 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <!-- Base fill -->
+  <rect width="1440" height="500" fill="#31967a"/>
+
+  <!-- Sweeping top wave highlight -->
+  <path d="M0 0 Q360 90 720 48 Q1080 6 1440 70 L1440 0 Z" fill="#3daa8a" opacity="0.8"/>
+
+  <!-- Diagonal ribbon -->
+  <path d="M-80 60 Q380 210 900 110 Q1200 60 1540 190 L1540 280 Q1200 155 900 220 Q380 330 -80 190 Z" fill="#4dbe9e" opacity="0.25"/>
+
+  <!-- Mid swell -->
+  <path d="M0 270 Q240 235 500 268 Q760 302 1000 255 Q1220 215 1440 245 L1440 325 Q1220 305 1000 350 Q760 395 500 358 Q240 322 0 360 Z" fill="#267a60" opacity="0.4"/>
+
+  <!-- Bottom organic wave -->
+  <path d="M0 375 Q180 345 400 378 Q640 414 880 368 Q1100 328 1280 362 Q1380 380 1440 368 L1440 500 L0 500 Z" fill="#1e6650" opacity="0.55"/>
+
+  <!-- Organic blobs for depth -->
+  <ellipse cx="180" cy="110" rx="140" ry="55" fill="#5ac8a4" opacity="0.12" transform="rotate(-18 180 110)"/>
+  <ellipse cx="820" cy="380" rx="160" ry="60" fill="#5ac8a4" opacity="0.1" transform="rotate(8 820 380)"/>
+  <ellipse cx="1320" cy="145" rx="120" ry="48" fill="#5ac8a4" opacity="0.13" transform="rotate(-10 1320 145)"/>
+  <circle cx="620" cy="70" r="70" fill="#5ac8a4" opacity="0.08"/>
+</svg>
