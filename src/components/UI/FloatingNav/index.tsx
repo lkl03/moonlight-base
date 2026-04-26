@@ -84,6 +84,15 @@ const FloatingNav = () => {
   const [themePreview, setThemePreview] = useState<ThemePreview>('dark');
   const navRef = useRef<HTMLElement | null>(null);
 
+  // Load persisted theme on mount
+  useEffect(() => {
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('ml-theme') : null;
+    if (stored === 'light') {
+      setThemePreview('light');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }, []);
+
   useEffect(() => {
     const getActiveSection = (): NavTarget => {
       const viewportMid = window.innerHeight / 2;
@@ -193,10 +202,17 @@ const FloatingNav = () => {
 
       <ThemeToggle
         type="button"
-        onClick={() =>
-          setThemePreview((prev) => (prev === 'dark' ? 'light' : 'dark'))
-        }
-        aria-label={`Toggle theme preview to ${themePreview === 'dark' ? 'light' : 'dark'}`}
+        onClick={() => {
+          const next = themePreview === 'dark' ? 'light' : 'dark';
+          setThemePreview(next);
+          if (next === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+          localStorage.setItem('ml-theme', next);
+        }}
+        aria-label={`Switch to ${themePreview === 'dark' ? 'light' : 'dark'} mode`}
       >
         <ThemeIconSlot $isActive={themePreview === 'dark'}>
           <MoonIcon />
