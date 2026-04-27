@@ -19,7 +19,7 @@ import { GetStartedButton } from '@/components';
 
 const FirstCTA = () => {
   return (
-    <Wrapper>
+    <Wrapper id="first-cta">
       <ImageContainer>
         <RevealCover />
         <Div>

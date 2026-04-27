@@ -52,7 +52,8 @@ export const LinkTo = styled(Link)<{ $variant: Variant }>`
     background-size: 100% 100%;
     border-color: ${({ $variant }) => hoverBorder($variant)};
     border-left-color: ${({ $variant }) => hoverBorder($variant)};
-    color: var(--white);
+    /* green filled always fills with --green; keep text white regardless of theme */
+    color: ${({ $variant }) => ($variant === 'green filled' ? '#ffffff' : 'var(--white)')};
   }
 
   &:focus {
