@@ -47,7 +47,7 @@ const PricingSection = () => {
         </Header>
         <CardContainer>
           {cardsInfo.map((info) => (
-            <Card key={info.title} style={planStyles[info.appearance]}>
+            <Card key={info.title} style={planStyles[info.appearance]} data-appearance={info.appearance}>
               <CardBody>
                 <TextCtn>
                   <MaskText className="title" phrases={[info.title]} tag="span" />

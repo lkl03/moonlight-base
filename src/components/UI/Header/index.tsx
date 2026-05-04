@@ -25,7 +25,10 @@ const Header = () => {
     <Wrapper>
       <Inner>
         <LogoContainer>
-          <Image src={moonlight_logo_white} alt="moonlight_logo_white" priority width={200} />
+          {/* White logo — shown in dark mode, hidden in light mode */}
+          <Image src={moonlight_logo_white} alt="Moonlight Web Designs" className="site-logo--white" priority width={200} />
+          {/* Dark logo — hidden in dark mode, shown in light mode */}
+          <Image src={moonlight_logo} alt="Moonlight Web Designs" className="site-logo--dark" priority width={200} />
           {/*<BurgerMenu onClick={() => setIsOpen(!isOpen)}>
             <motion.div
               variants={menu}

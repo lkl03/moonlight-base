@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import moonlight_logo_white from '../../../../public/pngs/logo-moonlight_white.png';
+import moonlight_logo from '../../../../public/pngs/logo-moonlight.png';
 import {
   Wrapper,
   Inner,
@@ -39,12 +40,9 @@ const Footer = () => {
         <Content>
           <BrandBlock>
             <LogoLink href="/" aria-label="Moonlight Web Designs home">
-              <Image
-                src={moonlight_logo_white}
-                alt="Moonlight Web Designs logo"
-                width={220}
-                priority
-              />
+              {/* White logo — dark mode; dark logo — light mode */}
+              <Image src={moonlight_logo_white} alt="Moonlight Web Designs logo" className="site-logo--white" width={220} priority />
+              <Image src={moonlight_logo} alt="Moonlight Web Designs logo" className="site-logo--dark" width={220} priority />
             </LogoLink>
 
             <BrandCopy>

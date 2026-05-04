@@ -3,7 +3,7 @@ import { LinkTo } from './styles';
 interface GetStartedButtonProps {
   text: string;
   href?: string;
-  variant?: 'green filled' | 'black filled' | 'green-to-black';
+  variant?: 'green filled' | 'black filled' | 'green-to-black' | 'white-on-green';
 }
 
 const GetStartedButton = ({
