@@ -1,0 +1,35 @@
+<svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Book on Calendly illustration</title>
+  <desc id="desc">A scheduling calendar window with selected availability blocks in Moonlight green.</desc>
+  <defs>
+    <linearGradient id="g" x1="35" y1="24" x2="174" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#123F34"/>
+      <stop offset="1" stop-color="#071513"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="220" height="140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+  <path d="M45 112c-20-5-31-20-20-35 13-17 39-6 52-29 16-29 56-18 72 1 15 18 40 3 50 24 9 19-8 34-29 38-38 7-85 10-125 1Z" fill="#0D2A24" opacity=".9"/>
+  <g filter="url(#shadow)">
+    <rect x="43" y="27" width="134" height="86" rx="16" fill="url(#g)" stroke="#1B3934"/>
+    <rect x="55" y="38" width="110" height="15" rx="7.5" fill="#F7F7F0"/>
+    <circle cx="66" cy="45.5" r="3" fill="#A8B2AF"/>
+    <circle cx="77" cy="45.5" r="3" fill="#A8B2AF"/>
+    <rect x="91" y="43" width="45" height="5" rx="2.5" fill="#DDE4E2"/>
+    <path d="M62 64h96" stroke="#203832" stroke-width="2"/>
+    <rect x="64" y="73" width="20" height="14" rx="4" fill="#132A25"/>
+    <rect x="91" y="73" width="20" height="14" rx="4" fill="#132A25"/>
+    <rect x="118" y="73" width="20" height="14" rx="4" fill="#18F0AA"/>
+    <rect x="145" y="73" width="20" height="14" rx="4" fill="#132A25"/>
+    <rect x="64" y="93" width="20" height="14" rx="4" fill="#132A25"/>
+    <rect x="91" y="93" width="20" height="14" rx="4" fill="#18F0AA"/>
+    <rect x="118" y="93" width="20" height="14" rx="4" fill="#132A25"/>
+    <rect x="145" y="93" width="20" height="14" rx="4" fill="#18F0AA"/>
+  </g>
+  <g>
+    <rect x="151" y="14" width="44" height="44" rx="14" fill="#18F0AA"/>
+    <path d="M164 37h18M173 28v18" stroke="#071513" stroke-width="5" stroke-linecap="round"/>
+    <path d="M151 58l10-6 6 6" fill="#18F0AA"/>
+  </g>
+</svg>

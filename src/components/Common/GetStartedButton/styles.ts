@@ -3,17 +3,21 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
-type Variant = 'green filled' | 'black filled' | 'green-to-black' | 'white-on-green';
+type Variant = 'green filled' | 'black filled' | 'green-to-black' | 'white-on-green' | 'white-to-green' | 'green-to-green';
 
 const baseBorder = ($variant: Variant) => {
   if ($variant === 'green-to-black') return 'var(--darkGreen)';
   if ($variant === 'white-on-green') return '#ffffff';
+  if ($variant === 'white-to-green') return '#ffffff';
+  if ($variant === 'green-to-green') return 'var(--darkGreen)';
   return 'var(--white)';
 };
 
 const hoverBorder = ($variant: Variant) => {
   if ($variant === 'black filled' || $variant === 'green-to-black') return 'var(--Background)';
   if ($variant === 'white-on-green') return '#ffffff';
+  if ($variant === 'white-to-green') return 'var(--green)';
+  if ($variant === 'green-to-green') return 'var(--green)';
   return 'var(--green)';
 };
 
@@ -21,18 +25,24 @@ const overlayFill = ($variant: Variant) => {
   if ($variant === 'black filled' || $variant === 'green-to-black')
     return 'var(--Background), var(--Background)';
   if ($variant === 'white-on-green') return '#ffffff, #ffffff';
+  if ($variant === 'white-to-green') return 'var(--green), var(--green)';
+  if ($variant === 'green-to-green') return 'var(--green), var(--green)';
   return 'var(--green), var(--green)';
 };
 
 const baseColor = ($variant: Variant) => {
   if ($variant === 'green-to-black') return 'var(--darkGreen)';
   if ($variant === 'white-on-green') return '#ffffff';
+  if ($variant === 'white-to-green') return '#ffffff';
+  if ($variant === 'green-to-green') return 'var(--darkGreen)';
   return 'var(--white)';
 };
 
 const hoverColor = ($variant: Variant) => {
   if ($variant === 'green filled') return '#ffffff';
   if ($variant === 'white-on-green') return 'var(--darkGreen)';
+  if ($variant === 'white-to-green') return '#ffffff';
+  if ($variant === 'green-to-green') return '#ffffff';
   return 'var(--white)';
 };
 

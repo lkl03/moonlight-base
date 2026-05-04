@@ -53,12 +53,15 @@ const darkControl = css`
   }
 `;
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.nav<{ $isVisible: boolean }>`
   ${lightNoiseSurface};
   position: fixed;
   left: 50%;
   bottom: max(0.85rem, calc(env(safe-area-inset-bottom) + 0.35rem));
-  transform: translateX(-50%);
+  transform: translateX(-50%) ${({ $isVisible }) => ($isVisible ? 'translateY(0)' : 'translateY(0.75rem)')};
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+  pointer-events: ${({ $isVisible }) => ($isVisible ? 'auto' : 'none')};
+  transition: opacity 0.35s ease, transform 0.35s ease;
   z-index: 80;
   display: flex;
   align-items: center;

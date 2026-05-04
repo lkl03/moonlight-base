@@ -68,7 +68,7 @@ const PricingSection = () => {
                 <GetStartedButton
                   text="Start Now"
                   href="/checkout"
-                  variant={info.appearance === 'outline' ? 'green-to-black' : 'black filled'}
+                  variant={info.appearance === 'outline' ? 'green-to-green' : 'white-on-green'}
                 />
               </Footer>
             </Card>

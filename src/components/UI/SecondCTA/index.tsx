@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import green_divider from '../../../../public/svgs/green_divider_v2.svg';
+import green_divider from '../../../../public/svgs/green_divider.svg';
 
 import {
   Wrapper,

@@ -1,0 +1,54 @@
+<svg width="640" height="380" viewBox="0 0 640 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Build with feedback illustration</title>
+  <desc id="desc">A dark design canvas with modular website blocks, a code panel, comments and cursor arrows.</desc>
+  <defs>
+    <linearGradient id="panel" x1="144" y1="91" x2="490" y2="288" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E3129"/>
+      <stop offset="1" stop-color="#071613"/>
+    </linearGradient>
+    <filter id="shadow" x="76" y="50" width="510" height="290" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="640" height="380" rx="28" fill="transparent"/>
+  <circle cx="164" cy="99" r="70" fill="#0E3A2E"/>
+  <circle cx="520" cy="262" r="78" fill="#102B25"/>
+  <path d="M67 239L112 213V265L67 239Z" fill="#19F2B2"/>
+  <path d="M570 244L615 218V270L570 244Z" fill="#F7F8F4" opacity="0.24"/>
+  <g filter="url(#shadow)">
+    <rect x="103" y="75" width="434" height="230" rx="28" fill="#071613"/>
+    <rect x="130" y="103" width="380" height="173" rx="22" fill="url(#panel)" stroke="#223B35"/>
+    <rect x="131" y="104" width="379" height="33" rx="16.5" fill="#F7F8F4"/>
+    <circle cx="154" cy="120" r="5" fill="#B9C3C3"/>
+    <circle cx="173" cy="120" r="5" fill="#B9C3C3"/>
+    <circle cx="192" cy="120" r="5" fill="#B9C3C3"/>
+    <rect x="218" y="112" width="129" height="15" rx="7.5" fill="#DDE4E4"/>
+    <g>
+      <rect x="154" y="157" width="108" height="89" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="174" y="177" width="56" height="8" rx="4" fill="#F4F4EF"/>
+      <rect x="174" y="194" width="74" height="7" rx="3.5" fill="#8E9B98"/>
+      <rect x="174" y="214" width="65" height="18" rx="7" fill="#124033"/>
+    </g>
+    <g>
+      <rect x="281" y="157" width="108" height="89" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="301" y="177" width="49" height="8" rx="4" fill="#F4F4EF"/>
+      <rect x="301" y="194" width="55" height="7" rx="3.5" fill="#8E9B98"/>
+      <path d="M305 224L318 211L331 222L354 198" stroke="#19F2B2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <rect x="345" y="202" width="116" height="55" rx="14" fill="#F7F8F4"/>
+      <rect x="369" y="217" width="56" height="8" rx="4" fill="#33403D"/>
+      <rect x="369" y="235" width="73" height="7" rx="3.5" fill="#9EA9A6"/>
+      <circle cx="444" cy="229" r="15" fill="#19F2B2"/>
+      <path d="M440 223L447 230L440 237" stroke="#071613" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <rect x="417" y="157" width="69" height="64" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="434" y="177" width="36" height="7" rx="3.5" fill="#F4F4EF"/>
+      <rect x="434" y="192" width="29" height="6" rx="3" fill="#8E9B98"/>
+    </g>
+  </g>
+  <path d="M490 168L512 154L507 181L500 175L490 190L484 186L494 171L490 168Z" fill="#19F2B2"/>
+  <circle cx="101" cy="174" r="10" fill="#19F2B2" opacity="0.75"/>
+  <circle cx="545" cy="116" r="6" fill="#F7F8F4" opacity="0.8"/>
+</svg>

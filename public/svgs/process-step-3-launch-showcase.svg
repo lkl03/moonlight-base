@@ -1,0 +1,49 @@
+<svg width="640" height="380" viewBox="0 0 640 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Launch and showcase illustration</title>
+  <desc id="desc">A finished website dashboard with an upward chart, launch rocket and spotlight elements.</desc>
+  <defs>
+    <linearGradient id="screen" x1="126" y1="88" x2="497" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D2F28"/>
+      <stop offset="1" stop-color="#071613"/>
+    </linearGradient>
+    <filter id="shadow" x="77" y="48" width="506" height="292" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="640" height="380" rx="28" fill="transparent"/>
+  <circle cx="509" cy="102" r="72" fill="#0E3A2E"/>
+  <circle cx="139" cy="261" r="78" fill="#102B25"/>
+  <path d="M70 283C126 232 188 218 257 237C320 254 350 203 404 186C452 172 504 190 553 223" stroke="#17342D" stroke-width="41" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <rect x="105" y="73" width="430" height="229" rx="28" fill="#071613"/>
+    <rect x="134" y="101" width="372" height="172" rx="22" fill="url(#screen)" stroke="#223B35"/>
+    <rect x="135" y="102" width="371" height="33" rx="16.5" fill="#F7F8F4"/>
+    <circle cx="157" cy="118" r="5" fill="#B9C3C3"/>
+    <circle cx="176" cy="118" r="5" fill="#B9C3C3"/>
+    <circle cx="195" cy="118" r="5" fill="#B9C3C3"/>
+    <rect x="221" y="110" width="132" height="15" rx="7.5" fill="#DDE4E4"/>
+    <g>
+      <rect x="162" y="156" width="139" height="93" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="184" y="174" width="62" height="8" rx="4" fill="#F4F4EF"/>
+      <rect x="184" y="192" width="74" height="7" rx="3.5" fill="#8E9B98"/>
+      <path d="M184 231L210 206L235 219L265 185L286 194" stroke="#19F2B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <rect x="327" y="156" width="137" height="93" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="350" y="174" width="66" height="8" rx="4" fill="#F4F4EF"/>
+      <rect x="350" y="192" width="70" height="7" rx="3.5" fill="#8E9B98"/>
+      <rect x="350" y="214" width="82" height="18" rx="7" fill="#123E32"/>
+      <circle cx="444" cy="223" r="25" fill="#19F2B2"/>
+      <path d="M436 212L451 223L436 234" stroke="#071613" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g>
+    <path d="M467 265C477 236 489 217 509 198C514 220 512 243 501 266L486 257L476 281L467 265Z" fill="#19F2B2"/>
+    <path d="M500 210L514 196L518 216" fill="#F7F8F4"/>
+    <circle cx="496" cy="237" r="8" fill="#071613" opacity="0.78"/>
+    <path d="M490 265L480 298" stroke="#19F2B2" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <path d="M414 107L422 126L441 134L422 142L414 161L406 142L387 134L406 126L414 107Z" fill="#F7F8F4"/>
+  <path d="M538 132L544 146L558 152L544 158L538 172L532 158L518 152L532 146L538 132Z" fill="#19F2B2"/>
+  <path d="M91 118L108 128L90 140L78 130L91 118Z" fill="#19F2B2" opacity="0.78"/>
+</svg>

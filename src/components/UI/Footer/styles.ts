@@ -141,6 +141,18 @@ export const LegalMetaItem = styled.span`
   line-height: 1.5;
 `;
 
+export const LegalMetaLink = styled(Link)`
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--emerald);
+  }
+`;
+
 export const UtilityGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(11rem, 14rem));

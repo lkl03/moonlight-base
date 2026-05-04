@@ -68,6 +68,6 @@ export const planStyles: Record<'solid' | 'outline', React.CSSProperties> = {
     ['--btn-bg' as any]: 'transparent',
     ['--btn-fg' as any]: 'var(--green)',
     ['--btn-border' as any]: '2px solid var(--green)',
-    ['--price-color' as any]: 'var(--darkGreen)',
+    ['--price-color' as any]: 'var(--green)',
   },
 };
