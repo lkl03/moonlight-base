@@ -132,7 +132,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   /* ─── Light Theme ─── */
   [data-theme="light"] {
     --Background: #eef2ef;
-    --white: #0d1a12;
+    --white: #121717;
     --light-gray: #354a3b;
     --link-color: #0aaa6a;
     --green: #0aaa6a;
@@ -142,6 +142,7 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   [data-theme="light"] body {
     background-color: var(--Background);
+    background-size: auto;
     color: var(--white);
   }
 
@@ -226,7 +227,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   }
   [data-theme="light"] [data-appearance="solid"] .title,
   [data-theme="light"] [data-appearance="solid"] .note {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(18, 23, 23, 0.85) !important;
   }
   [data-theme="light"] [data-appearance="solid"] .price {
     color: #ffffff !important;
@@ -237,13 +238,10 @@ export const GlobalStyles = styled.createGlobalStyle`
   [data-theme="light"] [data-appearance="solid"] li {
     color: #ffffff !important;
   }
-  /* Outline/Advance card — dark bg (--white=#0d1a12), fix price + desc legibility */
+  /* Outline/Advance card — dark bg (--white=#121717), fix desc + list legibility */
   [data-theme="light"] [data-appearance="outline"] .title,
   [data-theme="light"] [data-appearance="outline"] .note {
     color: rgba(238, 242, 239, 0.9) !important;
-  }
-  [data-theme="light"] [data-appearance="outline"] .price {
-    color: rgba(238, 242, 239, 0.95) !important;
   }
   [data-theme="light"] [data-appearance="outline"] .desc {
     color: rgba(238, 242, 239, 0.82) !important;
@@ -251,15 +249,18 @@ export const GlobalStyles = styled.createGlobalStyle`
   [data-theme="light"] [data-appearance="outline"] li {
     color: rgba(238, 242, 239, 0.88) !important;
   }
-  /* Pricing buttons — white outline on both card backgrounds */
-  [data-theme="light"] #pricing a {
-    border-color: #ffffff !important;
-    border-left-color: #ffffff !important;
-    color: #ffffff !important;
-    background-image: linear-gradient(#ffffff, #ffffff) !important;
+  /* Outline/Advance card button — white-to-green on dark card */
+  [data-theme="light"] [data-appearance="outline"] a {
+    border-color: rgba(255, 255, 255, 0.75) !important;
+    border-left-color: rgba(255, 255, 255, 0.75) !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    background-image: linear-gradient(var(--green), var(--green)) !important;
   }
-  [data-theme="light"] #pricing a:hover {
-    color: var(--darkGreen) !important;
+  [data-theme="light"] [data-appearance="outline"] a:hover {
+    background-size: 100% 100% !important;
+    border-color: var(--green) !important;
+    border-left-color: var(--green) !important;
+    color: #ffffff !important;
   }
 
   /* ── Contact — AccentLine + support links + scheduler card ── */
@@ -326,6 +327,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.04) inset,
       0 12px 28px rgba(0, 0, 0, 0.32) !important;
+  }
+  /* FloatingNav nav link hover — visible on dark capsule */
+  [data-theme="light"] nav[aria-label="Section navigation"] button:not([aria-label]):hover {
+    background: rgba(255, 255, 255, 0.1) !important;
   }
 
   /* ── Scrollbar ── */

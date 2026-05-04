@@ -1,0 +1,51 @@
+<svg width="640" height="380" viewBox="0 0 640 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Choose a plan illustration</title>
+  <desc id="desc">A dark browser window with three pricing plan cards and a selected checkmark, using Moonlight green accents.</desc>
+  <defs>
+    <linearGradient id="g1" x1="160" y1="86" x2="505" y2="292" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19F2B2" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#10251F" stop-opacity="0.92"/>
+    </linearGradient>
+    <filter id="shadow" x="78" y="45" width="500" height="292" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="640" height="380" rx="28" fill="transparent"/>
+  <circle cx="512" cy="99" r="72" fill="#0E3A2E"/>
+  <circle cx="116" cy="282" r="82" fill="#102B25"/>
+  <path d="M89 274C132 236 161 231 210 251C275 278 312 228 357 204C401 181 468 192 527 233" stroke="#17342D" stroke-width="42" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <rect x="104" y="72" width="432" height="230" rx="28" fill="#071613"/>
+    <rect x="127" y="98" width="386" height="181" rx="21" fill="#101E1B" stroke="#223B35"/>
+    <rect x="128" y="99" width="385" height="34" rx="17" fill="#F7F8F4"/>
+    <circle cx="151" cy="116" r="5" fill="#B9C3C3"/>
+    <circle cx="169" cy="116" r="5" fill="#B9C3C3"/>
+    <circle cx="187" cy="116" r="5" fill="#B9C3C3"/>
+    <rect x="211" y="108" width="132" height="15" rx="7.5" fill="#DDE4E4"/>
+    <g>
+      <rect x="155" y="154" width="92" height="100" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="174" y="174" width="48" height="9" rx="4.5" fill="#F4F4EF"/>
+      <rect x="174" y="192" width="56" height="7" rx="3.5" fill="#8E9B98"/>
+      <rect x="174" y="211" width="56" height="24" rx="8" fill="#123E32"/>
+    </g>
+    <g>
+      <rect x="274" y="143" width="92" height="111" rx="14" fill="#102B25" stroke="#1EF0AE" stroke-width="2"/>
+      <rect x="293" y="163" width="53" height="9" rx="4.5" fill="#F4F4EF"/>
+      <rect x="293" y="181" width="44" height="7" rx="3.5" fill="#A6B0AD"/>
+      <rect x="293" y="204" width="54" height="25" rx="8" fill="#19F2B2"/>
+      <path d="M309 216.5L318 225L335 207" stroke="#071613" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <rect x="393" y="154" width="92" height="100" rx="14" fill="#0B1816" stroke="#20312E"/>
+      <rect x="412" y="174" width="50" height="9" rx="4.5" fill="#F4F4EF"/>
+      <rect x="412" y="192" width="49" height="7" rx="3.5" fill="#8E9B98"/>
+      <rect x="412" y="211" width="54" height="24" rx="8" fill="#22302D"/>
+    </g>
+  </g>
+  <g>
+    <circle cx="526" cy="174" r="23" fill="#19F2B2"/>
+    <path d="M526 158L531 169L542 174L531 179L526 190L521 179L510 174L521 169L526 158Z" fill="#F7F8F4"/>
+  </g>
+  <path d="M92 104L111 118L91 132L80 119L92 104Z" fill="#19F2B2"/>
+  <path d="M560 258L586 243L584 273L560 258Z" fill="#19F2B2" opacity="0.7"/>
+</svg>

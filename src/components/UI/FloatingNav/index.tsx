@@ -82,6 +82,7 @@ const FloatingNav = () => {
   const [activeSection, setActiveSection] = useState<NavTarget>('what-we-do');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [themePreview, setThemePreview] = useState<ThemePreview>('dark');
+  const [isVisible, setIsVisible] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
 
   // Load persisted theme on mount
@@ -115,6 +116,7 @@ const FloatingNav = () => {
 
     const handleScroll = () => {
       setActiveSection(getActiveSection());
+      setIsVisible(window.scrollY > 80);
     };
 
     handleScroll();
@@ -169,7 +171,7 @@ const FloatingNav = () => {
   const activeLabel = navItems.find((item) => item.target === activeSection)?.label ?? 'What We Do';
 
   return (
-    <Wrapper ref={navRef} aria-label="Section navigation">
+    <Wrapper ref={navRef} aria-label="Section navigation" $isVisible={isVisible}>
       <ScrollTopButton type="button" onClick={scrollToTop} aria-label="Back to top">
         <ArrowUpIcon />
       </ScrollTopButton>

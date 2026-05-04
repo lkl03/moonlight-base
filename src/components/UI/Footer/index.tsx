@@ -12,7 +12,7 @@ import {
   BrandSecondaryRow,
   BrandAccentLink,
   LegalMeta,
-  LegalMetaItem,
+  LegalMetaLink,
   UtilityGrid,
   Column,
   ColumnTitle,
@@ -64,8 +64,9 @@ const Footer = () => {
                 </span>
               </BrandSecondaryRow>
               <LegalMeta>
-                <LegalMetaItem>Terms of Service</LegalMetaItem>
-                <LegalMetaItem>Privacy Policy</LegalMetaItem>
+                <LegalMetaLink href="/terms">Terms of Service</LegalMetaLink>
+                <LegalMetaLink href="/privacy">Privacy Policy</LegalMetaLink>
+                <LegalMetaLink href="/portal">Client Portal</LegalMetaLink>
               </LegalMeta>
             </BrandCopy>
           </BrandBlock>

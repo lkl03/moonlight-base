@@ -13,7 +13,11 @@ import {
 import MaskText from '@/components/Common/MaskText';
 import RevealCover from '@/components/Common/RevealCover';
 import { Div } from '../Featured/styles';
-import { imageVariants } from '../Featured';
+// imageVariants — local stub (was previously imported from Featured which no longer exports it)
+const imageVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 import { useIsMobile } from '../../../../libs/useIsMobile';
 import financial_freedom_banner from '../../../../public/images/financial_freedom_banner.png';
 import freedom_mobile_banner from '../../../../public/images/freedom_mobile_banner.png';
