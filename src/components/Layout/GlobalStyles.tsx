@@ -118,6 +118,17 @@ export const GlobalStyles = styled.createGlobalStyle`
     transition: opacity 0.6s ease 0.1s;
   }
 
+  /* ─── Logo show/hide for theme switching ─── */
+  .site-logo--dark {
+    display: none;
+  }
+  [data-theme="light"] .site-logo--white {
+    display: none;
+  }
+  [data-theme="light"] .site-logo--dark {
+    display: block;
+  }
+
   /* ─── Light Theme ─── */
   [data-theme="light"] {
     --Background: #eef2ef;
@@ -134,14 +145,6 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: var(--white);
   }
 
-  /* ── Logos: invert white PNG to dark ── */
-  [data-theme="light"] header img {
-    filter: invert(1);
-  }
-  [data-theme="light"] footer img {
-    filter: invert(1);
-  }
-
   /* ── Typography: override hardcoded grays from styled-components ── */
   /* Use !important to beat scoped class specificity (#bdbdbd, #c9c9c9, #cfcfcf) */
   [data-theme="light"] p {
@@ -150,7 +153,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   [data-theme="light"] h1,
   [data-theme="light"] h2,
   [data-theme="light"] h3 {
-    color: #111111;
+    color: rgba(18, 23, 23, 0.94);
   }
 
   /* ── Green banner sections (Featured / FirstCTA / SecondCTA) ──
@@ -186,75 +189,120 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: #3d5245 !important;
   }
 
-  /* ── Portfolio cards ── */
+  /* ── Portfolio: card borders + pill labels ── */
   [data-theme="light"] #portfolio a > div {
     border-color: rgba(0, 0, 0, 0.09) !important;
     background: rgba(0, 0, 0, 0.04) !important;
     box-shadow: 0 18px 34px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* ── Services ── */
+  /* ── Services: icon circles green, icons white ── */
   [data-theme="light"] #services {
     color: var(--white);
+    --icon-circle-bg: var(--green);
+    --icon-img-filter: brightness(0) invert(1);
   }
 
-  /* ── FAQ ── */
-  [data-theme="light"] #faq section > div > div,
-  [data-theme="light"] #faq > div > div > div > div {
-    border-color: rgba(0, 0, 0, 0.1) !important;
+  /* ── FAQ: accordion dividers + chevron ── */
+  /* AccordionItems: #faq > Inner(div) > Accordion(div) > AccordionItem(div) */
+  [data-theme="light"] #faq > div > div > div {
+    border-color: rgba(0, 0, 0, 0.12) !important;
   }
   [data-theme="light"] #faq button[aria-expanded] {
     color: var(--white) !important;
+  }
+  /* Chevron SVG is white — invert to dark */
+  [data-theme="light"] #faq img[alt=""] {
+    filter: invert(1);
   }
   [data-theme="light"] #faq div[id^="faq-answer"] {
     color: #3d5245 !important;
   }
 
-  /* ── Pricing ── */
-  [data-theme="light"] #pricing {
-    color: var(--white);
+  /* ── Pricing: card appearance overrides ── */
+  /* Solid/Standard card — bright green bg, white text for contrast */
+  [data-theme="light"] [data-appearance="solid"] {
+    background: var(--green) !important;
+  }
+  [data-theme="light"] [data-appearance="solid"] .title,
+  [data-theme="light"] [data-appearance="solid"] .note {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  [data-theme="light"] [data-appearance="solid"] .price {
+    color: #ffffff !important;
+  }
+  [data-theme="light"] [data-appearance="solid"] .desc {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+  [data-theme="light"] [data-appearance="solid"] li {
+    color: #ffffff !important;
+  }
+  /* Outline/Advance card — dark bg (--white=#0d1a12), fix price + desc legibility */
+  [data-theme="light"] [data-appearance="outline"] .title,
+  [data-theme="light"] [data-appearance="outline"] .note {
+    color: rgba(238, 242, 239, 0.9) !important;
+  }
+  [data-theme="light"] [data-appearance="outline"] .price {
+    color: rgba(238, 242, 239, 0.95) !important;
+  }
+  [data-theme="light"] [data-appearance="outline"] .desc {
+    color: rgba(238, 242, 239, 0.82) !important;
+  }
+  [data-theme="light"] [data-appearance="outline"] li {
+    color: rgba(238, 242, 239, 0.88) !important;
+  }
+  /* Pricing buttons — white outline on both card backgrounds */
+  [data-theme="light"] #pricing a {
+    border-color: #ffffff !important;
+    border-left-color: #ffffff !important;
+    color: #ffffff !important;
+    background-image: linear-gradient(#ffffff, #ffffff) !important;
+  }
+  [data-theme="light"] #pricing a:hover {
+    color: var(--darkGreen) !important;
   }
 
-  /* ── Contact — scheduler card ── */
+  /* ── Contact — AccentLine + support links + scheduler card ── */
+  /* AccentLine "(it probably is)" — was rgba(255,255,255,0.6), invisible on light bg */
+  [data-theme="light"] #contact h2 span {
+    color: rgba(18, 23, 23, 0.55) !important;
+  }
+  /* SupportLinks below stickers — was rgba(255,255,255,0.82), invisible on light bg */
+  [data-theme="light"] #contact > div > div > div:first-child a {
+    color: rgba(18, 23, 23, 0.7) !important;
+  }
+  [data-theme="light"] #contact > div > div > div:first-child a:hover {
+    color: var(--green) !important;
+  }
   [data-theme="light"] #contact > div > div > div:last-child > div {
     background: rgba(0, 0, 0, 0.03) !important;
     border-color: rgba(0, 0, 0, 0.08) !important;
   }
 
   /* ── Footer ── */
-  /* Border-top (Inner div, direct child of footer) */
   [data-theme="light"] footer > div {
     border-top-color: rgba(0, 0, 0, 0.1) !important;
   }
-  /* Copyright / brand copy paragraphs */
   [data-theme="light"] footer p {
     color: rgba(0, 0, 0, 0.72) !important;
   }
-  /* Legal meta items, secondary spans */
   [data-theme="light"] footer span {
     color: rgba(0, 0, 0, 0.6);
   }
-  /* Column titles */
   [data-theme="light"] footer h3 {
-    color: #111111;
+    color: rgba(18, 23, 23, 0.94);
   }
-  /* Sitemap & contact links (excludes LogoLink which has aria-label) */
   [data-theme="light"] footer a:not([aria-label]) {
     color: rgba(0, 0, 0, 0.72);
   }
   [data-theme="light"] footer a:not([aria-label]):hover {
     color: var(--green);
   }
-  /* eterlab accent link — keep green but slightly muted */
   [data-theme="light"] footer a[href*="eterlab"] {
     color: var(--green);
   }
 
-  /* ── Floating Nav — dark capsule in light mode ──
-     Reference: capsule stays dark, links are light/white,
-     the circular scroll + theme-toggle controls are light with dark icons. */
-
-  /* Dark capsule */
+  /* ── Floating Nav — dark capsule in light mode ── */
   [data-theme="light"] nav[aria-label="Section navigation"] {
     background: rgba(18, 23, 23, 0.94) !important;
     border-color: rgba(255, 255, 255, 0.07) !important;
@@ -262,14 +310,9 @@ export const GlobalStyles = styled.createGlobalStyle`
       0 0 0 1px rgba(255, 255, 255, 0.05) inset,
       0 18px 42px rgba(0, 0, 0, 0.32) !important;
   }
-
-  /* All section nav buttons: white text on dark capsule */
   [data-theme="light"] nav[aria-label="Section navigation"] button {
     color: rgba(255, 255, 255, 0.88);
   }
-
-  /* Circular control buttons (ScrollTopButton + ThemeToggle — direct children):
-     light background with dark icons, matching reference image */
   [data-theme="light"] nav[aria-label="Section navigation"] > button {
     background: rgba(248, 248, 246, 0.95) !important;
     color: #121717 !important;
@@ -277,8 +320,6 @@ export const GlobalStyles = styled.createGlobalStyle`
   [data-theme="light"] nav[aria-label="Section navigation"] > button svg {
     color: #121717 !important;
   }
-
-  /* Mobile dropdown menu: dark to match capsule */
   [data-theme="light"] #floating-nav-mobile-menu {
     background: rgba(18, 23, 23, 0.97) !important;
     border-color: rgba(255, 255, 255, 0.07) !important;

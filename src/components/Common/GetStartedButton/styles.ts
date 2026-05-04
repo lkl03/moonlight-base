@@ -3,20 +3,38 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
-type Variant = 'green filled' | 'black filled' | 'green-to-black';
+type Variant = 'green filled' | 'black filled' | 'green-to-black' | 'white-on-green';
 
-const baseBorder = ($variant: Variant) =>
-  $variant === 'green-to-black' ? 'var(--darkGreen)' : 'var(--white)';
+const baseBorder = ($variant: Variant) => {
+  if ($variant === 'green-to-black') return 'var(--darkGreen)';
+  if ($variant === 'white-on-green') return '#ffffff';
+  return 'var(--white)';
+};
 
-const hoverBorder = ($variant: Variant) =>
-  $variant === 'black filled' || $variant === 'green-to-black'
-    ? 'var(--Background)'
-    : 'var(--green)';
+const hoverBorder = ($variant: Variant) => {
+  if ($variant === 'black filled' || $variant === 'green-to-black') return 'var(--Background)';
+  if ($variant === 'white-on-green') return '#ffffff';
+  return 'var(--green)';
+};
 
-const overlayFill = ($variant: Variant) =>
-  $variant === 'black filled' || $variant === 'green-to-black'
-    ? 'var(--Background), var(--Background)'
-    : 'var(--green), var(--green)';
+const overlayFill = ($variant: Variant) => {
+  if ($variant === 'black filled' || $variant === 'green-to-black')
+    return 'var(--Background), var(--Background)';
+  if ($variant === 'white-on-green') return '#ffffff, #ffffff';
+  return 'var(--green), var(--green)';
+};
+
+const baseColor = ($variant: Variant) => {
+  if ($variant === 'green-to-black') return 'var(--darkGreen)';
+  if ($variant === 'white-on-green') return '#ffffff';
+  return 'var(--white)';
+};
+
+const hoverColor = ($variant: Variant) => {
+  if ($variant === 'green filled') return '#ffffff';
+  if ($variant === 'white-on-green') return 'var(--darkGreen)';
+  return 'var(--white)';
+};
 
 export const LinkTo = styled(Link)<{ $variant: Variant }>`
   position: relative;
@@ -30,7 +48,7 @@ export const LinkTo = styled(Link)<{ $variant: Variant }>`
   border-left-width: 8px;
   border-left-color: ${({ $variant }) => baseBorder($variant)};
 
-  color: ${({ $variant }) => ($variant === 'green-to-black' ? 'var(--darkGreen)' : 'var(--white)')};
+  color: ${({ $variant }) => baseColor($variant)};
   font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: bold;
   padding: clamp(0.8rem, 2vw, 1rem) clamp(1.8rem, 5vw, 2.8rem);
@@ -52,8 +70,7 @@ export const LinkTo = styled(Link)<{ $variant: Variant }>`
     background-size: 100% 100%;
     border-color: ${({ $variant }) => hoverBorder($variant)};
     border-left-color: ${({ $variant }) => hoverBorder($variant)};
-    /* green filled always fills with --green; keep text white regardless of theme */
-    color: ${({ $variant }) => ($variant === 'green filled' ? '#ffffff' : 'var(--white)')};
+    color: ${({ $variant }) => hoverColor($variant)};
   }
 
   &:focus {

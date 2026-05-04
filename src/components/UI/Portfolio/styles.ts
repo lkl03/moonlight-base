@@ -176,7 +176,8 @@ export const PortfolioPill = styled.span`
   border-radius: 999px;
   background: rgba(8, 17, 19, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--white);
+  /* Always on dark semi-transparent bg regardless of theme */
+  color: #ffffff;
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.08em;

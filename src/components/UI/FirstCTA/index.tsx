@@ -36,7 +36,7 @@ const FirstCTA = () => {
               Reach out to us to learn more about how we work and how we can help you.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Get in Touch" href="#contact" variant="black filled" />
+              <GetStartedButton text="Get in Touch" href="#contact" variant="white-on-green" />
             </ButtonContainer>
           </TextColumn>
         </Content>

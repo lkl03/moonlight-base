@@ -80,7 +80,7 @@ export const ImageCtn = styled.div`
   display: grid;
   place-items: center;
   padding: 0.8rem;
-  background-color: var(--white);
+  background-color: var(--icon-circle-bg, var(--white));
   border-radius: 999px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 
@@ -88,6 +88,7 @@ export const ImageCtn = styled.div`
     width: 72%;
     height: 72%;
     object-fit: contain;
+    filter: var(--icon-img-filter, none);
   }
 
   @media (max-width: 768px) {

@@ -44,7 +44,7 @@ const Featured = () => {
               engages your audience.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Learn More" href="#how-it-works" variant="black filled" />
+              <GetStartedButton text="Learn More" href="#how-it-works" variant="white-on-green" />
             </ButtonContainer>
           </TextColumn>
 

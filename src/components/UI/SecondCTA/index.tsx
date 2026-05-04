@@ -35,7 +35,7 @@ const SecondCTA = () => {
               specific needs, and we’ll provide a personalized quote based on the scope of work.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Get in Touch" href="#contact" variant="black filled" />
+              <GetStartedButton text="Get in Touch" href="#contact" variant="white-on-green" />
             </ButtonContainer>
           </TextColumn>
         </Content>
