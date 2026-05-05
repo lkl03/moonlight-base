@@ -199,7 +199,7 @@ export const PortfolioMeta = styled.div`
 `;
 
 export const PortfolioTitle = styled.h3`
-  color: var(--white);
+  color: #ffffff;
   font-size: 1.05rem;
   font-weight: 700 !important;
   line-height: 1.1;

@@ -1,8 +1,6 @@
-import portfolio_cover_agency from '../../../../public/svgs/portfolio-cover-agency.svg';
-import portfolio_cover_commerce from '../../../../public/svgs/portfolio-cover-commerce.svg';
-import portfolio_cover_growth from '../../../../public/svgs/portfolio-cover-growth.svg';
-import portfolio_cover_studio from '../../../../public/svgs/portfolio-cover-studio.svg';
-import portfolio_cover_wellness from '../../../../public/svgs/portfolio-cover-wellness.svg';
+import dvlegalesCover from '../../../../public/images/work/dvlegales-cover.jpg';
+import bioproteceCover from '../../../../public/images/work/bioprotece3d-cover.jpg';
+import prompteaCover from '../../../../public/images/work/promptea-cover.jpg';
 
 export const desktopHeaderPhrase = ['Showcasing Results'];
 export const desktopParagraphPhrase = [
@@ -18,33 +16,21 @@ export const mobileParagraphPhrase = [
 
 export const portfolioItems = [
   {
-    title: 'Framer',
-    tag: 'Agency',
-    href: 'https://www.framer.com',
-    cover: portfolio_cover_studio,
+    title: 'DV Legales',
+    tag: 'Law Firm',
+    href: 'https://dvlegales.com.ar',
+    cover: dvlegalesCover,
   },
   {
-    title: 'Linear',
+    title: 'Bioprotece3D',
+    tag: 'Healthcare',
+    href: 'https://bioprotece3d.com',
+    cover: bioproteceCover,
+  },
+  {
+    title: 'promptea.me',
     tag: 'SaaS',
-    href: 'https://linear.app',
-    cover: portfolio_cover_growth,
-  },
-  {
-    title: 'Notion',
-    tag: 'Wellness',
-    href: 'https://www.notion.so',
-    cover: portfolio_cover_wellness,
-  },
-  {
-    title: 'Vercel',
-    tag: 'Studio',
-    href: 'https://vercel.com',
-    cover: portfolio_cover_agency,
-  },
-  {
-    title: 'Shopify',
-    tag: 'Commerce',
-    href: 'https://www.shopify.com',
-    cover: portfolio_cover_commerce,
+    href: 'https://promptea.me',
+    cover: prompteaCover,
   },
 ] as const;

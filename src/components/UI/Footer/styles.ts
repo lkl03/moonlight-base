@@ -153,6 +153,15 @@ export const LegalMetaLink = styled(Link)`
   }
 `;
 
+export const VersionTag = styled.p`
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--emerald);
+  line-height: 1.4;
+  margin-top: 0.25rem;
+  opacity: 0.75;
+`;
+
 export const UtilityGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(11rem, 14rem));

@@ -134,10 +134,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     --Background: #eef2ef;
     --white: #121717;
     --light-gray: #354a3b;
-    --link-color: #0aaa6a;
-    --green: #0aaa6a;
-    --emerald: #0aaa6a;
-    --darkGreen: #087a4c;
+    --link-color: #17F2A6;
+    --green: #17F2A6;
+    --emerald: #17F2A6;
+    --darkGreen: #45a383;
   }
 
   [data-theme="light"] body {
@@ -223,7 +223,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   /* ── Pricing: card appearance overrides ── */
   /* Solid/Standard card — bright green bg, white text for contrast */
   [data-theme="light"] [data-appearance="solid"] {
-    background: var(--green) !important;
+    background: var(--darkGreen) !important;
   }
   [data-theme="light"] [data-appearance="solid"] .title,
   [data-theme="light"] [data-appearance="solid"] .note {

@@ -102,7 +102,7 @@ const Portfolio = () => {
         </ParallaxImages>
 
         <ButtonContainer>
-          <GetStartedButton text="View Our Recent Work" href="#contact" />
+          <GetStartedButton text="View Our Recent Work" href="/work" />
         </ButtonContainer>
       </Inner>
     </Wrapper>

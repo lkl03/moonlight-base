@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — Moonlight Web Designs',
+  title: 'Privacy Policy',
+  description:
+    'Learn how Moonlight Web Designs collects, uses, and protects your personal information. Your privacy is important to us.',
 };
 
 export default function PrivacyPage() {
