@@ -125,7 +125,8 @@ export const Label = styled.span`
 `;
 
 export const Headline = styled.h2`
-  color: var(--white);
+  /* Always on green banner — hardcode white regardless of theme */
+  color: #ffffff !important;
   font-size: clamp(2.25rem, 5vw, 3rem);
   font-weight: 900;
   line-height: 1.15;
@@ -136,7 +137,8 @@ export const Headline = styled.h2`
 `;
 
 export const Paragraph = styled.p`
-  color: var(--light-gray);
+  /* Always on green banner — hardcode white regardless of theme */
+  color: rgba(255, 255, 255, 0.88) !important;
   font-size: 1rem;
   line-height: 1.6;
   max-width: 40rem;

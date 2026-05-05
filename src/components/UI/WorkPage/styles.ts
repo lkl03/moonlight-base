@@ -6,11 +6,11 @@ import styled from 'styled-components';
 export const PageWrapper = styled.div`
   max-width: 72rem;
   margin: 0 auto;
-  padding: 5rem 1.5rem 8rem;
+  padding: 3rem 1.5rem 8rem;
   font-family: 'Raleway', sans-serif;
 
   @media (max-width: 768px) {
-    padding: 4rem 1.25rem 7rem;
+    padding: 2.5rem 1.25rem 7rem;
   }
 `;
 
@@ -72,11 +72,23 @@ export const ProjectCard = styled.a`
   color: inherit;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 
+  /* Light mode: solid white card so it's always visible */
+  [data-theme="light"] & {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       transform: translateY(-4px);
       border-color: rgba(23, 242, 166, 0.25);
       box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+    }
+
+    [data-theme="light"] &:hover {
+      border-color: rgba(23, 242, 166, 0.4);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
     }
   }
 `;
