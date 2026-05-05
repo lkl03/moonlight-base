@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — Moonlight Web Designs',
+  title: 'Terms of Service',
+  description:
+    'Read the Terms of Service for Moonlight Web Designs. Understand your rights and obligations when using our web design services.',
 };
 
 export default function TermsPage() {

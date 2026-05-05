@@ -13,6 +13,7 @@ import {
   BrandAccentLink,
   LegalMeta,
   LegalMetaLink,
+  VersionTag,
   UtilityGrid,
   Column,
   ColumnTitle,
@@ -68,6 +69,7 @@ const Footer = () => {
                 <LegalMetaLink href="/privacy">Privacy Policy</LegalMetaLink>
                 <LegalMetaLink href="/portal">Client Portal</LegalMetaLink>
               </LegalMeta>
+              <VersionTag>{process.env.NEXT_PUBLIC_APP_VERSION ?? 'v1.0'}</VersionTag>
             </BrandCopy>
           </BrandBlock>
 
