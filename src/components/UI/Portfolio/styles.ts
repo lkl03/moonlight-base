@@ -206,8 +206,9 @@ export const PortfolioTitle = styled.h3`
 `;
 
 export const PortfolioHint = styled.span`
-  color: rgba(255, 255, 255, 0.76);
+  color: var(--link-color);
   font-size: 0.86rem;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
 `;

@@ -11,7 +11,7 @@ export default function TermsPage() {
     <div
       style={{
         maxWidth: '48rem',
-        margin: '8rem auto 6rem',
+        margin: '3rem auto 6rem',
         textAlign: 'center',
         fontFamily: 'Raleway, sans-serif',
       }}

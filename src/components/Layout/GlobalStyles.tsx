@@ -196,6 +196,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     background: rgba(0, 0, 0, 0.04) !important;
     box-shadow: 0 18px 34px rgba(0, 0, 0, 0.08) !important;
   }
+  /* Portfolio card title always white — sits on dark overlay, never on light bg */
+  [data-theme="light"] #portfolio h3 {
+    color: #ffffff !important;
+  }
 
   /* ── Services: icon circles green, icons white ── */
   [data-theme="light"] #services {
@@ -301,6 +305,30 @@ export const GlobalStyles = styled.createGlobalStyle`
   }
   [data-theme="light"] footer a[href*="eterlab"] {
     color: var(--green);
+  }
+
+  /* ── Internal Nav (legal pages) — same dark capsule treatment as home FloatingNav ── */
+  [data-theme="light"] nav[aria-label="Page navigation"] {
+    background: rgba(18, 23, 23, 0.94) !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 18px 42px rgba(0, 0, 0, 0.32) !important;
+  }
+  [data-theme="light"] nav[aria-label="Page navigation"] button {
+    color: rgba(255, 255, 255, 0.88) !important;
+    background: rgba(248, 248, 246, 0.12) !important;
+  }
+  [data-theme="light"] nav[aria-label="Page navigation"] > button {
+    background: rgba(248, 248, 246, 0.95) !important;
+    color: #121717 !important;
+  }
+  [data-theme="light"] nav[aria-label="Page navigation"] > button svg {
+    color: #121717 !important;
+  }
+  [data-theme="light"] nav[aria-label="Page navigation"] a {
+    background: rgba(248, 248, 246, 0.95) !important;
+    color: #121717 !important;
   }
 
   /* ── Floating Nav — dark capsule in light mode ── */
