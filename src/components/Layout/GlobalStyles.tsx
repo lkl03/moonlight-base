@@ -173,15 +173,15 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   /* ── SecondCTA CTA button — light mode: black transparent → black fill, green text on hover ── */
   [data-theme="light"] #second-cta a {
-    border-color: rgba(18, 23, 23, 0.85) !important;
-    border-left-color: rgba(18, 23, 23, 0.85) !important;
-    color: rgba(18, 23, 23, 0.92) !important;
-    background-image: linear-gradient(rgba(18, 23, 23, 0.9), rgba(18, 23, 23, 0.9)) !important;
+    border-color: rgba(18, 23, 23, 1) !important;
+    border-left-color: rgba(18, 23, 23, 1) !important;
+    color: rgba(18, 23, 23, 1) !important;
+    background-image: linear-gradient(rgba(18, 23, 23, 1), rgba(18, 23, 23, 1)) !important;
   }
   [data-theme="light"] #second-cta a:hover {
     background-size: 100% 100% !important;
-    border-color: rgba(18, 23, 23, 0.9) !important;
-    border-left-color: rgba(18, 23, 23, 0.9) !important;
+    border-color: rgba(18, 23, 23, 1) !important;
+    border-left-color: rgba(18, 23, 23, 1) !important;
     color: var(--green) !important;
   }
 
