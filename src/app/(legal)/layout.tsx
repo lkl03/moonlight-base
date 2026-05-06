@@ -4,6 +4,7 @@ import StyledComponentsRegistry from '../../../libs/registry';
 import { GlobalStyles } from '@/components/Layout/GlobalStyles';
 import Header from '@/components/UI/Header';
 import InternalNav from '@/components/UI/InternalNav';
+import Footer from '@/components/UI/Footer';
 
 export default function LegalLayout({
   children,
@@ -16,6 +17,7 @@ export default function LegalLayout({
       <Header />
       <InternalNav />
       <main style={{ minHeight: '100vh' }}>{children}</main>
+      <Footer showSitemap={false} />
     </StyledComponentsRegistry>
   );
 }

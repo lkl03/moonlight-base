@@ -171,10 +171,21 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: #ffffff !important;
   }
 
-  /* ── Header ── */
-  [data-theme="light"] header[class] {
-    border-bottom-color: rgba(0, 0, 0, 0.1);
+  /* ── SecondCTA CTA button — light mode: black transparent → black fill, green text on hover ── */
+  [data-theme="light"] #second-cta a {
+    border-color: rgba(18, 23, 23, 0.85) !important;
+    border-left-color: rgba(18, 23, 23, 0.85) !important;
+    color: rgba(18, 23, 23, 0.92) !important;
+    background-image: linear-gradient(rgba(18, 23, 23, 0.9), rgba(18, 23, 23, 0.9)) !important;
   }
+  [data-theme="light"] #second-cta a:hover {
+    background-size: 100% 100% !important;
+    border-color: rgba(18, 23, 23, 0.9) !important;
+    border-left-color: rgba(18, 23, 23, 0.9) !important;
+    color: var(--green) !important;
+  }
+
+  /* ── Header ── (border override handled via [data-theme="light"] & in Header/styles.ts) */
 
   /* ── How it works — step cards ── */
   [data-theme="light"] #how-it-works article {
@@ -319,6 +330,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: rgba(255, 255, 255, 0.88) !important;
     background: rgba(248, 248, 246, 0.12) !important;
   }
+  /* Icon slots (spans) inherit dark --white in light mode — force white so icons are visible */
+  [data-theme="light"] nav[aria-label="Page navigation"] button span {
+    color: rgba(255, 255, 255, 0.88) !important;
+  }
   [data-theme="light"] nav[aria-label="Page navigation"] > button {
     background: rgba(248, 248, 246, 0.95) !important;
     color: #121717 !important;
@@ -341,6 +356,10 @@ export const GlobalStyles = styled.createGlobalStyle`
   }
   [data-theme="light"] nav[aria-label="Section navigation"] button {
     color: rgba(255, 255, 255, 0.88);
+  }
+  /* Icon slots (spans) inside ThemeToggle — force white so icons/active highlight are visible */
+  [data-theme="light"] nav[aria-label="Section navigation"] button span {
+    color: rgba(255, 255, 255, 0.88) !important;
   }
   [data-theme="light"] nav[aria-label="Section navigation"] > button {
     background: rgba(248, 248, 246, 0.95) !important;

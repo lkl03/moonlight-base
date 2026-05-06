@@ -140,6 +140,10 @@ export const ProjectYear = styled.span`
   color: var(--emerald);
   font-weight: 600;
   letter-spacing: 0.06em;
+
+  [data-theme="light"] & {
+    color: var(--darkGreen);
+  }
 `;
 
 export const ProjectTitle = styled.h2`
@@ -169,5 +173,9 @@ export const ProjectCTA = styled.span`
 
   ${ProjectCard}:hover & {
     gap: 0.55rem;
+  }
+
+  [data-theme="light"] & {
+    color: var(--darkGreen);
   }
 `;
