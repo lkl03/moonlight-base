@@ -32,7 +32,11 @@ const sitemapLinks = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-const Footer = () => {
+type FooterProps = {
+  showSitemap?: boolean;
+};
+
+const Footer = ({ showSitemap = true }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -73,27 +77,29 @@ const Footer = () => {
             </BrandCopy>
           </BrandBlock>
 
-          <UtilityGrid>
-            <Column>
-              <ColumnTitle>Sitemap</ColumnTitle>
-              <NavList>
-                {sitemapLinks.map((link) => (
-                  <li key={link.href}>
-                    <FooterLink href={link.href}>{link.label}</FooterLink>
-                  </li>
-                ))}
-              </NavList>
-            </Column>
+          <UtilityGrid $single={!showSitemap}>
+            {showSitemap && (
+              <Column>
+                <ColumnTitle>Sitemap</ColumnTitle>
+                <NavList>
+                  {sitemapLinks.map((link) => (
+                    <li key={link.href}>
+                      <FooterLink href={link.href}>{link.label}</FooterLink>
+                    </li>
+                  ))}
+                </NavList>
+              </Column>
+            )}
 
             <Column id="footer-contact">
               <ColumnTitle>Contact Info</ColumnTitle>
               <ContactList>
                 <li>
-                  <ContactLink href="tel:+11234567890">+1(123) 456 7890</ContactLink>
+                  <ContactLink href="tel:+5491128648977">+54 9 11 2864-8977</ContactLink>
                 </li>
                 <li>
-                  <ContactLink href="mailto:info@codestitch.com">
-                    info@codestitch.com
+                  <ContactLink href="mailto:contact.eterlab@gmail.com">
+                    contact.eterlab@gmail.com
                   </ContactLink>
                 </li>
               </ContactList>

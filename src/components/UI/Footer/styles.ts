@@ -162,9 +162,10 @@ export const VersionTag = styled.p`
   opacity: 0.75;
 `;
 
-export const UtilityGrid = styled.div`
+export const UtilityGrid = styled.div<{ $single?: boolean }>`
   display: grid;
-  grid-template-columns: repeat(2, minmax(11rem, 14rem));
+  grid-template-columns: ${({ $single }) =>
+    $single ? '1fr' : 'repeat(2, minmax(11rem, 14rem))'};
   align-items: start;
   gap: clamp(2rem, 4vw, 4.5rem);
 

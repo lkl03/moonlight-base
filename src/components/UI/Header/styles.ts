@@ -7,6 +7,10 @@ export const Wrapper = styled.section`
   border-top: 6px solid var(--green);
   border-bottom: 0.5px solid #3d3d3d;
 
+  [data-theme="light"] & {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+
   @media (max-width: 768px) {
     padding: 0.75rem 0;
   }
