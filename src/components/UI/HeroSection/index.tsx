@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { Wrapper, Inner, HeroTextContainer } from './styles';
+import { Wrapper, Inner, HeroTextContainer, ChevronButton } from './styles';
 import { GetStartedButton } from '@/components';
 import MaskText from '@/components/Common/MaskText';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -24,6 +24,11 @@ const HeroSection = () => {
   const hasMounted = useHasMounted();
 
   if (!hasMounted) return null;
+
+  const scrollToNext = () => {
+    const next = document.getElementById('what-we-do');
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <Wrapper>
@@ -48,6 +53,20 @@ const HeroSection = () => {
         </HeroTextContainer>
         <GetStartedButton text="Get Started" href="#pricing" />
       </Inner>
+
+      <ChevronButton onClick={scrollToNext} aria-label="Scroll to next section">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </ChevronButton>
     </Wrapper>
   );
 };

@@ -4,6 +4,17 @@ import hero_background from '../../../../public/images/grid_background.png';
 
 export const Wrapper = styled.section`
   margin-top: 10rem;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 5rem;
+  }
 `;
 
 export const Inner = styled.div`
@@ -77,7 +88,7 @@ export const HeroTextContainer = styled.div`
     text-wrap: balance;
     margin-left: 0.25rem;
     margin-right: 0.25rem;
-    
+
     h1 {
       font-size: 2.5rem;
     }
@@ -92,4 +103,39 @@ export const HeroTextContainer = styled.div`
   }
 `;
 
+export const ChevronButton = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:active {
+      color: var(--emerald);
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      animation: chevron-bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes chevron-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(7px); }
+    }
+  }
+`;
 
