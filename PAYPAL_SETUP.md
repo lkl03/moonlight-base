@@ -1,70 +1,81 @@
 # PayPal Subscription Setup
 
-This document explains how PayPal subscriptions are integrated into Moonlight Web Designs and what needs to be configured.
+This document explains how PayPal subscriptions are integrated into Moonlight Web Designs and what must be configured before the checkout flow works.
 
 ---
 
-## Required environment variables
+## Environment variables
 
-Copy `.env.example` to `.env.local` and fill in the values:
+All PayPal values are read from environment variables at runtime. **No real credentials are committed to this repository.**
+
+Create a `.env.local` file locally (it is git-ignored) and add the following:
 
 ```env
-# PayPal — public (safe to expose in the browser)
+# PayPal — public, safe to expose in the browser
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=your_paypal_client_id
-NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID=P-13965659MR530714MNIFH6ZQ
-NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID=P-1W79682320254352RNIFH7JY
+NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID=your_standard_plan_id
+NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID=your_advanced_plan_id
 
-# PayPal — server only (NEVER expose these in the browser)
+# PayPal — server only, never expose to the browser
 PAYPAL_WEBHOOK_ID=your_paypal_webhook_id
 PAYPAL_CLIENT_SECRET=your_paypal_client_secret
 ```
 
-> **Important:** Never commit `.env.local` or any file containing real secrets to version control. `.env.example` contains placeholders only.
+> **Never commit `.env.local` or any file containing real credentials.**
+> The `.gitignore` ignores `.env`, `.env.local`, and all `.env*.local` variants.
+
+### Configuring in Vercel
+
+Go to **Vercel Dashboard → Project → Settings → Environment Variables** and add each variable:
+
+| Variable | Environment |
+|---|---|
+| `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | Production (+ Preview/Development if testing live) |
+| `NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID` | Production (+ Preview/Development if testing live) |
+| `NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID` | Production (+ Preview/Development if testing live) |
+| `PAYPAL_WEBHOOK_ID` | Production |
+| `PAYPAL_CLIENT_SECRET` | Production |
+
+For sandbox testing, create sandbox plans in the PayPal Developer Dashboard and add the sandbox plan IDs and credentials to the **Preview** or **Development** environments instead.
 
 ---
 
-## PayPal plan IDs
+## PayPal plans
 
-| Plan     | Price       | PayPal Plan ID                        |
-|----------|-------------|---------------------------------------|
-| Standard | $199/month  | `P-13965659MR530714MNIFH6ZQ`          |
-| Advanced | $349/month  | `P-1W79682320254352RNIFH7JY`          |
+Two indefinite monthly subscription plans must exist in your PayPal account. Set their plan IDs in the env vars above:
 
-These plan IDs correspond to indefinite monthly billing plans created in the live PayPal app **moonlight-web-designs** (`contact.eterlab@gmail.com`).
+- **Standard Website Plan** — $199/month → `NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID`
+- **Advanced Website Plan** — $349/month → `NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID`
 
----
-
-## Sandbox vs live
-
-- The current integration uses **hosted PayPal subscription URLs** (Option A), which always point to the live PayPal environment via:
-  ```
-  https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=<PLAN_ID>
-  ```
-- To test with a sandbox, create sandbox plans in the PayPal Developer Dashboard and update the `NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID` and `NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID` env vars to sandbox plan IDs.
+Plans are configured as indefinite monthly billing — they do not expire after 12 months. The 12-month minimum commitment is a business/contractual obligation enforced via the UI confirmation modal and the Terms of Service, not by the PayPal plan duration.
 
 ---
 
 ## Webhook configuration
 
-### Current webhook URL (needs updating)
+### Webhook endpoint
 
-The PayPal webhook is currently configured to point to the site homepage, which is incorrect.
+The webhook handler lives at:
 
-**The webhook URL in the PayPal dashboard must be updated to:**
+```
+/api/webhooks/paypal
+```
+
+**The webhook URL in the PayPal dashboard must be set to:**
 
 ```
 https://moonlightwebdesigns.com/api/webhooks/paypal
 ```
 
+The previous webhook URL pointed to the homepage (`https://moonlightwebdesigns.com/`) — this must be corrected in the PayPal dashboard.
+
 ### Webhook ID
 
-```
-82499841YL703803E
-```
+Set the webhook ID from the PayPal dashboard as the `PAYPAL_WEBHOOK_ID` environment variable.
 
 ### Tracked events
 
-The following PayPal webhook events are handled at `/api/webhooks/paypal`:
+The handler processes the following PayPal webhook events:
 
 - `BILLING.SUBSCRIPTION.CREATED`
 - `BILLING.SUBSCRIPTION.ACTIVATED`
@@ -74,36 +85,42 @@ The following PayPal webhook events are handled at `/api/webhooks/paypal`:
 - `PAYMENT.SALE.DENIED`
 - `PAYMENT.SALE.REFUNDED`
 
-### Webhook signature verification (TODO)
+### Webhook signature verification
 
-The current webhook handler logs events but does **not yet verify PayPal webhook signatures**. Before going to production, implement signature verification using the `PAYPAL_WEBHOOK_ID` and `PAYPAL_CLIENT_SECRET` env vars.
+The handler at `src/app/api/webhooks/paypal/route.ts` verifies the PayPal webhook signature on every inbound request using `PAYPAL_WEBHOOK_ID`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, and `PAYPAL_CLIENT_SECRET`.
 
-Reference: https://developer.paypal.com/docs/api/webhooks/v1/#verify-webhook-signature
+If any of the three env vars are absent (e.g. in local dev), verification is skipped with a console warning and events are processed unverified. **All three vars must be set in production.**
+
+---
+
+## Sandbox vs live
+
+- The current integration uses **hosted PayPal subscription URLs** pointing directly to `https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=<PLAN_ID>`.
+- To test with sandbox, create sandbox plans in the PayPal Developer Dashboard and set the sandbox plan IDs and credentials in your Preview/Development environment variables on Vercel.
 
 ---
 
 ## 12-Month Minimum Contract Handling
 
-Moonlight Web Designs plans are billed monthly through PayPal but include a 12-month minimum commitment.
+Moonlight Web Designs plans are billed monthly through PayPal but include a 12-month minimum commitment. PayPal is used only as the recurring payment method.
 
-**PayPal is used only as the recurring payment method.** Because customers can cancel or disable automatic payments from their PayPal account, the minimum commitment is handled at three layers:
+The minimum commitment is enforced at three layers:
 
-1. **Pricing UI** — The 12-month minimum is shown on every pricing card below the CTA.
-2. **Confirmation modal** — Before redirecting to PayPal, users must read a confirmation explaining:
-   - The plan price and name
-   - That billing is through PayPal
+1. **Pricing UI** — The 12-month minimum is displayed on every pricing card below the CTA.
+2. **Confirmation modal** — Before redirecting to PayPal, the user must acknowledge:
+   - The plan name and price
    - That PayPal is only the payment method, not the governing agreement
-   - That cancelling or disabling PayPal does not end the contractual 12-month commitment
-3. **Terms of Service** — The `/terms` page contains explicit sections on the minimum commitment, PayPal as payment method, and early PayPal cancellation not cancelling the contractual obligation.
+   - That cancelling PayPal does not cancel the 12-month contractual commitment
+   - A required Terms of Service checkbox (Subscribe button stays disabled until checked)
+3. **Terms of Service** — `/terms` contains explicit sections covering the minimum commitment, PayPal as payment method, and early PayPal cancellation not relieving the contractual obligation.
 
 **Future backend work** should store:
-- The acceptance timestamp of the Terms / 12-month commitment checkbox
-- The PayPal subscription ID on activation
-- The activation date
-- The minimum commitment end date (activation date + 12 months)
-- Whether an early cancellation occurred before the minimum commitment end date
+- Acceptance timestamp of the Terms / 12-month commitment checkbox
+- PayPal subscription ID (from `BILLING.SUBSCRIPTION.ACTIVATED`)
+- Activation date and minimum commitment end date (activation + 12 months)
+- Early-cancellation flag if cancelled before the minimum commitment end date
 
-See the TODOs in:
+See TODOs in:
 - `src/app/api/webhooks/paypal/route.ts`
 - `src/components/UI/PricingSection/PayPalModal.tsx`
 
@@ -113,23 +130,15 @@ See the TODOs in:
 
 Route: `/thank-you`
 
-After a successful subscription, users can be directed to `/thank-you`. This page confirms the subscription and reminds the user of the 12-month minimum contract.
+Users land here after completing the PayPal subscription flow. The page confirms the subscription and reiterates the 12-month minimum contract.
 
-> Note: Hosted PayPal subscription URLs do not automatically redirect to a return URL unless a `return_url` is configured in the PayPal subscription plan settings. Update the plan's return URL in the PayPal dashboard to `https://moonlightwebdesigns.com/thank-you`.
-
----
-
-## Subscription plan settings
-
-PayPal subscriptions are configured as **indefinite monthly billing plans** — they do not expire automatically after 12 months.
-
-The 12-month minimum commitment is a business/contractual obligation, not a PayPal billing configuration. Clients subscribe indefinitely and are contractually obligated to maintain payments for at least 12 months.
+> To redirect users here automatically after PayPal checkout, update the plan's **Return URL** in the PayPal dashboard to `https://moonlightwebdesigns.com/thank-you`.
 
 ---
 
 ## Onboarding email (future)
 
-Once a backend is in place, trigger an onboarding confirmation email when `BILLING.SUBSCRIPTION.ACTIVATED` is received. Suggested content:
+Once a backend is in place, trigger an onboarding email when `BILLING.SUBSCRIPTION.ACTIVATED` is received. Suggested content:
 
 ```
 Subject: Moonlight Web Designs — Subscription Confirmation
@@ -148,8 +157,6 @@ As stated in our Terms of Service, the PayPal subscription is used as the
 payment method. The 12-month minimum commitment remains in effect even if
 the PayPal subscription is cancelled, paused, blocked, or otherwise disabled
 before the end of the minimum term.
-
-We'll follow up shortly with onboarding steps.
 
 — Moonlight Web Designs
 contact.eterlab@gmail.com

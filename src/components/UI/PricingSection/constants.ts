@@ -45,8 +45,7 @@ export const cardsInfo: PlanInfo[] = [
       'Unlimited edits & support',
     ],
     appearance: 'solid',
-    paypalPlanId:
-      process.env.NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID ?? 'P-13965659MR530714MNIFH6ZQ',
+    paypalPlanId: process.env.NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID ?? '',
     ctaText: 'Start Standard Plan — $199/mo',
     confirmationBody:
       "This plan is billed monthly through PayPal and has a 12-month minimum contract. PayPal is used as the recurring payment method, but your minimum commitment is governed by Moonlight Web Designs' Terms of Service.\n\nIf you cancel, pause, block, or otherwise disable your PayPal subscription before the end of the minimum term, you may remain responsible for the remaining unpaid months under the 12-month minimum commitment.",
@@ -67,8 +66,7 @@ export const cardsInfo: PlanInfo[] = [
       'Priority support with scalable structure',
     ],
     appearance: 'outline',
-    paypalPlanId:
-      process.env.NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID ?? 'P-1W79682320254352RNIFH7JY',
+    paypalPlanId: process.env.NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID ?? '',
     ctaText: 'Start Advanced Plan — $349/mo',
     confirmationBody:
       "This plan is billed monthly through PayPal and has a 12-month minimum contract. PayPal is used as the recurring payment method, but your minimum commitment is governed by Moonlight Web Designs' Terms of Service.\n\nIf you cancel, pause, block, or otherwise disable your PayPal subscription before the end of the minimum term, you may remain responsible for the remaining unpaid months under the 12-month minimum commitment.",
