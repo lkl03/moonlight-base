@@ -113,6 +113,10 @@ const sections: Section[] = [
       },
       {
         type: 'paragraph',
+        text: 'Monthly subscription fees are collected via PayPal as the recurring payment processor. PayPal is used solely as the billing method and does not govern the duration, scope, or obligations of your subscription. Your contractual commitment to Moonlight is governed by these Terms.',
+      },
+      {
+        type: 'paragraph',
         text: 'Subscription services are not a guarantee of unlimited simultaneous output. Requests are typically handled through an active queue. We may work on one or more active requests at a time depending on your plan, the complexity of the work, dependencies, and our internal capacity.',
       },
     ],
@@ -123,6 +127,14 @@ const sections: Section[] = [
       {
         type: 'paragraph',
         text: 'Unless a different term is stated in a signed agreement, subscription plans begin on the subscription start date and continue for a minimum term of twelve (12) months.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Moonlight Web Designs plans are billed monthly through PayPal and require a minimum commitment of twelve (12) months unless otherwise agreed in writing. By subscribing to a plan, the client authorizes recurring monthly charges for the selected plan and agrees to maintain an active payment method for the duration of the minimum commitment.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The PayPal subscription is used as the payment method and does not replace the client\'s contractual commitment. If the client cancels, pauses, disputes, blocks, or otherwise disables the PayPal subscription before the end of the twelve-month minimum term, the client remains responsible for any unpaid amounts due for the remainder of the minimum commitment, unless otherwise agreed in writing by Moonlight Web Designs.',
       },
       {
         type: 'paragraph',
@@ -153,6 +165,10 @@ const sections: Section[] = [
       {
         type: 'paragraph',
         text: 'If payment is late, failed, disputed, or reversed, we may pause work, suspend services, withhold deliverables, remove access to project systems, or suspend hosting/maintenance until the account is brought current. You remain responsible for unpaid fees during any suspension caused by non-payment.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Failed, cancelled, or disabled PayPal payments do not automatically cancel the client\'s 12-month minimum commitment. If a monthly payment fails, Moonlight Web Designs may notify the client and request that the payment method be updated. Services may be paused or suspended until the outstanding payment is resolved.',
       },
     ],
   },
