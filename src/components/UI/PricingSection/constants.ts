@@ -1,21 +1,38 @@
-// For desktop
 export const desktopHeaderPhrase = ['Simple & Transparent Pricing'];
 export const desktopParagraphPhrase = [
   'Choose a plan that fits your needs without any hidden fees or surprises.',
   'Pay the same amount every month and scale your website with confidence.',
 ];
 
-// For mobile
 export const mobileHeaderPhrase = ['Simple & Transparent Pricing'];
 export const mobileParagraphPhrase = [
   'Choose a plan that fits your needs without any hidden fees or surprises.',
   'Pay the same amount every month and scale your website with confidence.',
 ];
 
-export const cardsInfo = [
+export type PlanAppearance = 'solid' | 'outline';
+
+export interface PlanInfo {
+  title: string;
+  price: string;
+  priceMonthly: string;
+  description: string;
+  contractNote: string;
+  features: readonly string[];
+  appearance: PlanAppearance;
+  paypalPlanId: string;
+  ctaText: string;
+  confirmationBody: string;
+}
+
+export const PAYPAL_SUBSCRIPTION_BASE_URL =
+  'https://www.paypal.com/webapps/billing/plans/subscribe';
+
+export const cardsInfo: PlanInfo[] = [
   {
     title: 'Standard',
     price: '$199',
+    priceMonthly: '$199/month',
     description:
       'Built for landing pages and smaller brochure websites that need a polished online presence.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
@@ -28,10 +45,15 @@ export const cardsInfo = [
       'Unlimited edits & support',
     ],
     appearance: 'solid',
+    paypalPlanId: process.env.NEXT_PUBLIC_PAYPAL_STANDARD_PLAN_ID ?? '',
+    ctaText: 'Start Standard Plan — $199/mo',
+    confirmationBody:
+      "This plan is billed monthly through PayPal and has a 12-month minimum contract. PayPal is used as the recurring payment method, but your minimum commitment is governed by Moonlight Web Designs' Terms of Service.\n\nIf you cancel, pause, block, or otherwise disable your PayPal subscription before the end of the minimum term, you may remain responsible for the remaining unpaid months under the 12-month minimum commitment.",
   },
   {
-    title: 'Advance',
+    title: 'Advanced',
     price: '$349',
+    priceMonthly: '$349/month',
     description:
       'Designed for more complex websites that need extra pages, structure, and custom functionality.',
     contractNote: 'Per Month (12 Month Minimum Contract)',
@@ -44,10 +66,14 @@ export const cardsInfo = [
       'Priority support with scalable structure',
     ],
     appearance: 'outline',
+    paypalPlanId: process.env.NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID ?? '',
+    ctaText: 'Start Advanced Plan — $349/mo',
+    confirmationBody:
+      "This plan is billed monthly through PayPal and has a 12-month minimum contract. PayPal is used as the recurring payment method, but your minimum commitment is governed by Moonlight Web Designs' Terms of Service.\n\nIf you cancel, pause, block, or otherwise disable your PayPal subscription before the end of the minimum term, you may remain responsible for the remaining unpaid months under the 12-month minimum commitment.",
   },
-] as const;
+];
 
-export const planStyles: Record<'solid' | 'outline', React.CSSProperties> = {
+export const planStyles: Record<PlanAppearance, React.CSSProperties> = {
   solid: {
     ['--card-bg' as any]: 'var(--darkGreen)',
     ['--card-fg' as any]: 'var(--white)',

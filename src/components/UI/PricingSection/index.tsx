@@ -1,4 +1,5 @@
 'use client';
+import { useState, useCallback } from 'react';
 import {
   Wrapper,
   Inner,
@@ -10,6 +11,8 @@ import {
   CardBody,
   FeatureList,
   Footer,
+  PlanCta,
+  PlanCtaLegal,
 } from './styles';
 import { MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
@@ -20,11 +23,26 @@ import {
   mobileParagraphPhrase,
   cardsInfo,
   planStyles,
+  PlanInfo,
+  PAYPAL_SUBSCRIPTION_BASE_URL,
 } from './constants';
-import { GetStartedButton } from '@/components';
+import PayPalModal, { PlanConfirmationData } from './PayPalModal';
 
 const PricingSection = () => {
   const isMobile = useIsMobile();
+  const [activePlan, setActivePlan] = useState<PlanConfirmationData | null>(null);
+
+  const openModal = useCallback((info: PlanInfo) => {
+    setActivePlan({
+      title: info.title,
+      priceMonthly: info.priceMonthly,
+      confirmationBody: info.confirmationBody,
+      paypalUrl: `${PAYPAL_SUBSCRIPTION_BASE_URL}?plan_id=${info.paypalPlanId}`,
+      paypalPlanId: info.paypalPlanId,
+    });
+  }, []);
+
+  const closeModal = useCallback(() => setActivePlan(null), []);
 
   return (
     <Wrapper id="pricing">
@@ -45,9 +63,14 @@ const PricingSection = () => {
             )}
           </HeaderMainText>
         </Header>
+
         <CardContainer>
           {cardsInfo.map((info) => (
-            <Card key={info.title} style={planStyles[info.appearance]} data-appearance={info.appearance}>
+            <Card
+              key={info.title}
+              style={planStyles[info.appearance]}
+              data-appearance={info.appearance}
+            >
               <CardBody>
                 <TextCtn>
                   <MaskText className="title" phrases={[info.title]} tag="span" />
@@ -65,16 +88,24 @@ const PricingSection = () => {
               </CardBody>
 
               <Footer>
-                <GetStartedButton
-                  text="Start Now"
-                  href="/checkout"
-                  variant={info.appearance === 'outline' ? 'green-to-green' : 'white-on-green'}
-                />
+                <PlanCta
+                  onClick={() => openModal(info)}
+                  $variant={info.appearance === 'outline' ? 'green-to-green' : 'white-on-green'}
+                >
+                  <span>{info.ctaText}</span>
+                </PlanCta>
+                <PlanCtaLegal $onDark={info.appearance === 'solid'}>
+                  Monthly subscription billed through PayPal. 12-month minimum contract
+                  applies. By subscribing, you agree to our{' '}
+                  <a href="/terms">Terms of Service</a>.
+                </PlanCtaLegal>
               </Footer>
             </Card>
           ))}
         </CardContainer>
       </Inner>
+
+      <PayPalModal plan={activePlan} onClose={closeModal} />
     </Wrapper>
   );
 };
