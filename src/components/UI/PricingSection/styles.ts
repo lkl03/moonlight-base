@@ -217,7 +217,93 @@ export const FeatureList = styled.ul`
 export const Footer = styled.div`
   padding: 0 2.25rem 2rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+`;
+
+type PlanCtaVariant = 'white-on-green' | 'green-to-green';
+
+const ctaBase = ($variant: PlanCtaVariant) => {
+  if ($variant === 'white-on-green') return '#ffffff';
+  return 'var(--darkGreen)';
+};
+const ctaHoverFill = ($variant: PlanCtaVariant) => {
+  if ($variant === 'white-on-green') return '#ffffff, #ffffff';
+  return 'var(--green), var(--green)';
+};
+const ctaHoverColor = ($variant: PlanCtaVariant) => {
+  if ($variant === 'white-on-green') return 'var(--darkGreen)';
+  return '#ffffff';
+};
+
+export const PlanCta = styled.button<{ $variant: PlanCtaVariant }>`
+  position: relative;
+  display: inline-flex;
   justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid ${({ $variant }) => ctaBase($variant)};
+  border-left-width: 8px;
+  border-left-color: ${({ $variant }) => ctaBase($variant)};
+  color: ${({ $variant }) => ctaBase($variant)};
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: bold;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.8rem, 5vw, 2.8rem);
+  cursor: pointer;
+  background: none;
+  background-image: linear-gradient(${({ $variant }) => ctaHoverFill($variant)});
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  transition:
+    background-size 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    border-left-color 0.3s ease-in-out,
+    color 0.2s ease-in-out;
+
+  &:hover {
+    background-size: 100% 100%;
+    border-color: ${({ $variant }) => ctaBase($variant)};
+    border-left-color: ${({ $variant }) => ctaBase($variant)};
+    color: ${({ $variant }) => ctaHoverColor($variant)};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+  }
+`;
+
+export const PlanCtaLegal = styled.p<{ $onDark?: boolean }>`
+  font-size: 0.72rem;
+  line-height: 1.55;
+  text-align: center;
+  color: ${({ $onDark }) =>
+    $onDark ? 'rgba(255,255,255,0.72)' : 'var(--Background)'};
+  opacity: 0.75;
+  max-width: 22rem;
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.68rem;
+  }
 `;
 
 export const CardBody = styled.div`
