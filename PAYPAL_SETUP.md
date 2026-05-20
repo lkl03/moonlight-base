@@ -136,6 +136,31 @@ Users land here after completing the PayPal subscription flow. The page confirms
 
 ---
 
+## Phase 2 — PayPal JS SDK checkout sessions
+
+Phase 2 replaces the hosted PayPal subscription link flow with a proper checkout session flow.
+
+### What changed
+
+- **PayPal JS SDK** is now loaded client-side via `usePayPalScript` instead of redirecting to a hosted PayPal URL.
+- **Checkout sessions** are created in Firestore (`checkout_sessions` collection) via `POST /api/checkout/session` **before** the user interacts with PayPal. The session records the plan, client details, accepted terms, and accepted minimum commitment.
+- **onApprove** calls `PATCH /api/checkout/session` to store the PayPal `subscriptionID` returned by PayPal and sets `status: "paypal_approved"`. This does **not** mean the subscription is active.
+- **Webhooks remain the source of truth.** The `paypal_approved` status is a client-side confirmation only. The PayPal webhook handler (Phase 3) will set `status: "active"` when PayPal confirms via `BILLING.SUBSCRIPTION.ACTIVATED`.
+- **`/thank-you`** is a UX confirmation page. It shows the PayPal `subscription_id` from the query string but does **not** claim the subscription is active.
+
+### New API routes
+
+| Route | Method | Purpose |
+|---|---|---|
+| `/api/checkout/session` | `POST` | Create a `checkout_session` doc before PayPal |
+| `/api/checkout/session` | `PATCH` | Store `paypalSubscriptionId` and set `status: paypal_approved` after onApprove |
+
+### Plan config
+
+Plan prices are defined server-side in `src/lib/plans.ts`. The API routes use this config — never trust prices submitted from the client.
+
+---
+
 ## Firebase integration (future)
 
 Future onboarding flow will use Firebase Auth + Firestore to store checkout sessions, subscription status, PayPal events, and client portal data.

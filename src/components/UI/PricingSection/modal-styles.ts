@@ -126,30 +126,6 @@ export const ModalActions = styled.div`
   gap: 0.75rem;
 `;
 
-export const PayPalButton = styled.button`
-  background: #0070ba;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 0.875rem 2.5rem;
-  cursor: pointer;
-  width: 100%;
-  transition:
-    background 0.2s ease,
-    opacity 0.2s ease;
-
-  &:hover:not(:disabled) {
-    background: #005ea6;
-  }
-
-  &:disabled {
-    opacity: 0.38;
-    cursor: not-allowed;
-  }
-`;
-
 export const ModalLegalNote = styled.p`
   font-size: 0.75rem;
   line-height: 1.6;
@@ -165,4 +141,114 @@ export const ModalLegalNote = styled.p`
       color: var(--green, #17f2a6);
     }
   }
+`;
+
+// ── Form inputs ──────────────────────────────────────────────────────────────
+
+export const ModalInputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.9rem;
+`;
+
+export const ModalLabel = styled.label`
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+  letter-spacing: 0.02em;
+`;
+
+export const ModalInput = styled.input`
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  font-size: 0.925rem;
+  font-family: Raleway, sans-serif;
+  color: var(--Background, #121717);
+  background: #fafafa;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--darkGreen, #45a383);
+    box-shadow: 0 0 0 3px rgba(69, 163, 131, 0.12);
+  }
+`;
+
+export const ModalErrorText = styled.p`
+  font-size: 0.825rem;
+  color: #c0392b;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(192, 57, 43, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid #c0392b;
+`;
+
+// ── Buttons ──────────────────────────────────────────────────────────────────
+
+export const ContinueButton = styled.button`
+  background: var(--darkGreen, #45a383);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: Raleway, sans-serif;
+  padding: 0.875rem 2.5rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--green, #17f2a6);
+    color: var(--Background, #121717);
+  }
+
+  &:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+`;
+
+export const ModalSecondaryButton = styled.button`
+  background: none;
+  color: #777;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: Raleway, sans-serif;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.28);
+    color: #444;
+  }
+`;
+
+// ── PayPal SDK container ─────────────────────────────────────────────────────
+
+export const PayPalButtonContainer = styled.div`
+  min-height: 48px;
+  width: 100%;
+  position: relative;
+`;
+
+export const PayPalLoadingText = styled.p`
+  font-size: 0.875rem;
+  color: #888;
+  text-align: center;
+  padding: 1rem 0;
 `;

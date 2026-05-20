@@ -1,3 +1,5 @@
+import type { PlanKey } from '@/lib/plans';
+
 export const desktopHeaderPhrase = ['Simple & Transparent Pricing'];
 export const desktopParagraphPhrase = [
   'Choose a plan that fits your needs without any hidden fees or surprises.',
@@ -13,6 +15,7 @@ export const mobileParagraphPhrase = [
 export type PlanAppearance = 'solid' | 'outline';
 
 export interface PlanInfo {
+  planKey: PlanKey;
   title: string;
   price: string;
   priceMonthly: string;
@@ -25,11 +28,9 @@ export interface PlanInfo {
   confirmationBody: string;
 }
 
-export const PAYPAL_SUBSCRIPTION_BASE_URL =
-  'https://www.paypal.com/webapps/billing/plans/subscribe';
-
 export const cardsInfo: PlanInfo[] = [
   {
+    planKey: 'standard',
     title: 'Standard',
     price: '$199',
     priceMonthly: '$199/month',
@@ -51,6 +52,7 @@ export const cardsInfo: PlanInfo[] = [
       "This plan is billed monthly through PayPal and has a 12-month minimum contract. PayPal is used as the recurring payment method, but your minimum commitment is governed by Moonlight Web Designs' Terms of Service.\n\nIf you cancel, pause, block, or otherwise disable your PayPal subscription before the end of the minimum term, you may remain responsible for the remaining unpaid months under the 12-month minimum commitment.",
   },
   {
+    planKey: 'advanced',
     title: 'Advanced',
     price: '$349',
     priceMonthly: '$349/month',
@@ -75,25 +77,25 @@ export const cardsInfo: PlanInfo[] = [
 
 export const planStyles: Record<PlanAppearance, React.CSSProperties> = {
   solid: {
-    ['--card-bg' as any]: 'var(--darkGreen)',
-    ['--card-fg' as any]: 'var(--white)',
-    ['--card-border' as any]: 'none',
-    ['--tick' as any]: 'var(--white)',
-    ['--divider-opacity' as any]: 0.18,
-    ['--btn-bg' as any]: 'var(--white)',
-    ['--btn-fg' as any]: 'var(--darkGreen)',
-    ['--btn-border' as any]: 'var(--white)',
-    ['--price-color' as any]: 'var(--white)',
+    ['--card-bg' as string]: 'var(--darkGreen)',
+    ['--card-fg' as string]: 'var(--white)',
+    ['--card-border' as string]: 'none',
+    ['--tick' as string]: 'var(--white)',
+    ['--divider-opacity' as string]: 0.18,
+    ['--btn-bg' as string]: 'var(--white)',
+    ['--btn-fg' as string]: 'var(--darkGreen)',
+    ['--btn-border' as string]: 'var(--white)',
+    ['--price-color' as string]: 'var(--white)',
   },
   outline: {
-    ['--card-bg' as any]: 'var(--white)',
-    ['--card-fg' as any]: 'var(--Background)',
-    ['--card-border' as any]: '1px solid var(--light-gray)',
-    ['--tick' as any]: 'var(--green)',
-    ['--divider-opacity' as any]: 0.2,
-    ['--btn-bg' as any]: 'transparent',
-    ['--btn-fg' as any]: 'var(--green)',
-    ['--btn-border' as any]: '2px solid var(--green)',
-    ['--price-color' as any]: 'var(--green)',
+    ['--card-bg' as string]: 'var(--white)',
+    ['--card-fg' as string]: 'var(--Background)',
+    ['--card-border' as string]: '1px solid var(--light-gray)',
+    ['--tick' as string]: 'var(--green)',
+    ['--divider-opacity' as string]: 0.2,
+    ['--btn-bg' as string]: 'transparent',
+    ['--btn-fg' as string]: 'var(--green)',
+    ['--btn-border' as string]: '2px solid var(--green)',
+    ['--price-color' as string]: 'var(--green)',
   },
 };
