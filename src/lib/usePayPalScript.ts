@@ -37,7 +37,7 @@ export function usePayPalScript(clientId: string | undefined): PayPalScriptStatu
 
     const script = document.createElement('script');
     script.id = SCRIPT_ID;
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&vault=true&intent=subscription`;
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&vault=true&intent=subscription&currency=USD&locale=en_US`;
     script.async = true;
     script.onload = () => setStatus('ready');
     script.onerror = () => setStatus('error');

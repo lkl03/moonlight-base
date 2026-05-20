@@ -37,3 +37,8 @@ export function getPlan(key: PlanKey): PlanConfig {
 export function isPlanKey(value: unknown): value is PlanKey {
   return value === 'standard' || value === 'advanced';
 }
+
+export function getPlanByPaypalId(planId: string): PlanConfig | undefined {
+  if (!planId) return undefined;
+  return Object.values(PLANS).find((p) => p.paypalPlanId === planId && p.paypalPlanId !== '');
+}
