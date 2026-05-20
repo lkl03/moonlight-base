@@ -200,6 +200,43 @@ Subscription records, created by the `BILLING.SUBSCRIPTION.ACTIVATED` webhook ha
 | `createdAt` | Timestamp | |
 | `updatedAt` | Timestamp | |
 
+### `onboarding_submissions`
+
+Created by `POST /api/portal/onboarding` when a client submits the onboarding form. Updated on resubmission.
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Firestore document ID |
+| `clientEmail` | string | Authenticated client email |
+| `clientName` | string | Client display name |
+| `subscriptionId` | string \| null | References `subscriptions/{id}` |
+| `customerId` | string \| null | References `customers/{id}` |
+| `businessName` | string | Business name |
+| `businessIndustry` | string | Industry category |
+| `businessDescription` | string | Description of the business |
+| `primaryGoal` | string | Primary goal for the website |
+| `targetAudience` | string | Description of target customers |
+| `desiredPages` | string[] | List of page names requested |
+| `hasExistingWebsite` | boolean | Whether the client has an existing site |
+| `existingWebsiteUrl` | string | URL of existing site (if any) |
+| `brandColors` | string | Brand colour description |
+| `brandFonts` | string | Brand font description |
+| `designNotes` | string | Freeform design preferences |
+| `providingOwnContent` | boolean | Whether client provides copy/images |
+| `contentNotes` | string | Content-related notes |
+| `inspirationUrls` | string | Websites the client likes |
+| `desiredFeatures` | string[] | List of feature names requested |
+| `launchTimeline` | string | Desired launch timeframe |
+| `additionalNotes` | string | Any other requirements |
+| `status` | string | `submitted` \| `reviewed` |
+| `reviewedAt` | Timestamp \| null | Set when admin marks as reviewed |
+| `createdAt` | Timestamp | Document creation time |
+| `updatedAt` | Timestamp | Last update time |
+
+When a submission is created or updated, the corresponding `subscriptions` document is updated with:
+- `onboardingStatus`: `'not_started'` → `'submitted'` (admin can manually set to `'reviewed'`)
+- `onboardingSubmittedAt`: timestamp of submission
+
 ### `paypal_events`
 
 Raw PayPal webhook event payloads stored for auditability and idempotency. Every inbound webhook is stored here before processing begins.
@@ -253,6 +290,13 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // Onboarding submissions: clients can read/create their own; updates and reads are server-side.
+    match /onboarding_submissions/{submissionId} {
+      allow read: if request.auth != null
+        && resource.data.clientEmail == request.auth.token.email;
+      allow write: if false;
+    }
+
     // PayPal events are written and read exclusively by the Admin SDK.
     match /paypal_events/{eventId} {
       allow read, write: if false;
@@ -294,5 +338,4 @@ If `NEXT_PUBLIC_APP_URL` is not set, the magic link `continueUrl` defaults to `h
 
 ## What future PRs will add
 
-- **Onboarding form** — authenticated multi-step form at `/portal/onboarding` for collecting business details, website content, and branding preferences.
-- **Admin panel** — admin-only view for managing clients, viewing all subscriptions, and triggering manual actions.
+- **Admin panel** — admin-only view for managing clients, viewing all subscriptions, marking onboarding submissions as reviewed, and triggering manual actions.

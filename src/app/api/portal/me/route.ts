@@ -14,11 +14,39 @@ export interface PortalMeResponse {
   clientName: string;
   clientEmail: string;
   lastPaymentAt: string | null;
+  onboardingStatus: 'not_started' | 'submitted' | 'reviewed';
+  onboardingSubmittedAt: string | null;
 }
+
+const STATUS_PRIORITY: Record<string, number> = {
+  active: 0,
+  paypal_approved: 1,
+  pending: 2,
+  suspended: 3,
+  cancelled: 4,
+  expired: 5,
+};
 
 function tsToISO(ts: unknown): string | null {
   if (!ts || typeof (ts as Record<string, unknown>).toDate !== 'function') return null;
   return ((ts as { toDate: () => Date }).toDate)().toISOString();
+}
+
+function tsToMs(ts: unknown): number {
+  const iso = tsToISO(ts);
+  return iso ? new Date(iso).getTime() : 0;
+}
+
+function pickBestSubscription(docs: FirebaseFirestore.QueryDocumentSnapshot[]): FirebaseFirestore.QueryDocumentSnapshot | null {
+  if (docs.length === 0) return null;
+  return docs.slice().sort((a, b) => {
+    const aStatus = (a.data().status as string) ?? '';
+    const bStatus = (b.data().status as string) ?? '';
+    const aPriority = STATUS_PRIORITY[aStatus] ?? 99;
+    const bPriority = STATUS_PRIORITY[bStatus] ?? 99;
+    if (aPriority !== bPriority) return aPriority - bPriority;
+    return tsToMs(b.data().updatedAt) - tsToMs(a.data().updatedAt);
+  })[0];
 }
 
 export async function GET(request: NextRequest) {
@@ -38,49 +66,32 @@ export async function GET(request: NextRequest) {
 
   try {
     const db = getAdminDb();
-    let subData: Record<string, unknown> | null = null;
+    let bestDoc: FirebaseFirestore.QueryDocumentSnapshot | null = null;
     let clientName = '';
 
-    // Primary path: find subscription via customer record (created by webhook on activation).
-    const custSnap = await db
-      .collection('customers')
-      .where('email', '==', email)
-      .limit(1)
-      .get();
-
+    // Primary path: find subscriptions via customer record.
+    const custSnap = await db.collection('customers').where('email', '==', email).limit(1).get();
     if (!custSnap.empty) {
       const cust = custSnap.docs[0];
       clientName = (cust.data().name as string) ?? '';
-      const subSnap = await db
-        .collection('subscriptions')
-        .where('customerId', '==', cust.id)
-        .limit(1)
-        .get();
-      if (!subSnap.empty) subData = subSnap.docs[0].data() as Record<string, unknown>;
+      const subSnap = await db.collection('subscriptions').where('customerId', '==', cust.id).get();
+      bestDoc = pickBestSubscription(subSnap.docs);
     }
 
     // Fallback: find via Firestore users collection.
-    if (!subData) {
-      const userSnap = await db
-        .collection('users')
-        .where('email', '==', email)
-        .limit(1)
-        .get();
+    if (!bestDoc) {
+      const userSnap = await db.collection('users').where('email', '==', email).limit(1).get();
       if (!userSnap.empty) {
         const usr = userSnap.docs[0];
         if (!clientName) clientName = (usr.data().name as string) ?? '';
-        const subSnap = await db
-          .collection('subscriptions')
-          .where('userId', '==', usr.id)
-          .limit(1)
-          .get();
-        if (!subSnap.empty) subData = subSnap.docs[0].data() as Record<string, unknown>;
+        const subSnap = await db.collection('subscriptions').where('userId', '==', usr.id).get();
+        bestDoc = pickBestSubscription(subSnap.docs);
       }
     }
 
-    if (!subData) {
-      return NextResponse.json({ error: 'No subscription found' }, { status: 404 });
-    }
+    if (!bestDoc) return NextResponse.json({ error: 'No subscription found' }, { status: 404 });
+
+    const subData = bestDoc.data() as Record<string, unknown>;
 
     const body: PortalMeResponse = {
       planName: (subData.planName as string) ?? '',
@@ -96,6 +107,8 @@ export async function GET(request: NextRequest) {
       clientName: clientName || ((subData.clientName as string) ?? ''),
       clientEmail: email,
       lastPaymentAt: tsToISO(subData.lastPaymentAt),
+      onboardingStatus: (subData.onboardingStatus as 'not_started' | 'submitted' | 'reviewed') ?? 'not_started',
+      onboardingSubmittedAt: tsToISO(subData.onboardingSubmittedAt) ?? null,
     };
 
     return NextResponse.json(body);
