@@ -1,6 +1,6 @@
-import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
-import { getAuth, Auth } from 'firebase/auth';
-import { getFirestore, Firestore } from 'firebase/firestore';
+import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
+import { getAuth, type Auth } from 'firebase/auth';
+import { getFirestore, type Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,12 +11,17 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-function getFirebaseApp(): FirebaseApp {
+function getClientApp(): FirebaseApp {
   if (getApps().length > 0) return getApp();
   return initializeApp(firebaseConfig);
 }
 
-const app = getFirebaseApp();
+// Lazy getters — only initialised on first call, not at module load time.
+// This prevents build-time errors when NEXT_PUBLIC_FIREBASE_* env vars are absent.
+export function getClientAuth(): Auth {
+  return getAuth(getClientApp());
+}
 
-export const auth: Auth = getAuth(app);
-export const db: Firestore = getFirestore(app);
+export function getClientDb(): Firestore {
+  return getFirestore(getClientApp());
+}
