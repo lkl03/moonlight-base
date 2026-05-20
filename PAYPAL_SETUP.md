@@ -136,6 +136,20 @@ Users land here after completing the PayPal subscription flow. The page confirms
 
 ---
 
+## Firebase integration (future)
+
+Future onboarding flow will use Firebase Auth + Firestore to store checkout sessions, subscription status, PayPal events, and client portal data.
+
+Specifically:
+- **Checkout sessions** — the PayPal modal will write a `checkout_sessions` Firestore document (plan choice, accepted terms, timestamp) before redirecting to PayPal.
+- **Subscription records** — the webhook handler will create/update `subscriptions` and `customers` documents via the Firebase Admin SDK when PayPal events are received.
+- **PayPal events** — all inbound webhook payloads will be stored in `paypal_events` for auditability.
+- **Client portal** — Firebase Auth will gate the `/portal` route, letting clients view their subscription status, onboarding steps, and billing details.
+
+See `FIREBASE_SETUP.md` for environment variable requirements and collection schema.
+
+---
+
 ## Onboarding email (future)
 
 Once a backend is in place, trigger an onboarding email when `BILLING.SUBSCRIPTION.ACTIVATED` is received. Suggested content:
