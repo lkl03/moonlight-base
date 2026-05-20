@@ -12,6 +12,8 @@
     "@motionone/utils": "^10.16.3",
     "@studio-freight/react-lenis": "^0.0.36",
     "@vercel/analytics": "^2.0.1",
+    "firebase": "^12.13.0",
+    "firebase-admin": "^13.10.0",
     "framer-motion": "^10.16.4",
     "gsap": "^3.12.2",
     "next": "13.5.4",
