@@ -101,21 +101,115 @@ Go to **Vercel Dashboard → Project → Settings → Environment Variables** an
 
 ## Firestore collections
 
-The following collections are defined in `src/lib/firebase/schema.ts` and will be populated by future PRs:
+All collections are defined in `src/lib/firebase/schema.ts`. The schema type names map to `COLLECTIONS` constants in that file.
 
-| Collection | Description |
-|---|---|
-| `checkout_sessions` | Stores checkout intent, plan choice, and accepted terms before PayPal redirect |
-| `users` | Firebase Auth user profiles (uid, email, name, role) |
-| `customers` | PayPal payer details linked to a user |
-| `subscriptions` | Active and historical subscription records |
-| `paypal_events` | Raw PayPal webhook event payloads for auditability |
+### `checkout_sessions`
+
+Created by `POST /api/checkout/session` when a user starts the PayPal checkout flow. Updated by `PATCH /api/checkout/session` on PayPal approval and by the webhook handler on subscription activation.
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Firestore document ID |
+| `planName` | string | Human-readable plan name |
+| `paypalPlanId` | string | PayPal plan ID |
+| `planPrice` | number | Monthly price (server-authoritative) |
+| `currency` | string | Currency code (e.g. `USD`) |
+| `clientName` | string | Name entered by the user in the checkout form |
+| `clientEmail` | string | Email entered by the user |
+| `acceptedTerms` | boolean | Whether Terms of Service were accepted |
+| `acceptedTermsAt` | Timestamp \| null | When terms were accepted |
+| `acceptedMinimumCommitment` | boolean | Whether 12-month commitment was acknowledged |
+| `acceptedMinimumCommitmentAt` | Timestamp \| null | When commitment was acknowledged |
+| `minimumCommitmentMonths` | number | Always `12` |
+| `status` | string | `pending` → `paypal_approved` → `active` \| `cancelled` \| `expired` |
+| `paypalSubscriptionId` | string \| null | Set on PayPal approval |
+| `approvedAt` | Timestamp | Set when PayPal returns `subscriptionID` in `onApprove` |
+| `activatedAt` | Timestamp | Set by `BILLING.SUBSCRIPTION.ACTIVATED` webhook |
+| `minimumCommitmentEndAt` | Timestamp | `activatedAt + 12 months` |
+| `welcomeEmailSentAt` | Timestamp | Set after welcome email is sent (idempotency guard) |
+| `internalNotificationSentAt` | Timestamp | Set after internal notification is sent |
+| `createdAt` | Timestamp | Document creation time |
+| `updatedAt` | Timestamp | Last update time |
+
+### `users`
+
+Firebase Auth user profiles. Created on first sign-in or on subscription activation (as a placeholder record).
+
+| Field | Type | Description |
+|---|---|---|
+| `uid` | string | Firebase Auth UID |
+| `email` | string | User email |
+| `name` | string | Display name |
+| `role` | string | `client` or `admin` |
+| `createdAt` | Timestamp | |
+| `updatedAt` | Timestamp | |
+
+### `customers`
+
+PayPal payer details, linked to a user record. Created by the `BILLING.SUBSCRIPTION.ACTIVATED` webhook handler.
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Firestore document ID |
+| `userId` | string | References `users/{uid}` |
+| `email` | string | Customer email |
+| `name` | string | Customer name |
+| `paypalPayerId` | string \| null | PayPal payer ID from webhook resource |
+| `paypalEmail` | string \| null | PayPal account email from webhook resource |
+| `createdAt` | Timestamp | |
+| `updatedAt` | Timestamp | |
+
+### `subscriptions`
+
+Subscription records, created by the `BILLING.SUBSCRIPTION.ACTIVATED` webhook handler. Updated by subsequent billing and cancellation events.
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Firestore document ID |
+| `userId` | string \| null | References `users/{uid}` |
+| `customerId` | string \| null | References `customers/{id}` |
+| `paypalSubscriptionId` | string | PayPal subscription ID |
+| `paypalPlanId` | string \| null | PayPal plan ID |
+| `planName` | string | Human-readable plan name |
+| `monthlyPrice` | number | Monthly price |
+| `currency` | string | Currency code |
+| `status` | string | `active` \| `cancelled` \| `expired` \| `suspended` |
+| `startedAt` | Timestamp | Subscription start time from PayPal |
+| `minimumCommitmentMonths` | number | Always `12` |
+| `minimumCommitmentEndAt` | Timestamp | `startedAt + 12 months` |
+| `acceptedTermsAt` | Timestamp \| null | From checkout session |
+| `acceptedMinimumCommitmentAt` | Timestamp \| null | From checkout session |
+| `lastPaymentAt` | Timestamp \| null | Set by `PAYMENT.SALE.COMPLETED` |
+| `lastPaymentAmount` | string \| null | Set by `PAYMENT.SALE.COMPLETED` |
+| `lastPaymentCurrency` | string \| null | Set by `PAYMENT.SALE.COMPLETED` |
+| `lastPaymentStatus` | string \| null | Set by `PAYMENT.SALE.COMPLETED` |
+| `cancelledAt` | Timestamp \| null | Set by `BILLING.SUBSCRIPTION.CANCELLED` |
+| `earlyCancelledWithRemainingCommitment` | boolean | `true` if cancelled before `minimumCommitmentEndAt` |
+| `checkoutSessionId` | string \| null | Back-reference to originating `checkout_sessions` doc |
+| `welcomeEmailSentAt` | Timestamp \| null | Idempotency guard for welcome email |
+| `internalNotificationSentAt` | Timestamp \| null | Idempotency guard for internal notification |
+| `createdAt` | Timestamp | |
+| `updatedAt` | Timestamp | |
+
+### `paypal_events`
+
+Raw PayPal webhook event payloads stored for auditability and idempotency. Every inbound webhook is stored here before processing begins.
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | string | Firestore document ID |
+| `paypalEventId` | string | PayPal's event ID (used for deduplication) |
+| `eventType` | string | e.g. `BILLING.SUBSCRIPTION.ACTIVATED` |
+| `paypalSubscriptionId` | string \| null | From `resource.id` in the webhook payload |
+| `paypalPlanId` | string \| null | From `resource.plan_id` in the webhook payload |
+| `payload` | object | Full raw webhook payload |
+| `receivedAt` | Timestamp | When the event was received |
 
 ---
 
 ## Suggested Firestore security rules
 
-These rules are not yet deployed — they document the intended access model for when Firebase Auth is wired up in a future PR.
+These rules document the intended access model for when Firebase Auth is wired up for the client portal.
 
 ```firestore-rules
 rules_version = '2';
@@ -170,7 +264,4 @@ service cloud.firestore {
 ## What future PRs will add
 
 - **Firebase Auth integration** — sign-in for the `/portal` route using email/password.
-- **Checkout session writes** — the PayPal modal will write a `checkout_sessions` document before redirecting to PayPal.
-- **Webhook Firestore writes** — the PayPal webhook handler will create/update `subscriptions`, `customers`, and `paypal_events` documents via the Admin SDK.
 - **Client portal** — authenticated `/portal` pages for viewing subscription status, onboarding steps, and billing details.
-- **Transactional emails** — triggered on `BILLING.SUBSCRIPTION.ACTIVATED` to confirm plan, price, and 12-month minimum commitment.

@@ -59,11 +59,12 @@ const s: Record<string, CSSProperties> = {
     marginBottom: '0.75rem',
   },
   refBox: {
-    fontSize: '0.875rem',
+    display: 'block',
+    fontSize: '0.8rem',
     color: 'var(--light-gray)',
     lineHeight: 1.8,
-    marginBottom: '1rem',
-    padding: '0.75rem 1rem',
+    marginTop: '0.4rem',
+    padding: '0.65rem 1rem',
     borderRadius: '8px',
     background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(255,255,255,0.08)',
@@ -72,6 +73,40 @@ const s: Record<string, CSSProperties> = {
   },
   link: {
     color: 'var(--emerald)',
+    textDecoration: 'none',
+  },
+  btnRow: {
+    display: 'flex',
+    flexWrap: 'wrap' as const,
+    gap: '0.75rem',
+    marginTop: '2rem',
+  },
+  btnPrimary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0.8rem 1.5rem',
+    background: 'var(--darkGreen, #45a383)',
+    color: '#fff',
+    borderRadius: '8px',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '0.95rem',
+    fontWeight: 700,
+    textDecoration: 'none',
+    transition: 'background 0.2s',
+  },
+  btnSecondary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0.8rem 1.5rem',
+    background: 'transparent',
+    color: 'var(--light-gray)',
+    border: '1.5px solid rgba(255,255,255,0.18)',
+    borderRadius: '8px',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '0.95rem',
+    fontWeight: 600,
     textDecoration: 'none',
   },
 };
@@ -99,10 +134,19 @@ export default function ThankYouPage({ searchParams }: PageProps) {
 
       {subscription_id && (
         <p style={s.p}>
-          Subscription reference:{' '}
+          Subscription reference:
           <span style={s.refBox}>{subscription_id}</span>
         </p>
       )}
+
+      <div style={s.btnRow}>
+        <a href="/portal" style={s.btnPrimary}>
+          Go to client portal
+        </a>
+        <a href="/" style={s.btnSecondary}>
+          Back to homepage
+        </a>
+      </div>
 
       <hr style={s.divider} />
 

@@ -1,3 +1,7 @@
+// These interfaces describe the Firestore document shapes used across the app.
+// Client-side code uses Timestamp from 'firebase/firestore';
+// server-side (Admin SDK) code uses admin.firestore.Timestamp — same wire format.
+
 import { Timestamp } from 'firebase/firestore';
 
 export interface CheckoutSession {
@@ -13,8 +17,16 @@ export interface CheckoutSession {
   acceptedMinimumCommitment: boolean;
   acceptedMinimumCommitmentAt: Timestamp | null;
   minimumCommitmentMonths: number;
-  status: 'pending' | 'active' | 'cancelled' | 'expired';
+  // pending → paypal_approved → active | cancelled
+  status: 'pending' | 'paypal_approved' | 'active' | 'cancelled' | 'expired';
   paypalSubscriptionId: string | null;
+  // Set by PATCH /api/checkout/session (onApprove)
+  approvedAt?: Timestamp;
+  // Set by webhook BILLING.SUBSCRIPTION.ACTIVATED
+  activatedAt?: Timestamp;
+  minimumCommitmentEndAt?: Timestamp;
+  welcomeEmailSentAt?: Timestamp;
+  internalNotificationSentAt?: Timestamp;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
@@ -41,10 +53,10 @@ export interface Customer {
 
 export interface Subscription {
   id: string;
-  userId: string;
-  customerId: string;
+  userId: string | null;
+  customerId: string | null;
   paypalSubscriptionId: string;
-  paypalPlanId: string;
+  paypalPlanId: string | null;
   planName: string;
   monthlyPrice: number;
   currency: string;
@@ -52,11 +64,19 @@ export interface Subscription {
   startedAt: Timestamp;
   minimumCommitmentMonths: number;
   minimumCommitmentEndAt: Timestamp;
-  acceptedTermsAt: Timestamp;
-  acceptedMinimumCommitmentAt: Timestamp;
+  acceptedTermsAt: Timestamp | null;
+  acceptedMinimumCommitmentAt: Timestamp | null;
   lastPaymentAt: Timestamp | null;
+  lastPaymentAmount: string | null;
+  lastPaymentCurrency: string | null;
+  lastPaymentStatus: string | null;
   cancelledAt: Timestamp | null;
   earlyCancelledWithRemainingCommitment: boolean;
+  // Back-reference to the checkout_session that originated this subscription
+  checkoutSessionId: string | null;
+  // Idempotency guards — set after emails are sent
+  welcomeEmailSentAt: Timestamp | null;
+  internalNotificationSentAt: Timestamp | null;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }

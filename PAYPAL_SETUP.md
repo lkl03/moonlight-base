@@ -19,6 +19,13 @@ NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID=your_advanced_plan_id
 # PayPal — server only, never expose to the browser
 PAYPAL_WEBHOOK_ID=your_paypal_webhook_id
 PAYPAL_CLIENT_SECRET=your_paypal_client_secret
+
+# Resend — server only, for transactional emails
+RESEND_API_KEY=re_your_resend_api_key
+
+# Email — optional overrides (server only)
+MOONLIGHT_FROM_EMAIL=noreply@moonlightwebdesigns.com
+MOONLIGHT_ADMIN_EMAIL=contact.eterlab@gmail.com
 ```
 
 > **Never commit `.env.local` or any file containing real credentials.**
@@ -35,8 +42,11 @@ Go to **Vercel Dashboard → Project → Settings → Environment Variables** an
 | `NEXT_PUBLIC_PAYPAL_ADVANCED_PLAN_ID` | Production (+ Preview/Development if testing live) |
 | `PAYPAL_WEBHOOK_ID` | Production |
 | `PAYPAL_CLIENT_SECRET` | Production |
+| `RESEND_API_KEY` | Production |
+| `MOONLIGHT_FROM_EMAIL` | Production (optional — defaults to `noreply@moonlightwebdesigns.com`) |
+| `MOONLIGHT_ADMIN_EMAIL` | Production (optional — defaults to `contact.eterlab@gmail.com`) |
 
-For sandbox testing, create sandbox plans in the PayPal Developer Dashboard and add the sandbox plan IDs and credentials to the **Preview** or **Development** environments instead.
+For sandbox testing, create sandbox plans in the PayPal Developer Dashboard and add the sandbox plan IDs and credentials to the **Preview** or **Development** environments.
 
 ---
 
@@ -67,8 +77,6 @@ The webhook handler lives at:
 https://moonlightwebdesigns.com/api/webhooks/paypal
 ```
 
-The previous webhook URL pointed to the homepage (`https://moonlightwebdesigns.com/`) — this must be corrected in the PayPal dashboard.
-
 ### Webhook ID
 
 Set the webhook ID from the PayPal dashboard as the `PAYPAL_WEBHOOK_ID` environment variable.
@@ -77,13 +85,17 @@ Set the webhook ID from the PayPal dashboard as the `PAYPAL_WEBHOOK_ID` environm
 
 The handler processes the following PayPal webhook events:
 
-- `BILLING.SUBSCRIPTION.CREATED`
-- `BILLING.SUBSCRIPTION.ACTIVATED`
-- `BILLING.SUBSCRIPTION.CANCELLED`
-- `BILLING.SUBSCRIPTION.EXPIRED`
-- `PAYMENT.SALE.COMPLETED`
-- `PAYMENT.SALE.DENIED`
-- `PAYMENT.SALE.REFUNDED`
+| Event | Action |
+|---|---|
+| `BILLING.SUBSCRIPTION.ACTIVATED` | Creates user, customer, and subscription records in Firestore; sends welcome email to client and internal notification |
+| `BILLING.SUBSCRIPTION.CANCELLED` | Updates subscription status to `cancelled`; flags early cancellation if before `minimumCommitmentEndAt`; sends internal alert |
+| `BILLING.SUBSCRIPTION.EXPIRED` | Updates subscription status to `expired`; sends internal alert |
+| `BILLING.SUBSCRIPTION.SUSPENDED` | Updates subscription status to `suspended`; sends internal alert |
+| `PAYMENT.SALE.COMPLETED` | Updates last payment fields on the subscription record |
+| `PAYMENT.SALE.DENIED` | Sends payment failure alert to admin |
+| `PAYMENT.SALE.REFUNDED` | Sends payment failure alert to admin |
+
+All inbound events are stored in the `paypal_events` Firestore collection before any processing. **The handler returns `200` after the event is stored even if subsequent processing fails** — this prevents PayPal infinite retries. It returns `500` only if the event itself cannot be stored (PayPal will retry; deduplication handles the retry).
 
 ### Webhook signature verification
 
@@ -93,10 +105,20 @@ If any of the three env vars are absent (e.g. in local dev), verification is ski
 
 ---
 
-## Sandbox vs live
+## Idempotency
 
-- The current integration uses **hosted PayPal subscription URLs** pointing directly to `https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=<PLAN_ID>`.
-- To test with sandbox, create sandbox plans in the PayPal Developer Dashboard and set the sandbox plan IDs and credentials in your Preview/Development environment variables on Vercel.
+Every `BILLING.SUBSCRIPTION.ACTIVATED` event is deduplicated at two levels:
+
+1. **Event deduplication** — the `paypal_events` collection is checked by `paypalEventId` before any processing. If the event is already stored, processing is skipped.
+2. **Email deduplication** — `welcomeEmailSentAt` and `internalNotificationSentAt` timestamps on the subscription document prevent duplicate emails if the same event is processed more than once.
+
+This means it is safe for PayPal to replay events or for the webhook to be called multiple times for the same activation.
+
+---
+
+## Early cancellation detection
+
+When `BILLING.SUBSCRIPTION.CANCELLED` is received, the handler compares the cancellation timestamp against the subscription's `minimumCommitmentEndAt` field. If cancelled before the end of the 12-month minimum, `earlyCancelledWithRemainingCommitment` is set to `true` on the subscription document and the internal alert includes a prominent warning.
 
 ---
 
@@ -104,49 +126,33 @@ If any of the three env vars are absent (e.g. in local dev), verification is ski
 
 Moonlight Web Designs plans are billed monthly through PayPal but include a 12-month minimum commitment. PayPal is used only as the recurring payment method.
 
-The minimum commitment is enforced at three layers:
+The minimum commitment is enforced at four layers:
 
 1. **Pricing UI** — The 12-month minimum is displayed on every pricing card below the CTA.
-2. **Confirmation modal** — Before redirecting to PayPal, the user must acknowledge:
+2. **Confirmation modal** — Before subscribing via PayPal, the user must acknowledge:
    - The plan name and price
    - That PayPal is only the payment method, not the governing agreement
    - That cancelling PayPal does not cancel the 12-month contractual commitment
    - A required Terms of Service checkbox (Subscribe button stays disabled until checked)
 3. **Terms of Service** — `/terms` contains explicit sections covering the minimum commitment, PayPal as payment method, and early PayPal cancellation not relieving the contractual obligation.
-
-**Future backend work** should store:
-- Acceptance timestamp of the Terms / 12-month commitment checkbox
-- PayPal subscription ID (from `BILLING.SUBSCRIPTION.ACTIVATED`)
-- Activation date and minimum commitment end date (activation + 12 months)
-- Early-cancellation flag if cancelled before the minimum commitment end date
-
-See TODOs in:
-- `src/app/api/webhooks/paypal/route.ts`
-- `src/components/UI/PricingSection/PayPalModal.tsx`
+4. **Backend records** — The webhook handler stores `acceptedTermsAt`, `acceptedMinimumCommitmentAt`, `activatedAt`, and `minimumCommitmentEndAt` (activation + 12 months) on the subscription document.
 
 ---
 
-## Thank-you page
+## Checkout flow (Phase 2)
 
-Route: `/thank-you`
+The checkout flow uses the PayPal JS SDK (not hosted PayPal subscription links):
 
-Users land here after completing the PayPal subscription flow. The page confirms the subscription and reiterates the 12-month minimum contract.
+1. **User opens pricing modal** — enters name, email, accepts Terms of Service.
+2. **`POST /api/checkout/session`** — creates a `checkout_sessions` Firestore document with `status: pending`.
+3. **PayPal Buttons render** — the user approves the subscription in PayPal's native UI.
+4. **`PATCH /api/checkout/session`** — stores the `paypalSubscriptionId` returned by PayPal and sets `status: paypal_approved`. This does **not** mean the subscription is active.
+5. **User is redirected to `/thank-you`** — a UX confirmation page, not a proof of an active subscription.
+6. **`BILLING.SUBSCRIPTION.ACTIVATED` webhook** — PayPal confirms activation; the webhook handler sets `status: active`, creates all records, and sends emails. **This is the source of truth.**
 
-> To redirect users here automatically after PayPal checkout, update the plan's **Return URL** in the PayPal dashboard to `https://moonlightwebdesigns.com/thank-you`.
+### Plan config
 
----
-
-## Phase 2 — PayPal JS SDK checkout sessions
-
-Phase 2 replaces the hosted PayPal subscription link flow with a proper checkout session flow.
-
-### What changed
-
-- **PayPal JS SDK** is now loaded client-side via `usePayPalScript` instead of redirecting to a hosted PayPal URL.
-- **Checkout sessions** are created in Firestore (`checkout_sessions` collection) via `POST /api/checkout/session` **before** the user interacts with PayPal. The session records the plan, client details, accepted terms, and accepted minimum commitment.
-- **onApprove** calls `PATCH /api/checkout/session` to store the PayPal `subscriptionID` returned by PayPal and sets `status: "paypal_approved"`. This does **not** mean the subscription is active.
-- **Webhooks remain the source of truth.** The `paypal_approved` status is a client-side confirmation only. The PayPal webhook handler (Phase 3) will set `status: "active"` when PayPal confirms via `BILLING.SUBSCRIPTION.ACTIVATED`.
-- **`/thank-you`** is a UX confirmation page. It shows the PayPal `subscription_id` from the query string but does **not** claim the subscription is active.
+Plan prices are defined server-side in `src/lib/plans.ts`. The API routes use this config — never trust prices submitted from the client.
 
 ### New API routes
 
@@ -155,48 +161,37 @@ Phase 2 replaces the hosted PayPal subscription link flow with a proper checkout
 | `/api/checkout/session` | `POST` | Create a `checkout_session` doc before PayPal |
 | `/api/checkout/session` | `PATCH` | Store `paypalSubscriptionId` and set `status: paypal_approved` after onApprove |
 
-### Plan config
+---
 
-Plan prices are defined server-side in `src/lib/plans.ts`. The API routes use this config — never trust prices submitted from the client.
+## Transactional emails (Phase 3)
+
+Emails are sent via the [Resend](https://resend.com) API using direct HTTP calls (no SDK dependency). If `RESEND_API_KEY` is not configured, all email functions return `false` and log a warning — the webhook continues processing without failing.
+
+### Emails sent
+
+| Trigger | Recipient | Content |
+|---|---|---|
+| `BILLING.SUBSCRIPTION.ACTIVATED` | Client email | Welcome email with plan details, portal link, minimum term end date |
+| `BILLING.SUBSCRIPTION.ACTIVATED` | Admin | New activation summary (client name, email, plan, PayPal IDs, minimum term end) |
+| `BILLING.SUBSCRIPTION.CANCELLED` | Admin | Cancellation alert with early-cancellation warning if applicable |
+| `BILLING.SUBSCRIPTION.EXPIRED` | Admin | Status change alert |
+| `BILLING.SUBSCRIPTION.SUSPENDED` | Admin | Status change alert |
+| `PAYMENT.SALE.DENIED` | Admin | Payment failure alert |
+| `PAYMENT.SALE.REFUNDED` | Admin | Payment failure alert |
+
+Welcome and internal notification emails are idempotent — they will not be sent more than once per subscription, even if the webhook replays.
 
 ---
 
-## Firebase integration (future)
+## Thank-you page
 
-Future onboarding flow will use Firebase Auth + Firestore to store checkout sessions, subscription status, PayPal events, and client portal data.
+Route: `/thank-you`
 
-Specifically:
-- **Checkout sessions** — the PayPal modal will write a `checkout_sessions` Firestore document (plan choice, accepted terms, timestamp) before redirecting to PayPal.
-- **Subscription records** — the webhook handler will create/update `subscriptions` and `customers` documents via the Firebase Admin SDK when PayPal events are received.
-- **PayPal events** — all inbound webhook payloads will be stored in `paypal_events` for auditability.
-- **Client portal** — Firebase Auth will gate the `/portal` route, letting clients view their subscription status, onboarding steps, and billing details.
+Users land here after completing the PayPal subscription flow. The page:
 
-See `FIREBASE_SETUP.md` for environment variable requirements and collection schema.
+- Confirms the subscription was submitted to PayPal
+- Shows the PayPal `subscription_id` if present in the query string (`?subscription_id=...`)
+- Links to the client portal and homepage
+- Notes that the subscription is **not yet active** — PayPal will confirm via webhook
 
----
-
-## Onboarding email (future)
-
-Once a backend is in place, trigger an onboarding email when `BILLING.SUBSCRIPTION.ACTIVATED` is received. Suggested content:
-
-```
-Subject: Moonlight Web Designs — Subscription Confirmation
-
-Hi [Client Name],
-
-Thanks for subscribing to the [Standard/Advanced] Website Plan.
-
-Plan:              [Standard/Advanced] Website Plan
-Monthly price:     [$199/$349] USD
-Billing method:    PayPal subscription
-Minimum term:      12 months
-Minimum term end:  [Activation date + 12 months]
-
-As stated in our Terms of Service, the PayPal subscription is used as the
-payment method. The 12-month minimum commitment remains in effect even if
-the PayPal subscription is cancelled, paused, blocked, or otherwise disabled
-before the end of the minimum term.
-
-— Moonlight Web Designs
-contact.eterlab@gmail.com
-```
+> To redirect users here automatically after PayPal checkout, update the plan's **Return URL** in the PayPal dashboard to `https://moonlightwebdesigns.com/thank-you`.
