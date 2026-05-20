@@ -652,17 +652,58 @@ export default function PortalPage() {
           {/* Onboarding */}
           <div style={s.card}>
             <div style={s.cardTitle}>Onboarding</div>
-            <div style={s.pendingBadge}>Pending</div>
-            <p style={s.cardDesc}>
-              We&apos;ll use onboarding to collect your business details, website content,
-              design preferences, and launch requirements.
-            </p>
-            <a
-              href="/portal/onboarding"
-              style={{ ...s.btnPrimary, width: 'auto', display: 'inline-flex' }}
-            >
-              Complete onboarding →
-            </a>
+            {data.onboardingStatus === 'reviewed' ? (
+              <>
+                <div style={{
+                  ...s.pendingBadge,
+                  background: 'rgba(23,242,166,0.12)',
+                  color: '#17F2A6',
+                }}>Reviewed</div>
+                <p style={s.cardDesc}>
+                  Your onboarding details have been reviewed. We&apos;re working on your
+                  project. Contact us if you need to make any changes.
+                </p>
+                <a
+                  href="/portal/onboarding"
+                  style={{ ...s.btnSecondary, display: 'inline-flex' }}
+                >
+                  View / update onboarding
+                </a>
+              </>
+            ) : data.onboardingStatus === 'submitted' ? (
+              <>
+                <div style={{
+                  ...s.pendingBadge,
+                  background: 'rgba(99,102,241,0.15)',
+                  color: '#a5b4fc',
+                }}>Submitted</div>
+                <p style={s.cardDesc}>
+                  We received your onboarding details{data.onboardingSubmittedAt
+                    ? ` on ${fmtDate(data.onboardingSubmittedAt)}`
+                    : ''}. We&apos;ll review everything and be in touch soon.
+                </p>
+                <a
+                  href="/portal/onboarding"
+                  style={{ ...s.btnSecondary, display: 'inline-flex' }}
+                >
+                  Update onboarding
+                </a>
+              </>
+            ) : (
+              <>
+                <div style={s.pendingBadge}>Pending</div>
+                <p style={s.cardDesc}>
+                  We&apos;ll use onboarding to collect your business details, website
+                  content, design preferences, and launch requirements.
+                </p>
+                <a
+                  href="/portal/onboarding"
+                  style={{ ...s.btnPrimary, width: 'auto', display: 'inline-flex' }}
+                >
+                  Complete onboarding →
+                </a>
+              </>
+            )}
           </div>
 
           {/* Support */}

@@ -313,3 +313,87 @@ export async function sendMagicLinkEmail(params: MagicLinkEmailParams): Promise<
     text,
   });
 }
+
+// ── Onboarding notification (internal) ───────────────────────────────────────
+
+export interface OnboardingNotificationParams {
+  clientName: string;
+  clientEmail: string;
+  businessName: string;
+  planName: string;
+  paypalSubscriptionId: string;
+  primaryGoal: string;
+  launchTimeline: string;
+}
+
+export async function sendOnboardingNotificationEmail(
+  params: OnboardingNotificationParams
+): Promise<boolean> {
+  const { clientName, clientEmail, businessName, planName, paypalSubscriptionId, primaryGoal, launchTimeline } = params;
+
+  const lines = [
+    'A client has submitted their onboarding form.',
+    '',
+    `Client name:            ${clientName}`,
+    `Client email:           ${clientEmail}`,
+    `Business name:          ${businessName}`,
+    `Plan:                   ${planName}`,
+    `PayPal subscription ID: ${paypalSubscriptionId}`,
+    `Primary goal:           ${primaryGoal}`,
+    `Launch timeline:        ${launchTimeline}`,
+  ].join('\n');
+
+  return sendEmail({
+    to: adminEmail(),
+    subject: `Onboarding submitted — ${businessName}`,
+    text: lines,
+    html: `<pre style="font-family:monospace;font-size:14px;line-height:1.7;color:#121717">${lines}</pre>`,
+  });
+}
+
+// ── Onboarding confirmation (client-facing) ───────────────────────────────────
+
+export interface OnboardingConfirmationParams {
+  clientName: string;
+  clientEmail: string;
+  businessName: string;
+}
+
+export async function sendOnboardingConfirmationEmail(
+  params: OnboardingConfirmationParams
+): Promise<boolean> {
+  const { clientName, clientEmail, businessName } = params;
+
+  const text = [
+    `Hi ${clientName},`,
+    '',
+    `We've received your onboarding details for ${businessName}. We'll review everything and be in touch soon to get your project started.`,
+    '',
+    'If you need to update anything or have questions, just reply to this email.',
+    '',
+    'Best,',
+    'Moonlight Web Designs',
+  ].join('\n');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="font-family:Raleway,Arial,sans-serif;color:#121717;max-width:520px;margin:0 auto;padding:32px 24px;background:#fff">
+  <h2 style="font-size:1.2rem;font-weight:900;margin:0 0 1.25rem;font-family:Inter,Arial,sans-serif">
+    Onboarding received — ${businessName}
+  </h2>
+  <p style="margin:0 0 1rem">Hi ${clientName},</p>
+  <p style="margin:0 0 1.5rem">We've received your onboarding details for <strong>${businessName}</strong>. We'll review everything and be in touch soon to get your project started.</p>
+  <p style="margin:0 0 1.5rem;color:#444">If you need to update anything or have questions, just reply to this email.</p>
+  <hr style="border:0;border-top:1px solid #eee;margin:1.5rem 0">
+  <p style="font-size:0.75rem;color:#aaa;margin:0">Moonlight Web Designs</p>
+</body>
+</html>`;
+
+  return sendEmail({
+    to: clientEmail,
+    subject: `Onboarding received — ${businessName}`,
+    html,
+    text,
+  });
+}
