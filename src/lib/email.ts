@@ -71,9 +71,9 @@ export async function sendSubscriptionWelcomeEmail(
   const text = [
     `Hi ${clientName},`,
     '',
-    `Thanks for subscribing to the ${planName}.`,
+    `Thanks for subscribing to the ${planName}. Your subscription is now active.`,
     '',
-    'Your subscription is active.',
+    'Here are your subscription details:',
     '',
     `Plan: ${planName}`,
     `Monthly price: ${priceStr}`,
@@ -81,12 +81,14 @@ export async function sendSubscriptionWelcomeEmail(
     'Minimum commitment: 12 months',
     `Minimum term end date: ${endStr}`,
     '',
-    'You can access your client portal here:',
+    'Next step:',
+    "We'll send your onboarding form shortly so we can collect your business details,",
+    'website preferences, content, and launch requirements.',
+    '',
+    'You can access your client portal at:',
     'https://moonlightwebdesigns.com/portal',
     '',
-    "We'll follow up shortly with the onboarding steps.",
-    '',
-    'If you have any questions, contact us at contact.eterlab@gmail.com.',
+    'If you have any questions, just reply to this email.',
     '',
     'Best,',
     'Moonlight Web Designs',
@@ -96,36 +98,33 @@ export async function sendSubscriptionWelcomeEmail(
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="font-family:Raleway,Arial,sans-serif;color:#121717;max-width:580px;margin:0 auto;padding:32px 24px;background:#fff">
-  <h1 style="font-size:1.4rem;font-weight:900;margin:0 0 1rem">Welcome to Moonlight Web Designs</h1>
-  <p>Hi ${clientName},</p>
-  <p>Thanks for subscribing to the <strong>${planName}</strong>.</p>
-  <p style="background:#f0faf6;border-left:4px solid #45a383;padding:12px 16px;border-radius:4px;font-weight:600;">
-    Your subscription is active.
-  </p>
-  <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
+  <h1 style="font-size:1.4rem;font-weight:900;margin:0 0 1rem;font-family:Inter,Arial,sans-serif">Your Moonlight Web Designs subscription is active</h1>
+  <p style="margin:0 0 0.5rem">Hi ${clientName},</p>
+  <p style="margin:0 0 1.25rem">Thanks for subscribing to the <strong>${planName}</strong>. Your subscription is now active.</p>
+  <p style="margin:0 0 0.5rem;font-weight:600;font-size:0.9rem">Here are your subscription details:</p>
+  <table style="width:100%;border-collapse:collapse;margin:0.75rem 0 1.5rem;font-size:0.9rem">
     <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#555;width:50%">Plan</td><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">${planName}</td></tr>
     <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#555">Monthly price</td><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">${priceStr}</td></tr>
     <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#555">Billing method</td><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">PayPal</td></tr>
     <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#555">Minimum commitment</td><td style="padding:8px 0;border-bottom:1px solid #eee;font-weight:600">12 months</td></tr>
     <tr><td style="padding:8px 0;color:#555">Minimum term end date</td><td style="padding:8px 0;font-weight:600">${endStr}</td></tr>
   </table>
-  <p>
+  <p style="margin:0 0 0.4rem;font-weight:600;font-size:0.9rem">Next step</p>
+  <p style="margin:0 0 1.5rem;color:#444">We'll send your onboarding form shortly so we can collect your business details, website preferences, content, and launch requirements.</p>
+  <p style="margin:0 0 1.5rem">
     <a href="https://moonlightwebdesigns.com/portal"
        style="display:inline-block;background:#45a383;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.95rem">
       Access Client Portal
     </a>
   </p>
-  <p>We'll follow up shortly with the onboarding steps.</p>
-  <p>If you have any questions, contact us at
-    <a href="mailto:contact.eterlab@gmail.com" style="color:#45a383">contact.eterlab@gmail.com</a>.
-  </p>
-  <p>Best,<br>Moonlight Web Designs</p>
+  <p style="margin:0 0 1.5rem;color:#444">If you have any questions, just reply to this email.</p>
+  <p style="margin:0">Best,<br>Moonlight Web Designs</p>
   <hr style="border:0;border-top:1px solid #eee;margin:1.5rem 0">
   <p style="font-size:0.75rem;color:#aaa">PayPal subscription reference: ${paypalSubscriptionId}</p>
 </body>
 </html>`;
 
-  return sendEmail({ to: clientEmail, subject: 'Welcome to Moonlight Web Designs', html, text });
+  return sendEmail({ to: clientEmail, subject: 'Your Moonlight Web Designs subscription is active', html, text });
 }
 
 // ── Internal activation notification ────────────────────────────────────────
@@ -256,5 +255,61 @@ export async function sendStatusAlert(params: StatusAlertParams): Promise<boolea
     subject: `Moonlight subscription ${params.newStatus}`,
     text: lines,
     html: `<pre style="font-family:monospace;font-size:14px;line-height:1.7;color:#121717">${lines}</pre>`,
+  });
+}
+
+// ── Magic link / portal login email ─────────────────────────────────────────
+
+export interface MagicLinkEmailParams {
+  to: string;
+  link: string;
+}
+
+export async function sendMagicLinkEmail(params: MagicLinkEmailParams): Promise<boolean> {
+  const text = [
+    'Hi,',
+    '',
+    "Here's your secure login link for the Moonlight Web Designs client portal.",
+    '',
+    `Sign in: ${params.link}`,
+    '',
+    'This link expires in 1 hour and can only be used once.',
+    '',
+    "If you didn't request this, you can safely ignore this email.",
+    '',
+    'Best,',
+    'Moonlight Web Designs',
+  ].join('\n');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="font-family:Raleway,Arial,sans-serif;color:#121717;max-width:520px;margin:0 auto;padding:32px 24px;background:#fff">
+  <h2 style="font-size:1.2rem;font-weight:900;margin:0 0 1.25rem;font-family:Inter,Arial,sans-serif">
+    Your Moonlight Web Designs login link
+  </h2>
+  <p style="margin:0 0 1rem">Click the button below to sign in to your client portal.</p>
+  <p style="margin:0 0 1.5rem">
+    <a href="${params.link}"
+       style="display:inline-block;background:#45a383;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.95rem">
+      Sign in to Client Portal
+    </a>
+  </p>
+  <p style="margin:0 0 0.5rem;font-size:0.85rem;color:#666">
+    This link expires in <strong>1 hour</strong> and can only be used once.
+  </p>
+  <p style="margin:0 0 1.5rem;font-size:0.85rem;color:#666">
+    If you didn&apos;t request this, you can safely ignore this email.
+  </p>
+  <hr style="border:0;border-top:1px solid #eee;margin:1.5rem 0">
+  <p style="font-size:0.75rem;color:#aaa;margin:0">Moonlight Web Designs</p>
+</body>
+</html>`;
+
+  return sendEmail({
+    to: params.to,
+    subject: 'Your Moonlight Web Designs login link',
+    html,
+    text,
   });
 }

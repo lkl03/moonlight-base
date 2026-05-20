@@ -71,7 +71,16 @@ Go to **Vercel Dashboard → Project → Settings → Environment Variables** an
 1. In the Firebase Console, open your project.
 2. Navigate to **Build → Authentication**.
 3. Click **Get started**.
-4. Enable the sign-in providers you need (e.g. **Email/Password** for the client portal).
+4. Under **Sign-in method**, enable **Email/Password**.
+5. Inside the Email/Password provider, also enable the **Email link (passwordless sign-in)** sub-option — this is required for the client portal magic link flow.
+
+#### Authorized domains
+
+The portal uses Firebase email link sign-in with `handleCodeInApp: true`, which means the magic link redirects directly to your app URL. Firebase will only allow redirects to domains listed under **Authentication → Settings → Authorized domains**.
+
+Add `moonlightwebdesigns.com` to the authorized domains list. `localhost` is included by default for local development.
+
+> **Without this step**, magic links will fail with an "unauthorized domain" error when clicked.
 
 ### 3. Enable Firestore
 
@@ -259,9 +268,31 @@ service cloud.firestore {
 - PayPal webhook events (`paypal_events`) are write-only from the server; no client access.
 - Admin roles can be granted later using Firebase Custom Claims (e.g. `request.auth.token.admin == true`).
 
+> **Portal data access note:** The client portal (`/portal`) does **not** use client-side Firestore queries. All subscription data is returned by `GET /api/portal/me`, a server-side route that verifies the Firebase ID token and queries Firestore via the Admin SDK. This means the Firestore security rules above are not exercised by the portal — the Admin SDK bypasses them. The rules above protect against any future direct client-side Firestore access.
+
+---
+
+## Client portal environment variables
+
+Add these to Vercel in addition to the existing Firebase vars:
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `NEXT_PUBLIC_APP_URL` | Base URL for magic link `continueUrl` | `https://moonlightwebdesigns.com` |
+
+`NEXT_PUBLIC_APP_URL` must be set to the correct URL in each Vercel environment:
+
+| Vercel environment | Value |
+|---|---|
+| Production | `https://moonlightwebdesigns.com` |
+| Preview | `https://your-preview-url.vercel.app` (or omit to use production URL as default) |
+| Development | `http://localhost:3000` |
+
+If `NEXT_PUBLIC_APP_URL` is not set, the magic link `continueUrl` defaults to `https://moonlightwebdesigns.com/portal`, which is correct for production.
+
 ---
 
 ## What future PRs will add
 
-- **Firebase Auth integration** — sign-in for the `/portal` route using email/password.
-- **Client portal** — authenticated `/portal` pages for viewing subscription status, onboarding steps, and billing details.
+- **Onboarding form** — authenticated multi-step form at `/portal/onboarding` for collecting business details, website content, and branding preferences.
+- **Admin panel** — admin-only view for managing clients, viewing all subscriptions, and triggering manual actions.
