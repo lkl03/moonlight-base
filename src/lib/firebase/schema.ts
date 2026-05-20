@@ -77,6 +77,9 @@ export interface Subscription {
   // Idempotency guards — set after emails are sent
   welcomeEmailSentAt: Timestamp | null;
   internalNotificationSentAt: Timestamp | null;
+  // Onboarding tracking
+  onboardingStatus?: 'not_started' | 'submitted' | 'reviewed';
+  onboardingSubmittedAt?: Timestamp | null;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
@@ -91,10 +94,47 @@ export interface PayPalEvent {
   receivedAt: Timestamp;
 }
 
+export interface OnboardingSubmission {
+  id: string;
+  // Auth / linking
+  clientEmail: string;
+  clientName: string;
+  subscriptionId: string | null;
+  customerId: string | null;
+  // Business basics
+  businessName: string;
+  businessIndustry: string;
+  businessDescription: string;
+  primaryGoal: string;
+  targetAudience: string;
+  // Website scope
+  desiredPages: string[];
+  hasExistingWebsite: boolean;
+  existingWebsiteUrl: string;
+  // Branding / design
+  brandColors: string;
+  brandFonts: string;
+  designNotes: string;
+  // Content
+  providingOwnContent: boolean;
+  contentNotes: string;
+  inspirationUrls: string;
+  // Integrations / launch
+  desiredFeatures: string[];
+  launchTimeline: string;
+  additionalNotes: string;
+  // Status
+  status: 'submitted' | 'reviewed';
+  reviewedAt: Timestamp | null;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
 export const COLLECTIONS = {
   CHECKOUT_SESSIONS: 'checkout_sessions',
   USERS: 'users',
   CUSTOMERS: 'customers',
   SUBSCRIPTIONS: 'subscriptions',
   PAYPAL_EVENTS: 'paypal_events',
+  ONBOARDING_SUBMISSIONS: 'onboarding_submissions',
 } as const;
