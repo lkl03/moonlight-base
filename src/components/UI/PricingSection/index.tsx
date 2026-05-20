@@ -24,7 +24,6 @@ import {
   cardsInfo,
   planStyles,
   PlanInfo,
-  PAYPAL_SUBSCRIPTION_BASE_URL,
 } from './constants';
 import PayPalModal, { PlanConfirmationData } from './PayPalModal';
 
@@ -34,10 +33,10 @@ const PricingSection = () => {
 
   const openModal = useCallback((info: PlanInfo) => {
     setActivePlan({
+      planKey: info.planKey,
       title: info.title,
       priceMonthly: info.priceMonthly,
       confirmationBody: info.confirmationBody,
-      paypalUrl: `${PAYPAL_SUBSCRIPTION_BASE_URL}?plan_id=${info.paypalPlanId}`,
       paypalPlanId: info.paypalPlanId,
     });
   }, []);

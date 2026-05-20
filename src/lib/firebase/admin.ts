@@ -16,7 +16,13 @@ function getAdminApp(): admin.app.App {
   });
 }
 
-const adminApp = getAdminApp();
+// Lazy getters — the Admin SDK is only initialised on first call,
+// not at module load time. This prevents build-time errors when
+// FIREBASE_* env vars are absent (e.g. during `next build`).
+export function getAdminDb(): admin.firestore.Firestore {
+  return admin.firestore(getAdminApp());
+}
 
-export const adminAuth = admin.auth(adminApp);
-export const adminDb = admin.firestore(adminApp);
+export function getAdminAuth(): admin.auth.Auth {
+  return admin.auth(getAdminApp());
+}

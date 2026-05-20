@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+interface PageProps {
+  searchParams: { subscription_id?: string; checkout_session_id?: string };
+}
+
 const s: Record<string, CSSProperties> = {
   page: {
     maxWidth: '44rem',
@@ -54,30 +58,51 @@ const s: Record<string, CSSProperties> = {
     opacity: 0.75,
     marginBottom: '0.75rem',
   },
+  refBox: {
+    fontSize: '0.875rem',
+    color: 'var(--light-gray)',
+    lineHeight: 1.8,
+    marginBottom: '1rem',
+    padding: '0.75rem 1rem',
+    borderRadius: '8px',
+    background: 'rgba(255,255,255,0.04)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    fontFamily: 'monospace',
+    wordBreak: 'break-all' as const,
+  },
   link: {
     color: 'var(--emerald)',
     textDecoration: 'none',
   },
 };
 
-export default function ThankYouPage() {
+export default function ThankYouPage({ searchParams }: PageProps) {
+  const { subscription_id } = searchParams;
+
   return (
     <div style={s.page}>
-      <div style={s.badge}>Subscription received</div>
+      <div style={s.badge}>Subscription submitted</div>
       <h1 style={s.h1}>Thank you for subscribing to Moonlight Web Designs.</h1>
 
       <p style={s.p}>
-        We received your subscription request. You&apos;ll receive the next onboarding
-        steps by email shortly.
+        Your PayPal subscription has been submitted. Once PayPal confirms activation,
+        we&apos;ll send your onboarding details by email.
       </p>
 
       <p style={s.p}>
-        Your subscription is billed monthly through PayPal. As stated in our{' '}
+        Your plan includes a 12-month minimum contract, as described in our{' '}
         <a href="/terms" style={s.link}>
           Terms of Service
         </a>
-        , Moonlight Web Designs plans include a 12-month minimum contract.
+        .
       </p>
+
+      {subscription_id && (
+        <p style={s.p}>
+          Subscription reference:{' '}
+          <span style={s.refBox}>{subscription_id}</span>
+        </p>
+      )}
 
       <hr style={s.divider} />
 
@@ -90,9 +115,9 @@ export default function ThankYouPage() {
       </p>
 
       <p style={s.note}>
-        Note: If you are not redirected here automatically after subscribing, you can
-        bookmark this page as confirmation. Make sure your PayPal subscription was
-        completed successfully in your PayPal account.
+        Note: Your subscription is not yet active — PayPal will confirm activation
+        shortly. This page is a submission confirmation only, not proof of an active
+        subscription.
       </p>
     </div>
   );
