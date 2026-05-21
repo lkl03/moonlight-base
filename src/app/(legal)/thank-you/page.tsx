@@ -152,16 +152,15 @@ export default function ThankYouPage({ searchParams }: PageProps) {
 
       <p style={s.note}>
         If you have any questions, contact us at{' '}
-        <a href="mailto:contact.eterlab@gmail.com" style={s.link}>
-          contact.eterlab@gmail.com
+        <a href="mailto:hello@moonlightwebdesigns.com" style={s.link}>
+          hello@moonlightwebdesigns.com
         </a>
         .
       </p>
 
       <p style={s.note}>
-        Note: Your subscription is not yet active — PayPal will confirm activation
-        shortly. This page is a submission confirmation only, not proof of an active
-        subscription.
+        Note: Your subscription is not yet active — PayPal will confirm activation shortly.
+        This page confirms your subscription was submitted, not that it is active.
       </p>
     </div>
   );

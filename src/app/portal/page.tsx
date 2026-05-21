@@ -48,14 +48,18 @@ function statusBadge(status: string): { label: string; color: string; bg: string
   switch (status) {
     case 'active':
       return { label: 'Active', color: '#121717', bg: '#17F2A6' };
+    case 'paypal_approved':
+      return { label: 'Pending activation', color: '#93c5fd', bg: 'rgba(96,165,250,0.15)' };
+    case 'pending':
+      return { label: 'Pending', color: '#fcd34d', bg: 'rgba(245,158,11,0.15)' };
+    case 'suspended':
+      return { label: 'Suspended', color: '#fdba74', bg: 'rgba(249,115,22,0.15)' };
     case 'cancelled':
       return { label: 'Cancelled', color: '#fca5a5', bg: 'rgba(239,68,68,0.15)' };
-    case 'suspended':
-      return { label: 'Suspended', color: '#fcd34d', bg: 'rgba(245,158,11,0.15)' };
     case 'expired':
-      return { label: 'Expired', color: '#9ca3af', bg: 'rgba(156,163,175,0.15)' };
+      return { label: 'Expired', color: '#f87171', bg: 'rgba(239,68,68,0.12)' };
     default:
-      return { label: status, color: '#dcdcdc', bg: 'rgba(255,255,255,0.08)' };
+      return { label: status.replace('_', ' '), color: '#dcdcdc', bg: 'rgba(255,255,255,0.08)' };
   }
 }
 

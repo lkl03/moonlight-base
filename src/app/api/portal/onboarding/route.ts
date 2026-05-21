@@ -3,25 +3,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { getAdminAuth, getAdminDb } from '@/lib/firebase/admin';
 import { sendOnboardingNotificationEmail, sendOnboardingConfirmationEmail } from '@/lib/email';
 import { COLLECTIONS } from '@/lib/firebase/schema';
-
-const STATUS_PRIORITY: Record<string, number> = {
-  active: 0,
-  paypal_approved: 1,
-  pending: 2,
-  suspended: 3,
-  cancelled: 4,
-  expired: 5,
-};
-
-function tsToISO(ts: unknown): string | null {
-  if (!ts || typeof (ts as Record<string, unknown>).toDate !== 'function') return null;
-  return ((ts as { toDate: () => Date }).toDate)().toISOString();
-}
-
-function tsToMs(ts: unknown): number {
-  const iso = tsToISO(ts);
-  return iso ? new Date(iso).getTime() : 0;
-}
+import { selectBestSubscription } from '@/lib/subscription';
 
 async function verifyAndGetEmail(request: NextRequest): Promise<string | null> {
   const bearer = request.headers.get('Authorization') ?? '';
@@ -59,15 +41,8 @@ async function findBestSubscription(db: FirebaseFirestore.Firestore, email: stri
     }
   }
 
-  if (docs.length === 0) return null;
-
-  const best = docs.slice().sort((a, b) => {
-    const aPriority = STATUS_PRIORITY[(a.data().status as string) ?? ''] ?? 99;
-    const bPriority = STATUS_PRIORITY[(b.data().status as string) ?? ''] ?? 99;
-    if (aPriority !== bPriority) return aPriority - bPriority;
-    return tsToMs(b.data().updatedAt) - tsToMs(a.data().updatedAt);
-  })[0];
-
+  const best = selectBestSubscription(docs);
+  if (!best) return null;
   return { doc: best, clientName, customerId };
 }
 

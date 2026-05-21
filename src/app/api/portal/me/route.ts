@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminAuth, getAdminDb } from '@/lib/firebase/admin';
+import { selectBestSubscription } from '@/lib/subscription';
 
 export interface PortalMeResponse {
   planName: string;
@@ -18,35 +19,9 @@ export interface PortalMeResponse {
   onboardingSubmittedAt: string | null;
 }
 
-const STATUS_PRIORITY: Record<string, number> = {
-  active: 0,
-  paypal_approved: 1,
-  pending: 2,
-  suspended: 3,
-  cancelled: 4,
-  expired: 5,
-};
-
 function tsToISO(ts: unknown): string | null {
   if (!ts || typeof (ts as Record<string, unknown>).toDate !== 'function') return null;
   return ((ts as { toDate: () => Date }).toDate)().toISOString();
-}
-
-function tsToMs(ts: unknown): number {
-  const iso = tsToISO(ts);
-  return iso ? new Date(iso).getTime() : 0;
-}
-
-function pickBestSubscription(docs: FirebaseFirestore.QueryDocumentSnapshot[]): FirebaseFirestore.QueryDocumentSnapshot | null {
-  if (docs.length === 0) return null;
-  return docs.slice().sort((a, b) => {
-    const aStatus = (a.data().status as string) ?? '';
-    const bStatus = (b.data().status as string) ?? '';
-    const aPriority = STATUS_PRIORITY[aStatus] ?? 99;
-    const bPriority = STATUS_PRIORITY[bStatus] ?? 99;
-    if (aPriority !== bPriority) return aPriority - bPriority;
-    return tsToMs(b.data().updatedAt) - tsToMs(a.data().updatedAt);
-  })[0];
 }
 
 export async function GET(request: NextRequest) {
@@ -75,7 +50,7 @@ export async function GET(request: NextRequest) {
       const cust = custSnap.docs[0];
       clientName = (cust.data().name as string) ?? '';
       const subSnap = await db.collection('subscriptions').where('customerId', '==', cust.id).get();
-      bestDoc = pickBestSubscription(subSnap.docs);
+      bestDoc = selectBestSubscription(subSnap.docs);
     }
 
     // Fallback: find via Firestore users collection.
@@ -85,7 +60,7 @@ export async function GET(request: NextRequest) {
         const usr = userSnap.docs[0];
         if (!clientName) clientName = (usr.data().name as string) ?? '';
         const subSnap = await db.collection('subscriptions').where('userId', '==', usr.id).get();
-        bestDoc = pickBestSubscription(subSnap.docs);
+        bestDoc = selectBestSubscription(subSnap.docs);
       }
     }
 
