@@ -316,13 +316,14 @@ service cloud.firestore {
 
 ---
 
-## Client portal environment variables
+## Client portal and admin environment variables
 
 Add these to Vercel in addition to the existing Firebase vars:
 
 | Variable | Purpose | Default |
 |---|---|---|
 | `NEXT_PUBLIC_APP_URL` | Base URL for magic link `continueUrl` | `https://moonlightwebdesigns.com` |
+| `MOONLIGHT_ADMIN_PIN` | Numeric PIN for admin panel login | — (required; admin panel inaccessible without it) |
 
 `NEXT_PUBLIC_APP_URL` must be set to the correct URL in each Vercel environment:
 

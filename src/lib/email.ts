@@ -345,7 +345,7 @@ export async function sendOnboardingNotificationEmail(
 
   return sendEmail({
     to: adminEmail(),
-    subject: `Onboarding submitted — ${businessName}`,
+    subject: `New Moonlight onboarding submitted — ${businessName}`,
     text: lines,
     html: `<pre style="font-family:monospace;font-size:14px;line-height:1.7;color:#121717">${lines}</pre>`,
   });
@@ -392,7 +392,7 @@ export async function sendOnboardingConfirmationEmail(
 
   return sendEmail({
     to: clientEmail,
-    subject: `Onboarding received — ${businessName}`,
+    subject: 'We received your Moonlight onboarding details',
     html,
     text,
   });
