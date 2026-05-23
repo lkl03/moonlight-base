@@ -550,8 +550,8 @@ export default function PortalPage() {
             <p style={{ color: '#dcdcdc', marginBottom: '1.5rem', lineHeight: 1.7 }}>
               We couldn&apos;t find an active subscription for{' '}
               <strong>{user?.email}</strong>. If you believe this is an error, contact{' '}
-              <a href="mailto:hello@moonlightwebdesigns.com" style={s.link}>
-                hello@moonlightwebdesigns.com
+              <a href="mailto:contact.eterlab@gmail.com" style={s.link}>
+                contact.eterlab@gmail.com
               </a>
               .
             </p>
@@ -716,8 +716,8 @@ export default function PortalPage() {
             <p style={s.cardDesc}>
               Need to make changes to your plan or billing? Contact us and we&apos;ll help.
             </p>
-            <a href="mailto:hello@moonlightwebdesigns.com" style={s.link}>
-              hello@moonlightwebdesigns.com
+            <a href="mailto:contact.eterlab@gmail.com" style={s.link}>
+              contact.eterlab@gmail.com
             </a>
           </div>
 
