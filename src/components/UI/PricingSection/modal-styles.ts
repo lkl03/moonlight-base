@@ -16,8 +16,9 @@ export const ModalOverlay = styled(motion.div)`
 `;
 
 export const ModalBox = styled(motion.div)`
-  background: var(--white, #fff);
-  color: var(--Background, #121717);
+  /* Always light — the modal must be readable regardless of site theme. */
+  background: #ffffff;
+  color: #121717;
   border-radius: 1rem;
   max-width: 36rem;
   width: 100%;
@@ -57,7 +58,7 @@ export const ModalTitle = styled.h3`
   font-weight: 800;
   margin-bottom: 0.5rem;
   padding-right: 2rem;
-  color: var(--Background, #121717);
+  color: #121717;
   line-height: 1.2;
 `;
 
@@ -77,8 +78,11 @@ export const ModalPriceBadge = styled.div`
 export const ModalBodyText = styled.p`
   font-size: 0.9rem;
   line-height: 1.7;
-  color: #555;
   margin-bottom: 0.85rem;
+  /* && doubles class specificity to beat [data-theme="light"] p { color !important } */
+  && {
+    color: #555 !important;
+  }
 `;
 
 export const ModalDivider = styled.hr`
@@ -129,9 +133,12 @@ export const ModalActions = styled.div`
 export const ModalLegalNote = styled.p`
   font-size: 0.75rem;
   line-height: 1.6;
-  color: #999;
   text-align: center;
   margin-top: 0.9rem;
+  /* && doubles class specificity to beat [data-theme="light"] p { color !important } */
+  && {
+    color: #999 !important;
+  }
 
   a {
     color: var(--darkGreen, #45a383);
@@ -184,13 +191,16 @@ export const ModalInput = styled.input`
 
 export const ModalErrorText = styled.p`
   font-size: 0.825rem;
-  color: #c0392b;
   line-height: 1.5;
   margin-top: 0.25rem;
   padding: 0.6rem 0.85rem;
   background: rgba(192, 57, 43, 0.06);
   border-radius: 6px;
   border-left: 3px solid #c0392b;
+  /* && doubles class specificity to beat [data-theme="light"] p { color !important } */
+  && {
+    color: #c0392b !important;
+  }
 `;
 
 // ── Buttons ──────────────────────────────────────────────────────────────────

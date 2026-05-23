@@ -38,6 +38,8 @@ type FooterProps = {
 
 const Footer = ({ showSitemap = true }: FooterProps) => {
   const currentYear = new Date().getFullYear();
+  // NEXT_PUBLIC_LAST_UPDATED is inlined at build time — safe for SSR (no hydration mismatch)
+  const lastUpdated = process.env.NEXT_PUBLIC_LAST_UPDATED ?? '';
 
   return (
     <Wrapper>
@@ -73,7 +75,10 @@ const Footer = ({ showSitemap = true }: FooterProps) => {
                 <LegalMetaLink href="/privacy">Privacy Policy</LegalMetaLink>
                 <LegalMetaLink href="/portal">Client Portal</LegalMetaLink>
               </LegalMeta>
-              <VersionTag>{process.env.NEXT_PUBLIC_APP_VERSION ?? 'v1.0'}</VersionTag>
+              <VersionTag>
+                {process.env.NEXT_PUBLIC_APP_VERSION ?? 'v1.0'}
+                {lastUpdated ? ` · Last updated ${lastUpdated}` : ''}
+              </VersionTag>
             </BrandCopy>
           </BrandBlock>
 

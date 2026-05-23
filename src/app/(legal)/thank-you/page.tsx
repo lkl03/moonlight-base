@@ -152,8 +152,8 @@ export default function ThankYouPage({ searchParams }: PageProps) {
 
       <p style={s.note}>
         If you have any questions, contact us at{' '}
-        <a href="mailto:hello@moonlightwebdesigns.com" style={s.link}>
-          hello@moonlightwebdesigns.com
+        <a href="mailto:contact.eterlab@gmail.com" style={s.link}>
+          contact.eterlab@gmail.com
         </a>
         .
       </p>

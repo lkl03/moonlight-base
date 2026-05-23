@@ -236,6 +236,11 @@ const ctaHoverColor = ($variant: PlanCtaVariant) => {
   if ($variant === 'white-on-green') return 'var(--darkGreen)';
   return '#ffffff';
 };
+/** Border color on hover — must match the fill color to avoid mismatch. */
+const ctaHoverBorder = ($variant: PlanCtaVariant) => {
+  if ($variant === 'white-on-green') return '#ffffff';
+  return 'var(--green)'; // match the hover fill (var(--green)), not the resting border (var(--darkGreen))
+};
 
 export const PlanCta = styled.button<{ $variant: PlanCtaVariant }>`
   position: relative;
@@ -265,8 +270,8 @@ export const PlanCta = styled.button<{ $variant: PlanCtaVariant }>`
 
   &:hover {
     background-size: 100% 100%;
-    border-color: ${({ $variant }) => ctaBase($variant)};
-    border-left-color: ${({ $variant }) => ctaBase($variant)};
+    border-color: ${({ $variant }) => ctaHoverBorder($variant)};
+    border-left-color: ${({ $variant }) => ctaHoverBorder($variant)};
     color: ${({ $variant }) => ctaHoverColor($variant)};
   }
 
@@ -288,8 +293,7 @@ export const PlanCtaLegal = styled.p<{ $onDark?: boolean }>`
   line-height: 1.55;
   text-align: center;
   color: ${({ $onDark }) =>
-    $onDark ? 'rgba(255,255,255,0.72)' : 'var(--Background)'};
-  opacity: 0.75;
+    $onDark ? 'rgba(255,255,255,0.62)' : 'rgba(18,23,23,0.62)'};
   max-width: 22rem;
 
   a {

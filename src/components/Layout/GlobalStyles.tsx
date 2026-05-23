@@ -278,6 +278,15 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: #ffffff !important;
   }
 
+  /* ── Pricing — legal text under CTA buttons ── */
+  /* Global [data-theme="light"] p rule overrides PlanCtaLegal; restore readable colors per card bg */
+  [data-theme="light"] [data-appearance="solid"] p {
+    color: rgba(255, 255, 255, 0.62) !important;
+  }
+  [data-theme="light"] [data-appearance="outline"] p {
+    color: rgba(238, 242, 239, 0.62) !important;
+  }
+
   /* ── Contact — AccentLine + support links + scheduler card ── */
   /* AccentLine "(it probably is)" — was rgba(255,255,255,0.6), invisible on light bg */
   [data-theme="light"] #contact h2 span {
@@ -378,6 +387,14 @@ export const GlobalStyles = styled.createGlobalStyle`
   /* FloatingNav nav link hover — visible on dark capsule */
   [data-theme="light"] nav[aria-label="Section navigation"] button:not([aria-label]):hover {
     background: rgba(255, 255, 255, 0.1) !important;
+  }
+  /* ThemeToggle: icons should be dark on the light pill bg (overrides white from button span rule) */
+  [data-theme="light"] nav[aria-label="Section navigation"] button[aria-label] svg {
+    color: #121717 !important;
+  }
+  /* ThemeIconSlot hover — subtle dark tint on the light toggle pill */
+  [data-theme="light"] nav[aria-label="Section navigation"] button[aria-label] span:hover {
+    background: rgba(18, 23, 23, 0.1) !important;
   }
 
   /* ── Scrollbar ── */

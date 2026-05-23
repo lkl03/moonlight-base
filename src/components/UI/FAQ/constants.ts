@@ -1,6 +1,8 @@
+import React from 'react';
+
 type FAQItem = {
   question: string;
-  answer: string;
+  answer: React.ReactNode;
 };
 
 export const desktopHeaderPhrase = ['Frequently Asked Questions'];
@@ -20,28 +22,51 @@ export const animate = {
 
 export const faqData: FAQItem[] = [
   {
-    question: 'What’s included in the monthly website subscription?',
+    question: "What's Moonlight?",
     answer:
-      'Each plan includes custom design, development, hosting, ongoing support, and website updates. The exact scope depends on the plan you choose, but the goal is to give you a polished site without a large upfront payment.',
+      "Moonlight is a subscription-based web design service by eterlab. It gives businesses a simple way to get a polished, maintained website through a predictable monthly plan instead of a large upfront build cost.",
   },
   {
-    question: 'How long does it take to launch my website?',
-    answer:
-      'In most cases, the process takes no more than 1 week to get your website ready. Timelines can move even faster for simpler landing pages, as long as content and feedback are shared on time.',
+    question: "What's eterlab?",
+    answer: React.createElement(
+      React.Fragment,
+      null,
+      "eterlab is the main design agency behind Moonlight, founded by ",
+      React.createElement(
+        "a",
+        {
+          href: "https://www.linkedin.com/in/ll-luca-lago/",
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+        "Luca Lago"
+      ),
+      ", a designer and founder with years of experience designing and building websites for clients across different industries. Moonlight is one of eterlab’s service formats, focused on monthly web design subscriptions."
+    ),
   },
   {
-    question: 'Do I own the website once it’s finished?',
+    question: "What’s included in the monthly website subscription?",
     answer:
-      'Yes, the website is for your business as long as the agreement is respected. If the contract is ended before the 12-month term, we simply stop providing support and we do not hand over the design and development files at that stage. Once the 12 months are completed, if you decide not to continue with us, we deliver everything as agreed.',
+      "Each plan includes custom design, development, hosting, ongoing support, and website updates. The exact scope depends on the plan you choose, but the goal is to give you a polished site without a large upfront payment.",
   },
   {
-    question: 'Can you redesign my current website instead of starting from scratch?',
+    question: "How long does it take to launch my website?",
     answer:
-      'Absolutely. We can refresh your current site or rebuild it with a stronger layout, better visuals, improved responsiveness, and a cleaner structure while keeping the best parts of your existing brand.',
+      "In most cases, the process takes no more than 1 week to get your website ready. Timelines can move even faster for simpler landing pages, as long as content and feedback are shared on time.",
   },
   {
-    question: 'What if I need more pages, features, or integrations later on?',
+    question: "Do I own the website once it’s finished?",
     answer:
-      'That’s exactly what the Advance plan and custom scope options are for. As your business grows, we can add extra pages, custom sections, booking flows, advanced forms, or third-party integrations without forcing you into a one-size-fits-all setup.',
+      "Yes, the website is for your business as long as the agreement is respected. If the contract is ended before the 12-month term, we simply stop providing support and we do not hand over the design and development files at that stage. Once the 12 months are completed, if you decide not to continue with us, we deliver everything as agreed.",
+  },
+  {
+    question: "Can you redesign my current website instead of starting from scratch?",
+    answer:
+      "Absolutely. We can refresh your current site or rebuild it with a stronger layout, better visuals, improved responsiveness, and a cleaner structure while keeping the best parts of your existing brand.",
+  },
+  {
+    question: "What if I need more pages, features, or integrations later on?",
+    answer:
+      "That’s exactly what the Advanced plan and custom scope options are for. As your business grows, we can add extra pages, custom sections, booking flows, advanced forms, or third-party integrations without forcing you into a one-size-fits-all setup.",
   },
 ];
