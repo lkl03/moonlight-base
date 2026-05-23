@@ -297,12 +297,8 @@ export const PlanCtaLegal = styled.p<{ $onDark?: boolean }>`
   max-width: 22rem;
 
   a {
-    text-decoration: underline;
+    text-decoration: none;
     color: inherit;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
   @media (max-width: 768px) {

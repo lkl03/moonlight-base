@@ -22,30 +22,39 @@ export const animate = {
 
 export const faqData: FAQItem[] = [
   {
-    question: "What's Moonlight?",
+    question: "What's Moonlight Web Designs?",
     answer:
-      "Moonlight is a subscription-based web design service by eterlab. It gives businesses a simple way to get a polished, maintained website through a predictable monthly plan instead of a large upfront build cost.",
+      "Moonlight Web Designs is a subscription-based web design service by eterlab. It gives businesses a simple way to get a polished, maintained website through a predictable monthly plan instead of a large upfront build cost.",
   },
   {
     question: "What's eterlab?",
     answer: React.createElement(
       React.Fragment,
       null,
-      "eterlab is the main design agency behind Moonlight, founded by ",
       React.createElement(
         "a",
         {
-          href: "https://www.linkedin.com/in/ll-luca-lago/",
+          href: "https://eterlab.co/",
           target: "_blank",
           rel: "noopener noreferrer",
         },
-        "Luca Lago"
+        "eterlab."
       ),
-      ", a designer and founder with years of experience designing and building websites for clients across different industries. Moonlight is one of eterlab’s service formats, focused on monthly web design subscriptions."
+      " is the main design agency behind Moonlight, founded by Luca Lago, its founder and a designer with years of experience creating websites for clients across different industries. Moonlight Web Designs is one of ",
+      React.createElement(
+        "a",
+        {
+          href: "https://eterlab.co/",
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+        "eterlab."
+      ),
+      "'s service formats, focused on monthly web design subscriptions."
     ),
   },
   {
-    question: "What’s included in the monthly website subscription?",
+    question: "What's included in the monthly website subscription?",
     answer:
       "Each plan includes custom design, development, hosting, ongoing support, and website updates. The exact scope depends on the plan you choose, but the goal is to give you a polished site without a large upfront payment.",
   },
@@ -55,7 +64,7 @@ export const faqData: FAQItem[] = [
       "In most cases, the process takes no more than 1 week to get your website ready. Timelines can move even faster for simpler landing pages, as long as content and feedback are shared on time.",
   },
   {
-    question: "Do I own the website once it’s finished?",
+    question: "Do I own the website once it's finished?",
     answer:
       "Yes, the website is for your business as long as the agreement is respected. If the contract is ended before the 12-month term, we simply stop providing support and we do not hand over the design and development files at that stage. Once the 12 months are completed, if you decide not to continue with us, we deliver everything as agreed.",
   },
@@ -67,6 +76,6 @@ export const faqData: FAQItem[] = [
   {
     question: "What if I need more pages, features, or integrations later on?",
     answer:
-      "That’s exactly what the Advanced plan and custom scope options are for. As your business grows, we can add extra pages, custom sections, booking flows, advanced forms, or third-party integrations without forcing you into a one-size-fits-all setup.",
+      "That's exactly what the Advanced plan and custom scope options are for. As your business grows, we can add extra pages, custom sections, booking flows, advanced forms, or third-party integrations without forcing you into a one-size-fits-all setup.",
   },
 ];

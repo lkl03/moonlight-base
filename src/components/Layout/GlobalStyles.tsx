@@ -264,14 +264,16 @@ export const GlobalStyles = styled.createGlobalStyle`
   [data-theme="light"] [data-appearance="outline"] li {
     color: rgba(238, 242, 239, 0.88) !important;
   }
-  /* Outline/Advance card button — white-to-green on dark card */
-  [data-theme="light"] [data-appearance="outline"] a {
+  /* Outline/Advance card CTA button — white-to-green on dark card.
+     PlanCta is a <button> element (not <a>); targeting <a> would wrongly style
+     the Terms of Service link inside PlanCtaLegal. */
+  [data-theme="light"] [data-appearance="outline"] button {
     border-color: rgba(255, 255, 255, 0.75) !important;
     border-left-color: rgba(255, 255, 255, 0.75) !important;
     color: rgba(255, 255, 255, 0.88) !important;
     background-image: linear-gradient(var(--green), var(--green)) !important;
   }
-  [data-theme="light"] [data-appearance="outline"] a:hover {
+  [data-theme="light"] [data-appearance="outline"] button:hover {
     background-size: 100% 100% !important;
     border-color: var(--green) !important;
     border-left-color: var(--green) !important;
