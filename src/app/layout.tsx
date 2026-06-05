@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://moonlightwebdesigns.com'),
@@ -66,6 +67,19 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18212293245"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18212293245');
+          `}
+        </Script>
       </body>
     </html>
   );
