@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import { CALENDLY_EMBED_URL, CONTACT_EMAIL } from './config';
+import { trackBookCallConversion } from '@/lib/google-ads';
 import {
   EmbedActions,
   EmbedButton,
@@ -32,6 +34,19 @@ const buildEmbedUrl = () => {
 };
 
 const CalendlyEmbed = () => {
+  // Listen for Calendly's postMessage confirmation of a scheduled booking.
+  // Fires only when the user completes the booking flow inside the inline widget.
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.event === 'calendly.event_scheduled') {
+        trackBookCallConversion();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   if (!isConfigured) {
     return (
       <EmbedFallback>

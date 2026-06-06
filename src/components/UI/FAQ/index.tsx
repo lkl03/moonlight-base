@@ -18,6 +18,7 @@ import ic_chevron_down from '../../../../public/svgs/ic_chevron_down.svg';
 import { GetStartedButton, MaskText } from '@/components';
 import { useIsMobile } from '../../../../libs/useIsMobile';
 import { animate, desktopHeaderPhrase, faqData, mobileHeaderPhrase } from './constants';
+import { trackBookCallConversion } from '@/lib/google-ads';
 
 const FAQ = () => {
   const [openItem, setOpenItem] = useState<number | null>(0);
@@ -87,7 +88,7 @@ const FAQ = () => {
         </Accordion>
 
         <Actions>
-          <GetStartedButton text="Get In Touch" href="#contact" variant="green filled" />
+          <GetStartedButton text="Get In Touch" href="#contact" variant="green filled" onClick={trackBookCallConversion} />
         </Actions>
       </Inner>
     </Wrapper>

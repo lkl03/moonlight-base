@@ -15,6 +15,7 @@ import {
 
 import RevealCover from '@/components/Common/RevealCover';
 import { GetStartedButton } from '@/components';
+import { trackBookCallConversion } from '@/lib/google-ads';
 
 
 const FirstCTA = () => {
@@ -36,7 +37,7 @@ const FirstCTA = () => {
               Reach out to us to learn more about how we work and how we can help you.
             </Paragraph>
             <ButtonContainer>
-              <GetStartedButton text="Get in Touch" href="#contact" variant="white-on-green" />
+              <GetStartedButton text="Get in Touch" href="#contact" variant="white-on-green" onClick={trackBookCallConversion} />
             </ButtonContainer>
           </TextColumn>
         </Content>
