@@ -26,6 +26,7 @@ import {
   PlanInfo,
 } from './constants';
 import PayPalModal, { PlanConfirmationData } from './PayPalModal';
+import { trackBookCallClickConversion } from '@/lib/google-ads';
 
 const PricingSection = () => {
   const isMobile = useIsMobile();
@@ -88,7 +89,10 @@ const PricingSection = () => {
 
               <Footer>
                 <PlanCta
-                  onClick={() => openModal(info)}
+                  onClick={() => {
+                    trackBookCallClickConversion();
+                    openModal(info);
+                  }}
                   $variant={info.appearance === 'outline' ? 'green-to-green' : 'white-on-green'}
                 >
                   <span>{info.ctaText}</span>
