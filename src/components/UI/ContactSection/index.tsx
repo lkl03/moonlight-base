@@ -7,7 +7,7 @@ import stickerEmail from '../../../../public/svgs/contact-email-us.svg';
 import stickerPlans from '../../../../public/svgs/contact-view-plans.svg';
 import CalendlyEmbed from './CalendlyEmbed';
 import { CALENDLY_EMBED_URL, CONTACT_EMAIL } from './config';
-import { trackBookCallConversion } from '@/lib/google-ads';
+import { trackBookCallClickConversion } from '@/lib/google-ads';
 import {
   AccentLine,
   ContentColumn,
@@ -101,7 +101,7 @@ const ContactSection = () => {
 
             <SupportRow>
               <SupportItem>30-minute intro call</SupportItem>
-              <SupportLink href={calendlyCtaHref} target="_blank" rel="noreferrer noopener" onClick={trackBookCallConversion}>
+              <SupportLink href={calendlyCtaHref} target="_blank" rel="noreferrer noopener" onClick={trackBookCallClickConversion}>
                 Book on Calendly
               </SupportLink>
               <SupportLink href={`mailto:${CONTACT_EMAIL}`}>Email us instead</SupportLink>
