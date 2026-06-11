@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://moonlightwebdesigns.com'),
@@ -64,22 +63,35 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/*
+          Google Ads base tag — raw <script> elements render as actual HTML in the
+          SSR response, NOT deferred through Next.js's RSC payload.
+
+          Using next/script with strategy="afterInteractive" or "beforeInteractive"
+          in a Next.js 13 App Router Server Component serialises the Script into the
+          RSC JSON payload (self.__next_f.push), meaning window.gtag only exists
+          after React hydrates. Tag Assistant never sees a real <script> tag, so the
+          base tag cannot be verified.
+
+          Raw <script> / dangerouslySetInnerHTML bypasses that deferral entirely and
+          matches the standard two-script Google Ads implementation exactly.
+        */}
+        {/* 1. gtag.js library — async so it never blocks rendering */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts, @next/next/next-script-for-ga */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18212293245" />
+        {/* 2. Inline config — defines window.dataLayer + gtag before hydration */}
+        <script
+          id="google-ads-tag"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18212293245');`,
+          }}
+        />
+      </head>
       <body>
         {children}
         <Analytics />
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18212293245"
-          strategy="afterInteractive"
-        />
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18212293245');
-          `}
-        </Script>
       </body>
     </html>
   );
