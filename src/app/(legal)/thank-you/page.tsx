@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  searchParams: { subscription_id?: string; checkout_session_id?: string };
+  searchParams: { subscription_id?: string; checkout_session_id?: string; source?: string };
 }
 
 const s: Record<string, CSSProperties> = {
@@ -112,7 +112,51 @@ const s: Record<string, CSSProperties> = {
 };
 
 export default function ThankYouPage({ searchParams }: PageProps) {
-  const { subscription_id } = searchParams;
+  const { subscription_id, source } = searchParams;
+
+  if (source === 'ads') {
+    return (
+      <div style={s.page}>
+        <div style={s.badge}>Request received</div>
+        <h1 style={s.h1}>Thanks — We Got Your Request</h1>
+
+        <p style={s.p}>
+          We&apos;ll review your project details and follow up soon. If it looks like a fit,
+          we&apos;ll schedule a free intro call to talk through your website needs.
+        </p>
+
+        <p style={s.p}>
+          In the meantime, feel free to browse our{' '}
+          <a href="/work" style={s.link}>
+            recent work
+          </a>{' '}
+          or review our{' '}
+          <a href="/#pricing" style={s.link}>
+            plans and pricing
+          </a>
+          .
+        </p>
+
+        <div style={s.btnRow}>
+          <a href="/" style={s.btnPrimary}>
+            Back To Home
+          </a>
+        </div>
+
+        <hr style={s.divider} />
+
+        <p style={s.note}>
+          Have a question in the meantime? Email us at{' '}
+          <a href="mailto:contact.eterlab@gmail.com" style={s.link}>
+            contact.eterlab@gmail.com
+          </a>
+          .
+        </p>
+      </div>
+    );
+  }
+
+  // ── Default: PayPal subscription flow ───────────────────────────────────────
 
   return (
     <div style={s.page}>
