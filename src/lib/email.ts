@@ -351,6 +351,41 @@ export async function sendOnboardingNotificationEmail(
   });
 }
 
+// ── Ads landing page lead notification ───────────────────────────────────────
+
+export interface AdsLeadParams {
+  name: string;
+  email: string;
+  businessName: string;
+  currentWebsite?: string;
+  need: string;
+  message?: string;
+}
+
+export async function sendAdsLeadNotification(params: AdsLeadParams): Promise<boolean> {
+  const { name, email, businessName, currentWebsite, need, message } = params;
+
+  const lines = [
+    'New lead from /monthly-web-design ads landing page.',
+    '',
+    `Name:             ${name}`,
+    `Email:            ${email}`,
+    `Business:         ${businessName}`,
+    `Current website:  ${currentWebsite ?? '(not provided)'}`,
+    `What they need:   ${need}`,
+    `Message:          ${message ?? '(not provided)'}`,
+    '',
+    'Budget confirmation: Checked — client confirmed $199/mo minimum with 12-month contract.',
+  ].join('\n');
+
+  return sendEmail({
+    to: adminEmail(),
+    subject: `New ads lead — ${businessName}`,
+    text: lines,
+    html: `<pre style="font-family:monospace;font-size:14px;line-height:1.7;color:#121717">${lines}</pre>`,
+  });
+}
+
 // ── Onboarding confirmation (client-facing) ───────────────────────────────────
 
 export interface OnboardingConfirmationParams {
